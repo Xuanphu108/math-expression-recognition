@@ -1,5 +1,11 @@
 # math-expression-recognition
 
+## Table Of Contents
+
+[edit][1]
+
+[1]: https://github.com/bkahn-github/math-expression-recognition/edit/master/README.md
+
 ## ToDo
 
 Look into all math recognition papers
