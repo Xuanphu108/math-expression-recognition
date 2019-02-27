@@ -38,6 +38,8 @@ Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Notes
 
+**Refer to fairseq**
+
 will implement decoding on val like allennlp
 
 Allennlp might not implement val loss correctly
