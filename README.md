@@ -12,6 +12,20 @@
 
 ## ToDo
 
+Check doubly stochastic loss
+
+Check resizing/padding
+
+Check scaling image
+
+Check grad clipping
+
+Bigger model
+
+Pretrained resnet
+
+Reduce lr on plateau (5? 3?)
+
 Look into all math recognition papers
 
 Use more dimensions
