@@ -10,15 +10,6 @@
 * [Other][5]
 * [Beam Search][5]
 
-[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
-[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
-[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#transformers
-[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#later
-[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#done
-[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#other
-[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#beam
-
-
 ## ToDo
 
 Look into all math recognition papers
@@ -191,3 +182,10 @@ first input to decoder at validation is start token
 
 `python split_data.py`
 
+[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
+[2]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
+[3]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#transformers
+[4]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#later
+[5]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#done
+[6]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#other
+[7]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#beam-search-stuff
