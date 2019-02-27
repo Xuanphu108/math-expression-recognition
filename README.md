@@ -9,6 +9,7 @@
 * [Done][5]
 * [Other][6]
 * [Beam Search][7]
+* [Papers][8]
 
 ## ToDo
 
@@ -198,6 +199,8 @@ first input to decoder at validation is start token
 
 `python split_data.py`
 
+## Papers
+
 [1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
 [2]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
 [3]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#transformers
@@ -205,3 +208,5 @@ first input to decoder at validation is start token
 [5]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#done
 [6]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#other
 [7]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#beam-search-stuff
+[8]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#papers
+
