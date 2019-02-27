@@ -2,8 +2,6 @@
 
 ## ToDo
 
-fp16
-
 Look into all math recognition papers
 
 Use more dimensions
@@ -30,7 +28,9 @@ http://openaccess.thecvf.com/content_ICCV_2017/papers/Pedersoli_Areas_of_Attenti
 
 https://www.researchgate.net/publication/325016817_Captioning_Transformer_with_Stacked_Attention_Modules
 
+## Later
 
+fp16 **Wait until allennlp supports apex**
 
 ## Done
 
