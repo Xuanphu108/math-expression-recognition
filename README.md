@@ -41,6 +41,8 @@ Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 **Refer to fairseq**
 
+Tune beam size
+
 will implement decoding on val like allennlp
 
 Allennlp might not implement val loss correctly
