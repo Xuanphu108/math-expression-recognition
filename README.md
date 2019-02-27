@@ -20,8 +20,6 @@ Increase the batch size
 
 Larger/pretrained resnet
 
-Preprocess latex like https://github.com/harvardnlp/im2markup
-
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Notes
@@ -59,6 +57,8 @@ https://www.researchgate.net/publication/325016817_Captioning_Transformer_with_S
 ## Later
 
 fp16 **Wait until allennlp supports apex**
+
+Preprocess latex like https://github.com/harvardnlp/im2markup **Their preprocessing is for images of latex**
 
 ## Done
 
