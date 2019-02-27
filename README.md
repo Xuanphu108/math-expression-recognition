@@ -21,7 +21,7 @@ Check scaling image
 
 Check grad clipping
 
-Bigger model
+Bigger model **In progress**
 
 Pretrained resnet
 
