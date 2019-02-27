@@ -203,6 +203,24 @@ first input to decoder at validation is start token
 
 ## Papers
 
+### Multi scale attention with dense encoder:
+
+> Paper: arxiv.org/abs/1801.03530
+
+> Github: JianshuZhang/WAP
+
+> Details
+* Train with lr of 1e-8 until metric doesn't improve
+
+### Image to markup generation with coarse to fine attention:
+
+> Paper: arxiv.org/pdf/1609.04938.pdf
+
+> Github: harvardnlp/im2markup
+
+> Details
+ * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
+
 [1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
 [2]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
 [3]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#transformers
