@@ -2,9 +2,22 @@
 
 ## Table Of Contents
 
-[edit][1]
+* [Todo][1]
+* [Notes][5]
+* [Transformers][2]
+* [Later][3]
+* [Done][4]
+* [Other][5]
+* [Beam Search][5]
 
-[1]: https://github.com/bkahn-github/math-expression-recognition/edit/master/README.md
+[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
+[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
+[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#transformers
+[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#later
+[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#done
+[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#other
+[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#beam
+
 
 ## ToDo
 
@@ -19,6 +32,24 @@ Larger/pretrained resnet
 Preprocess latex like https://github.com/harvardnlp/im2markup
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
+
+## Notes
+
+will implement decoding on val like allennlp
+
+Allennlp might not implement val loss correctly
+
+validation max decoding steps are the same as length of target
+
+beam search and bleu score is also implemented only on predictions with length of target_len
+
+decode will run on model.forward_on_instances()
+
+use predictor to run prediction and any post processing
+
+preds returned from _decode will be sorted in training so use sorted labels and masks as well
+
+first input to decoder at validation is start token
 
 # Transformers
 
