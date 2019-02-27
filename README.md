@@ -3,12 +3,12 @@
 ## Table Of Contents
 
 * [Todo][1]
-* [Notes][5]
-* [Transformers][2]
-* [Later][3]
-* [Done][4]
-* [Other][5]
-* [Beam Search][5]
+* [Notes][2]
+* [Transformers][3]
+* [Later][4]
+* [Done][5]
+* [Other][6]
+* [Beam Search][7]
 
 ## ToDo
 
