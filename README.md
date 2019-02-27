@@ -42,7 +42,7 @@ preds returned from _decode will be sorted in training so use sorted labels and 
 
 first input to decoder at validation is start token
 
-# Transformers
+## Transformers
 
 https://github.com/ruotianluo/Transformer_Captioning
 
