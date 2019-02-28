@@ -15,6 +15,7 @@
 * [Experiments](#experiments)
   * [Larger Decoder](#larger-decoder)
   * [Pretrained Resnet 18](#pretrained-resnet18)
+  * [20 epochs half lr after 10](#20-epochs-half-lr-after-10)
 
 ## ToDo
 
@@ -232,7 +233,7 @@ first input to decoder at validation is start token
  
 ### Larger decoder
 Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=10993888  
-Better
+Result: Better
 
 256 hidden units for all decoders
 
@@ -305,7 +306,7 @@ Metrics: {
  
 ### Pretrained Resnet18
 Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11019236  
-Better; Loss is lower
+Result: Better; Loss is lower
 
 Pretrained resnet18 on imagenet
 
@@ -377,3 +378,52 @@ Metrics: {
 }
 ```
 
+### 20 epochs half lr after 10
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11019311
+
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "lazy": true,
+        "subset": false
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "max_timesteps": 20, 
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256,
+        "pretrained": true
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+       "learning_rate_scheduler": {
+            "type": "multi_step",
+            "milestones": [10, 20, 30, 40],
+            "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+#     "vocabulary": {
+#         "directory_path": "/path/to/vocab"
+#     },
+}
+```
