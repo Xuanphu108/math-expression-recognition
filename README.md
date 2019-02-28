@@ -18,7 +18,7 @@
   * [Pretrained Resnet 18](#pretrained-resnet18)
   * [20 epochs half lr after 10](#20-epochs-half-lr-after-10)
   * [check doubly stochastic loss](#check-doubly-stochastic-loss)
-  *[normalizing image](#normalizing-image)
+  * [normalizing image](#normalizing-image)
   
 ### normalizing image
 Kernel: https://www.kaggle.com/bkkaggle/allennlp-config/data?scriptVersionId=11019369  
@@ -98,7 +98,7 @@ img = (img - self.mean) / self.std
 
 ## Template
 
-  *[](#)
+  * [](#)
   
 ### 
 Kernel:  
