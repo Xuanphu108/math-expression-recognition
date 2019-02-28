@@ -279,3 +279,51 @@ first input to decoder at validation is start token
  ```
  
  ### Pretrained Resnet18
+
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "lazy": true,
+        "subset": false
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "max_timesteps": 20, 
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256,
+        "pretrained": true
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 10,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+       "learning_rate_scheduler": {
+            "type": "multi_step",
+            "milestones": [10, 20, 30, 40],
+            "gamma": 0.1
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+#     "vocabulary": {
+#         "directory_path": "/path/to/vocab"
+#     },
+}
+```
