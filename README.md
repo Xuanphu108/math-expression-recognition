@@ -17,7 +17,7 @@
   * [Larger Decoder (Better)](#larger-decoder)
   * [Pretrained Resnet 18 (Better)](#pretrained-resnet18)
   * [20 epochs half lr after 10 (Better)](#20-epochs-half-lr-after-10)
-  * [check doubly stochastic loss (Better)](#check-doubly-stochastic-loss)
+  * [check doubly stochastic loss (Come back to later)](#check-doubly-stochastic-loss)
   * [normalizing image (Come back to later)](#normalizing-image)
   * [20 epochs half lr after 10 and doubly stochastic loss](#20-epochs-half-lr-after-10-and-doubly-stochastic-loss)
 
@@ -476,7 +476,7 @@ Metrics: {
 
 ### check doubly stochastic loss
 Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11019369  
-Result: Not directly comparable since loss function has changed, but looks better
+Result: Not directly comparable since loss function has changed, but looks ok
 
 ```
 Metrics: {
