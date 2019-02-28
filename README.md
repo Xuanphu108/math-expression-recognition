@@ -225,7 +225,7 @@ first input to decoder at validation is start token
  
  ## Experiments
  
- ### All decoder_params to 256
+ ### Larger decoder
 
 [1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
 [2]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
