@@ -18,6 +18,8 @@
 
 ## ToDo
 
+Print out ground truth labels in predict
+
 Check doubly stochastic loss
 
 Check resizing/padding
