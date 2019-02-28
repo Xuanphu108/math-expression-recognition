@@ -303,4 +303,77 @@ Metrics: {
 }
  ```
  
- ### Pretrained Resnet18
+### Pretrained Resnet18
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11019236  
+Better; Loss is lower
+
+Pretrained resnet18 on imagenet
+
+```
+Metrics: {
+  "best_epoch": 8,
+  "peak_cpu_memory_MB": 3408.14,
+  "peak_gpu_0_memory_MB": 10906,
+  "training_duration": "01:27:12",
+  "training_start_epoch": 0,
+  "training_epochs": 9,
+  "epoch": 9,
+  "training_loss": 1.5743129854803686,
+  "training_cpu_memory_MB": 3408.14,
+  "training_gpu_0_memory_MB": 10906,
+  "validation_BLEU": 0.04362086240345169,
+  "validation_exprate": 0.0,
+  "validation_loss": 1.8315349945000239,
+  "best_validation_BLEU": 0.060921997280835714,
+  "best_validation_exprate": 0.0,
+  "best_validation_loss": 1.6474940734250205
+}
+```
+
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "lazy": true,
+        "subset": false
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "max_timesteps": 20, 
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256,
+        "pretrained": true
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 10,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+       "learning_rate_scheduler": {
+            "type": "multi_step",
+            "milestones": [10, 20, 30, 40],
+            "gamma": 0.1
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+#     "vocabulary": {
+#         "directory_path": "/path/to/vocab"
+#     },
+}
+```
+
