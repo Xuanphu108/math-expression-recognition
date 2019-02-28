@@ -12,6 +12,7 @@
 * [Papers][8]
 * [Experiments][9]
   * [Larger Decoder][10]
+  * [Pretrained Resnet 18][11]
 
 ## ToDo
 
@@ -226,6 +227,8 @@ first input to decoder at validation is start token
  ## Experiments
  
  ### Larger decoder
+ 
+ ### Pretrained Resnet18
 
 [1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
 [2]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
@@ -238,4 +241,6 @@ first input to decoder at validation is start token
 [9]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#experiments
 
 [10]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#larger-decoder
+[11]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#pretrained-resnet18
+
 
