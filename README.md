@@ -10,6 +10,7 @@
 * [Other][6]
 * [Beam Search][7]
 * [Papers][8]
+* [Experiments][9]
 
 ## ToDo
 
@@ -23,7 +24,7 @@ Check grad clipping
 
 Bigger model **In progress**
 
-Pretrained resnet
+Pretrained resnet **In progress**
 
 Reduce lr on plateau (5? 3?)
 
@@ -220,6 +221,8 @@ first input to decoder at validation is start token
 
 > Details
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
+ 
+ ## Experiments
 
 [1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
 [2]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
@@ -229,4 +232,4 @@ first input to decoder at validation is start token
 [6]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#other
 [7]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#beam-search-stuff
 [8]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#papers
-
+[9]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#experiments
