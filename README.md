@@ -254,6 +254,7 @@ first input to decoder at validation is start token
 
 > Details
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
+ * Images are resized to ~200x50
  
 ## Experiments
  
