@@ -28,8 +28,6 @@ Check scaling image
 
 Check grad clipping
 
-Bigger model **In progress**
-
 Pretrained resnet **In progress**
 
 Reduce lr on plateau (5? 3?)
@@ -87,6 +85,7 @@ fp16 **Wait until allennlp supports apex**
 Preprocess latex like https://github.com/harvardnlp/im2markup **Their preprocessing is for images of latex**
 
 ## Done
+Bigger model **Better**
 
 Expose jupyter port through pf service
 
@@ -228,10 +227,34 @@ first input to decoder at validation is start token
 > Details
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
  
- ## Experiments
+## Experiments
  
- ### Larger decoder
- 
+### Larger decoder [Better]
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=10993888
+
+256 hidden units for all decoders
+
+```
+Metrics: {
+  "best_epoch": 8,
+  "peak_cpu_memory_MB": 3412.376,
+  "peak_gpu_0_memory_MB": 10906,
+  "training_duration": "01:28:32",
+  "training_start_epoch": 0,
+  "training_epochs": 9,
+  "epoch": 9,
+  "training_loss": 1.810625918276675,
+  "training_cpu_memory_MB": 3412.376,
+  "training_gpu_0_memory_MB": 10906,
+  "validation_BLEU": 0.05348376783490231,
+  "validation_exprate": 0.0,
+  "validation_loss": 1.8296998398644584,
+  "best_validation_BLEU": 0.04266974779147556,
+  "best_validation_exprate": 0.0,
+  "best_validation_loss": 1.827181032725743
+}
+```
+
  ```
  {
     "dataset_reader": {
