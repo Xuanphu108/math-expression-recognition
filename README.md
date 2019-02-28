@@ -2,8 +2,8 @@
 
 ## Table Of Contents
 
-* [Todo][1](#todo)
-* [Notes][2](#notes)
+* [Todo](#todo)
+* [Notes](#notes)
 * [Transformers](#transformers)
 * [Later](#later)
 * [Done](#done)
