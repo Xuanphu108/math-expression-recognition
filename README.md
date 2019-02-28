@@ -454,8 +454,10 @@ Metrics: {
 }
 ```
 
+Code Changes:
+
 ```
-state['loss'] += ((1 - torch.sum(state['attention_weights'], dim=1)) ** 2).mean(
+state['loss'] += ((1 - torch.sum(state['attention_weights'], dim=1)) ** 2).mean()
 ```
 
 ```
