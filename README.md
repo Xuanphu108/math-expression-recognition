@@ -16,6 +16,7 @@
   * [Larger Decoder](#larger-decoder)
   * [Pretrained Resnet 18](#pretrained-resnet18)
   * [20 epochs half lr after 10](#20-epochs-half-lr-after-10)
+  * [check doubly stochastic loss](#check-doubly-stochastic-loss)
 
 ## ToDo
 
@@ -379,7 +380,7 @@ Metrics: {
 ```
 
 ### 20 epochs half lr after 10
-Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11019311
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11019311  
 
 ```
 {
@@ -415,6 +416,82 @@ Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11019311
             "type": "multi_step",
             "milestones": [10, 20, 30, 40],
             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+#     "vocabulary": {
+#         "directory_path": "/path/to/vocab"
+#     },
+}
+```
+
+### check doubly stochastic loss
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11019369  
+Result: Not directly comparable since loss function has changed, but looks better
+
+```
+Metrics: {
+  "best_epoch": 9,
+  "peak_cpu_memory_MB": 3395.48,
+  "peak_gpu_0_memory_MB": 10906,
+  "training_duration": "01:26:24",
+  "training_start_epoch": 0,
+  "training_epochs": 9,
+  "epoch": 9,
+  "training_loss": 1.683724222956477,
+  "training_cpu_memory_MB": 3395.48,
+  "training_gpu_0_memory_MB": 10906,
+  "validation_BLEU": 0.08684682558748881,
+  "validation_exprate": 0.0005659309564233164,
+  "validation_loss": 1.8228243717125483,
+  "best_validation_BLEU": 0.08684682558748881,
+  "best_validation_exprate": 0.0005659309564233164,
+  "best_validation_loss": 1.8228243717125483
+}
+```
+
+```
+state['loss'] += ((1 - torch.sum(state['attention_weights'], dim=1)) ** 2).mean(
+```
+
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "lazy": true,
+        "subset": false
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "max_timesteps": 20, 
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256,
+        "pretrained": true
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 10,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+       "learning_rate_scheduler": {
+            "type": "multi_step",
+            "milestones": [10, 20, 30, 40],
+            "gamma": 0.1
         },
         "num_serialized_models_to_keep": 6,
         "summary_interval": 10,
