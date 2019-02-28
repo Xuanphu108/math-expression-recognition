@@ -2,6 +2,7 @@
 
 ## Table Of Contents
 
+* [Template](#template)
 * [Todo](#todo)
 * [Notes](#notes)
 * [Transformers](#transformers)
@@ -17,6 +18,23 @@
   * [Pretrained Resnet 18](#pretrained-resnet18)
   * [20 epochs half lr after 10](#20-epochs-half-lr-after-10)
   * [check doubly stochastic loss](#check-doubly-stochastic-loss)
+  
+## Template
+
+  *[](#)
+  
+### 
+Kernel:  
+Results:
+
+```
+```
+
+```
+```
+
+```
+```
 
 ## ToDo
 
