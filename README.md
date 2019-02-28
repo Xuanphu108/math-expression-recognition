@@ -10,6 +10,8 @@
 * [Other](#other)
 * [Beam Search](#beam-search-stuff)
 * [Papers](#papers)
+  * [Multi scale attention with dense encoder](#multi-scale-attention-with-dense-encoder)
+  * [Image to markup generation with coarse to fine attention]
 * [Experiments](#experiments)
   * [Larger Decoder](#larger-decoder)
   * [Pretrained Resnet 18](#pretrained-resnet18)
