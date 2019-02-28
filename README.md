@@ -709,7 +709,7 @@ Metrics: {
 ```
 
 ### min count 10
-Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11030277  
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11030349   
 Results:
 
 ```
@@ -725,7 +725,7 @@ Results:
     "dataset_reader": {
         "type": "math-dataset",
         "root_path": "./2013",
-        "lazy": false,
+        "lazy": true,
         "subset": false
     },
     "train_data_path": "train.csv",
