@@ -16,7 +16,7 @@
 * [Experiments](#experiments)
   * [Larger Decoder (Better)](#larger-decoder)
   * [Pretrained Resnet 18 (Better)](#pretrained-resnet18)
-  * [20 epochs half lr after 10 ()](#20-epochs-half-lr-after-10)
+  * [20 epochs half lr after 10 (Better)](#20-epochs-half-lr-after-10)
   * [check doubly stochastic loss (Better)](#check-doubly-stochastic-loss)
   * [normalizing image (Come back to later)](#normalizing-image)
   
