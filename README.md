@@ -19,7 +19,7 @@
   * [20 epochs half lr after 10 (Better)](#20-epochs-half-lr-after-10)
   * [check doubly stochastic loss (Come back to later)](#check-doubly-stochastic-loss)
   * [normalizing image (Come back to later)](#normalizing-image)
-  * [20 epochs half lr after 10 and doubly stochastic loss](#20-epochs-half-lr-after-10-and-doubly-stochastic-loss)
+  * [20 epochs half lr after 10 and doubly stochastic loss (Not better)](#20-epochs-half-lr-after-10-and-doubly-stochastic-loss)
 
 ## Template
 
@@ -633,7 +633,24 @@ Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11024682
 Results:
 
 ```
-
+Metrics: {
+  "best_epoch": 16,
+  "peak_cpu_memory_MB": 3416.648,
+  "peak_gpu_0_memory_MB": 10906,
+  "training_duration": "02:48:36",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 1.4561049691191665,
+  "training_cpu_memory_MB": 3416.648,
+  "training_gpu_0_memory_MB": 10906,
+  "validation_BLEU": 0.07566714071122081,
+  "validation_exprate": 0.0028296547821165816,
+  "validation_loss": 1.80103257724217,
+  "best_validation_BLEU": 0.08142147376864764,
+  "best_validation_exprate": 0.001697792869269949,
+  "best_validation_loss": 1.790456669671195
+}
 ```
 
 ```
