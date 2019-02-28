@@ -223,6 +223,8 @@ first input to decoder at validation is start token
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
  
  ## Experiments
+ 
+ ### All decoder_params to 256
 
 [1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
 [2]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
