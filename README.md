@@ -8,7 +8,7 @@
 * [Later](#later)
 * [Done](#done)
 * [Other](#other)
-* [Beam Search](#beam-search)
+* [Beam Search](#beam-search-stuff)
 * [Papers](#papers)
 * [Experiments](#experiments)
   * [Larger Decoder](#larger-decoder)
