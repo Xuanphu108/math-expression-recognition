@@ -19,7 +19,8 @@
   * [20 epochs half lr after 10 (Better)](#20-epochs-half-lr-after-10)
   * [check doubly stochastic loss (Better)](#check-doubly-stochastic-loss)
   * [normalizing image (Come back to later)](#normalizing-image)
-  
+  * [20 epochs half lr after 10 and doubly stochastic loss](#20 epochs half lr after 10 and doubly stochastic loss)
+
 ## Template
 
   * [](#)
@@ -614,6 +615,65 @@ img = (img - self.mean) / self.std
             "type": "multi_step",
             "milestones": [10, 20, 30, 40],
             "gamma": 0.1
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+#     "vocabulary": {
+#         "directory_path": "/path/to/vocab"
+#     },
+}
+```
+
+### 20 epochs half lr after 10 and doubly stochastic loss
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11024682  
+Results:
+
+```
+
+```
+
+```
+
+```
+
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "lazy": true,
+        "subset": false
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "max_timesteps": 20, 
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256,
+        "pretrained": true
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+       "learning_rate_scheduler": {
+            "type": "multi_step",
+            "milestones": [10, 20, 30, 40],
+            "gamma": 0.5
         },
         "num_serialized_models_to_keep": 6,
         "summary_interval": 10,
