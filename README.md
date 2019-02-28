@@ -18,10 +18,6 @@
 
 ## ToDo
 
-**Is label during beam search out of order?**
-
-Print out ground truth labels in predict
-
 Check doubly stochastic loss
 
 Check resizing/padding
@@ -30,13 +26,9 @@ Check scaling image
 
 Check grad clipping
 
-Pretrained resnet **In progress**
-
 Reduce lr on plateau (5? 3?)
 
 Look into all math recognition papers
-
-Use more dimensions
 
 Increase the batch size
 
@@ -47,6 +39,8 @@ Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 ## Notes
 
 **Refer to fairseq**
+
+Is label during beam search out of order? **No, all state vars are sorted in _decode() **
 
 Tune beam size
 
@@ -87,6 +81,11 @@ fp16 **Wait until allennlp supports apex**
 Preprocess latex like https://github.com/harvardnlp/im2markup **Their preprocessing is for images of latex**
 
 ## Done
+
+Print out ground truth labels in predict
+
+Pretrained resnet **Better**
+
 Bigger model **Better**
 
 Expose jupyter port through pf service
@@ -305,51 +304,3 @@ Metrics: {
  ```
  
  ### Pretrained Resnet18
-
-```
-%%writefile config.json
-{
-    "dataset_reader": {
-        "type": "math-dataset",
-        "root_path": "./2013",
-        "lazy": true,
-        "subset": false
-    },
-    "train_data_path": "train.csv",
-    "validation_data_path": "val.csv",
-    "model": {
-        "type": "math-image-captioning",
-        "max_timesteps": 20, 
-        "embedding_dim": 256,
-        "attention_dim": 256,
-        "decoder_dim": 256,
-        "pretrained": true
-    },
-    "iterator": {
-        "type": "bucket",
-        "sorting_keys":[["label", "num_tokens"]],
-        "batch_size": 64
-    },
-    "trainer": {
-        "num_epochs": 10,
-        "cuda_device": 0,
-        "optimizer": {
-            "type": "adam",
-            "lr": 0.01
-        },
-       "learning_rate_scheduler": {
-            "type": "multi_step",
-            "milestones": [10, 20, 30, 40],
-            "gamma": 0.1
-        },
-        "num_serialized_models_to_keep": 6,
-        "summary_interval": 10,
-        "histogram_interval": 10,
-        "should_log_parameter_statistics": true,
-        "should_log_learning_rate": true
-    },
-#     "vocabulary": {
-#         "directory_path": "/path/to/vocab"
-#     },
-}
-```
