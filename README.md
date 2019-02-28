@@ -19,7 +19,7 @@
   * [20 epochs half lr after 10 (Better)](#20-epochs-half-lr-after-10)
   * [check doubly stochastic loss (Better)](#check-doubly-stochastic-loss)
   * [normalizing image (Come back to later)](#normalizing-image)
-  * [20 epochs half lr after 10 and doubly stochastic loss](#20 epochs half lr after 10 and doubly stochastic loss)
+  * [20 epochs half lr after 10 and doubly stochastic loss](#20-epochs-half-lr-after-10-and-doubly-stochastic-loss)
 
 ## Template
 
