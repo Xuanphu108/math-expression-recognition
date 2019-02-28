@@ -2,17 +2,17 @@
 
 ## Table Of Contents
 
-* [Todo][1]
-* [Notes][2]
-* [Transformers][3]
-* [Later][4]
-* [Done][5]
-* [Other][6]
-* [Beam Search][7]
-* [Papers][8]
-* [Experiments][9]
-  * [Larger Decoder][10]
-  * [Pretrained Resnet 18][11]
+* [Todo][1](#todo)
+* [Notes][2](#notes)
+* [Transformers](#transformers)
+* [Later](#later)
+* [Done](#done)
+* [Other](#other)
+* [Beam Search](#beam-search)
+* [Papers](#papers)
+* [Experiments](#experiments)
+  * [Larger Decoder](#larger-decoder)
+  * [Pretrained Resnet 18](#pretrained-resnet18)
 
 ## ToDo
 
@@ -229,18 +229,3 @@ first input to decoder at validation is start token
  ### Larger decoder
  
  ### Pretrained Resnet18
-
-[1]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#todo
-[2]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#notes
-[3]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#transformers
-[4]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#later
-[5]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#done
-[6]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#other
-[7]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#beam-search-stuff
-[8]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#papers
-[9]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#experiments
-
-[10]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#larger-decoder
-[11]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#pretrained-resnet18
-
-
