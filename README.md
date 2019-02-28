@@ -18,6 +18,8 @@
 
 ## ToDo
 
+**Is label during beam search out of order?**
+
 Print out ground truth labels in predict
 
 Check doubly stochastic loss
