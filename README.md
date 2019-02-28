@@ -20,82 +20,6 @@
   * [check doubly stochastic loss](#check-doubly-stochastic-loss)
   * [normalizing image](#normalizing-image)
   
-### normalizing image
-Kernel: https://www.kaggle.com/bkkaggle/allennlp-config/data?scriptVersionId=11019369  
-Results:
-
-```
-Metrics: {
-  "best_epoch": 9,
-  "peak_cpu_memory_MB": 3424.244,
-  "peak_gpu_0_memory_MB": 10906,
-  "training_duration": "01:27:02",
-  "training_start_epoch": 0,
-  "training_epochs": 9,
-  "epoch": 9,
-  "training_loss": 1.7649663300127596,
-  "training_cpu_memory_MB": 3424.244,
-  "training_gpu_0_memory_MB": 10906,
-  "validation_BLEU": 0.07426352194827664,
-  "validation_exprate": 0.0,
-  "validation_loss": 1.788192174264363,
-  "best_validation_BLEU": 0.07426352194827664,
-  "best_validation_exprate": 0.0,
-  "best_validation_loss": 1.788192174264363
-}
-```
-
-```
-img = (img - self.mean) / self.std
-```
-
-```
-{
-    "dataset_reader": {
-        "type": "math-dataset",
-        "root_path": "./2013",
-        "lazy": true,
-        "subset": false
-    },
-    "train_data_path": "train.csv",
-    "validation_data_path": "val.csv",
-    "model": {
-        "type": "math-image-captioning",
-        "max_timesteps": 20, 
-        "embedding_dim": 256,
-        "attention_dim": 256,
-        "decoder_dim": 256,
-        "pretrained": true
-    },
-    "iterator": {
-        "type": "bucket",
-        "sorting_keys":[["label", "num_tokens"]],
-        "batch_size": 64
-    },
-    "trainer": {
-        "num_epochs": 10,
-        "cuda_device": 0,
-        "optimizer": {
-            "type": "adam",
-            "lr": 0.01
-        },
-       "learning_rate_scheduler": {
-            "type": "multi_step",
-            "milestones": [10, 20, 30, 40],
-            "gamma": 0.1
-        },
-        "num_serialized_models_to_keep": 6,
-        "summary_interval": 10,
-        "histogram_interval": 10,
-        "should_log_parameter_statistics": true,
-        "should_log_learning_rate": true
-    },
-#     "vocabulary": {
-#         "directory_path": "/path/to/vocab"
-#     },
-}
-```
-
 ## Template
 
   * [](#)
@@ -556,6 +480,82 @@ Code Changes:
 
 ```
 state['loss'] += ((1 - torch.sum(state['attention_weights'], dim=1)) ** 2).mean()
+```
+
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "lazy": true,
+        "subset": false
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "max_timesteps": 20, 
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256,
+        "pretrained": true
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 10,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+       "learning_rate_scheduler": {
+            "type": "multi_step",
+            "milestones": [10, 20, 30, 40],
+            "gamma": 0.1
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+#     "vocabulary": {
+#         "directory_path": "/path/to/vocab"
+#     },
+}
+```
+
+### normalizing image
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config/data?scriptVersionId=11019369  
+Results: Not much difference; Won't use for now, come back to it later if necessary
+
+```
+Metrics: {
+  "best_epoch": 9,
+  "peak_cpu_memory_MB": 3424.244,
+  "peak_gpu_0_memory_MB": 10906,
+  "training_duration": "01:27:02",
+  "training_start_epoch": 0,
+  "training_epochs": 9,
+  "epoch": 9,
+  "training_loss": 1.7649663300127596,
+  "training_cpu_memory_MB": 3424.244,
+  "training_gpu_0_memory_MB": 10906,
+  "validation_BLEU": 0.07426352194827664,
+  "validation_exprate": 0.0,
+  "validation_loss": 1.788192174264363,
+  "best_validation_BLEU": 0.07426352194827664,
+  "best_validation_exprate": 0.0,
+  "best_validation_loss": 1.788192174264363
+}
+```
+
+```
+img = (img - self.mean) / self.std
 ```
 
 ```
