@@ -403,6 +403,28 @@ Metrics: {
 
 ### 20 epochs half lr after 10
 Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11019311  
+Results: A lot better; loss goes down!
+
+```
+Metrics: {
+  "best_epoch": 19,
+  "peak_cpu_memory_MB": 3424.544,
+  "peak_gpu_0_memory_MB": 10906,
+  "training_duration": "02:49:55",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.8282530619217469,
+  "training_cpu_memory_MB": 3424.544,
+  "training_gpu_0_memory_MB": 10906,
+  "validation_BLEU": 0.08959688555673197,
+  "validation_exprate": 0.0028296547821165816,
+  "validation_loss": 1.1140256417649133,
+  "best_validation_BLEU": 0.08959688555673197,
+  "best_validation_exprate": 0.0028296547821165816,
+  "best_validation_loss": 1.1140256417649133
+}
+```
 
 ```
 {
