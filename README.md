@@ -227,10 +227,11 @@ first input to decoder at validation is start token
 > Details
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
  
- ## Experiments
+## Experiments
  
- ### Larger decoder [Better]
-Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=10993888
+### Larger decoder
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=10993888  
+Better
 
 256 hidden units for all decoders
 
