@@ -11,6 +11,7 @@
 * [Beam Search][7]
 * [Papers][8]
 * [Experiments][9]
+  * [Larger Decoder][10]
 
 ## ToDo
 
@@ -235,3 +236,6 @@ first input to decoder at validation is start token
 [7]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#beam-search-stuff
 [8]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#papers
 [9]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#experiments
+
+[10]: https://github.com/bkahn-github/math-expression-recognition/blob/master/README.md#larger-decoder
+
