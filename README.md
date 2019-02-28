@@ -18,11 +18,11 @@
 
 ## ToDo
 
-Check doubly stochastic loss
+Check doubly stochastic loss **In progress**
 
 Check resizing/padding
 
-Check scaling image
+Check scaling image **In progress**
 
 Check grad clipping
 
