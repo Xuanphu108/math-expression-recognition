@@ -14,11 +14,11 @@
   * [Multi scale attention with dense encoder](#multi-scale-attention-with-dense-encoder)
   * [Image to markup generation with coarse to fine attention](#image-to-markup-generation-with-coarse-to-fine-attention)
 * [Experiments](#experiments)
-  * [Larger Decoder](#larger-decoder)
-  * [Pretrained Resnet 18](#pretrained-resnet18)
-  * [20 epochs half lr after 10](#20-epochs-half-lr-after-10)
-  * [check doubly stochastic loss](#check-doubly-stochastic-loss)
-  * [normalizing image](#normalizing-image)
+  * [Larger Decoder (Better)](#larger-decoder)
+  * [Pretrained Resnet 18 (Better)](#pretrained-resnet18)
+  * [20 epochs half lr after 10 ()](#20-epochs-half-lr-after-10)
+  * [check doubly stochastic loss (Better)](#check-doubly-stochastic-loss)
+  * [normalizing image (Come back to later)](#normalizing-image)
   
 ## Template
 
@@ -42,11 +42,7 @@ Results:
 
 ## ToDo
 
-Check doubly stochastic loss **In progress**
-
 Check resizing/padding
-
-Check scaling image **In progress**
 
 Check grad clipping
 
@@ -56,7 +52,7 @@ Look into all math recognition papers
 
 Increase the batch size
 
-Larger/pretrained resnet
+Larger resnet
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
@@ -105,6 +101,10 @@ fp16 **Wait until allennlp supports apex**
 Preprocess latex like https://github.com/harvardnlp/im2markup **Their preprocessing is for images of latex**
 
 ## Done
+
+Check scaling image
+
+Check doubly stochastic loss
 
 Print out ground truth labels in predict
 
