@@ -43,6 +43,8 @@ Results:
 
 ## ToDo
 
+Only use tokens that appear at least n times
+
 Check resizing/padding
 
 Check grad clipping
