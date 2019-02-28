@@ -247,8 +247,7 @@ first input to decoder at validation is start token
         "max_timesteps": 20, 
         "embedding_dim": 256,
         "attention_dim": 256,
-        "decoder_dim": 256,
-        "teacher_forcing": true
+        "decoder_dim": 256
     },
     "iterator": {
         "type": "bucket",
