@@ -45,7 +45,7 @@ Results:
 
 Only use tokens that appear at least n times
 
-Check resizing/padding
+Check resizing/padding/rectangular images
 
 Check grad clipping
 
