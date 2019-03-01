@@ -23,7 +23,7 @@
   * [min count 10 (Better)](#min-count-10)
   * [512x256 (Slightly better)](#512x256)
   * [512x128 ()](#512x128)
-
+  * [reduce on plateau factor 0.5 patience 5](#reduce-on-plateau-factor-0.5-patience-5)
 
 ## Template
 
@@ -933,6 +933,72 @@ Results:
             "type": "multi_step",
             "milestones": [10, 20, 30, 40],
             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### Reduce on plateau factor 0.5 patience 5
+Kernel: 
+Results:
+
+```
+
+```
+
+```
+
+```
+
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": true
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "max_timesteps": 20,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256,
+        "pretrained": true
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 50,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.001
+        },
+       "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
         },
         "num_serialized_models_to_keep": 6,
         "summary_interval": 10,
