@@ -22,7 +22,7 @@
   * [20 epochs half lr after 10 and doubly stochastic loss (Not better)](#20-epochs-half-lr-after-10-and-doubly-stochastic-loss)
   * [min count 10 (Better)](#min-count-10)
   * [512x256 (Slightly better)](#512x256)
-  * [512x128 ()](#512x128)
+  * [512x128 (No difference)](#512x128)
   * [reduce on plateau factor 0.5 patience 5](#reduce-on-plateau-factor-05-patience-5)
   * [resnet50](#resnet50)
 
@@ -43,6 +43,8 @@ Results:
 ```
 
 ## ToDo
+
+Check if the model actually learns anything?
 
 More timesteps
 
@@ -882,10 +884,27 @@ Metrics: {
 
 ### 512x128
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11057703  
-Results: 
+Results: No difference, might be because the model still isn't learning the latex; try using wider aspect ratios after sure that the model works
 
 ```
-
+Metrics: {
+  "best_epoch": 13,
+  "peak_cpu_memory_MB": 2415.388,
+  "peak_gpu_0_memory_MB": 8644,
+  "training_duration": "02:17:50",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.5043626680030479,
+  "training_cpu_memory_MB": 2415.388,
+  "training_gpu_0_memory_MB": 8644,
+  "validation_BLEU": 0.07481919181026701,
+  "validation_exprate": 0.003395585738539898,
+  "validation_loss": 1.0206764382975442,
+  "best_validation_BLEU": 0.07505426950014889,
+  "best_validation_exprate": 0.003961516694963215,
+  "best_validation_loss": 0.927132785320282
+}
 ```
 
 ```
