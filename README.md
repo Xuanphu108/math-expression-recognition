@@ -4,10 +4,10 @@
 
 * [Template](#template)
 * [Todo](#todo)
+* [Done](#done)
 * [Notes](#notes)
 * [Transformers](#transformers)
 * [Later](#later)
-* [Done](#done)
 * [Other](#other)
 * [Beam Search](#beam-search-stuff)
 * [Papers](#papers)
@@ -22,6 +22,8 @@
   * [20 epochs half lr after 10 and doubly stochastic loss (Not better)](#20-epochs-half-lr-after-10-and-doubly-stochastic-loss)
   * [min count 10 (Better)](#min-count-10)
   * [512x256 (Slightly better)](#512x256)
+  * [512x128 ()](#512x128)
+
 
 ## Template
 
@@ -45,17 +47,11 @@ Results:
 
 ## ToDo
 
-Only use tokens that appear at least n times **In progress**
+More timesteps
 
-Check resizing/padding/rectangular images **In progress**
-
-AvgPool rectangular
-
-remove first conv?
+remove first conv? **Do next**
 
 Doubly stochastic attention
-
-Adaptive avg pool right?
 
 Check grad clipping
 
@@ -65,55 +61,19 @@ Look into all math recognition papers
 
 Increase the batch size
 
-Larger resnet
+Larger resnet **Do next**
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
-## Notes
-
-**Refer to fairseq**
-
-Is label during beam search out of order? **No, all state vars are sorted in _decode() **
-
-Tune beam size
-
-will implement decoding on val like allennlp
-
-Allennlp might not implement val loss correctly
-
-validation max decoding steps are the same as length of target
-
-beam search and bleu score is also implemented only on predictions with length of target_len
-
-decode will run on model.forward_on_instances()
-
-use predictor to run prediction and any post processing
-
-preds returned from _decode will be sorted in training so use sorted labels and masks as well
-
-first input to decoder at validation is start token
-
-## Transformers
-
-https://github.com/ruotianluo/Transformer_Captioning
-
-https://ai.googleblog.com/2018/09/conceptual-captions-new-dataset-and.html
-
-> Paper: http://aclweb.org/anthology/P18-1238
-
-https://openreview.net/forum?id=HJN6DiAcKQ
-
-http://openaccess.thecvf.com/content_ICCV_2017/papers/Pedersoli_Areas_of_Attention_ICCV_2017_paper.pdf
-
-https://www.researchgate.net/publication/325016817_Captioning_Transformer_with_Stacked_Attention_Modules
-
-## Later
-
-fp16 **Wait until allennlp supports apex**
-
-Preprocess latex like https://github.com/harvardnlp/im2markup **Their preprocessing is for images of latex**
-
 ## Done
+
+AvgPool rectangular
+
+Adaptive avg pool right? **Yes**
+
+Check resizing/padding/rectangular images **Slightly better**
+
+Only use tokens that appear at least n times **Better**
 
 Check scaling image
 
@@ -166,6 +126,51 @@ Change decode to only keep relevant data in state dict
 Prepend all private instance variables with _
 
 Try allennlp's embedding Done
+
+
+## Notes
+
+**Refer to fairseq**
+
+Is label during beam search out of order? **No, all state vars are sorted in _decode() **
+
+Tune beam size
+
+will implement decoding on val like allennlp
+
+Allennlp might not implement val loss correctly
+
+validation max decoding steps are the same as length of target
+
+beam search and bleu score is also implemented only on predictions with length of target_len
+
+decode will run on model.forward_on_instances()
+
+use predictor to run prediction and any post processing
+
+preds returned from _decode will be sorted in training so use sorted labels and masks as well
+
+first input to decoder at validation is start token
+
+## Transformers
+
+https://github.com/ruotianluo/Transformer_Captioning
+
+https://ai.googleblog.com/2018/09/conceptual-captions-new-dataset-and.html
+
+> Paper: http://aclweb.org/anthology/P18-1238
+
+https://openreview.net/forum?id=HJN6DiAcKQ
+
+http://openaccess.thecvf.com/content_ICCV_2017/papers/Pedersoli_Areas_of_Attention_ICCV_2017_paper.pdf
+
+https://www.researchgate.net/publication/325016817_Captioning_Transformer_with_Stacked_Attention_Modules
+
+## Later
+
+fp16 **Wait until allennlp supports apex**
+
+Preprocess latex like https://github.com/harvardnlp/im2markup **Their preprocessing is for images of latex**
 
 ## Other
 
@@ -841,6 +846,72 @@ Metrics: {
         "max_timesteps": 20,
         "encoder_height": 16,
         "encoder_width": 8,
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256,
+        "pretrained": true
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+       "learning_rate_scheduler": {
+            "type": "multi_step",
+            "milestones": [10, 20, 30, 40],
+            "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### 512x128
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11057703  
+Results: 
+
+```
+
+```
+
+```
+
+```
+
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": false
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "max_timesteps": 20,
+        "encoder_height": 16,
+        "encoder_width": 4,
         "embedding_dim": 256,
         "attention_dim": 256,
         "decoder_dim": 256,
