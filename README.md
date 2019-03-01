@@ -20,8 +20,8 @@
   * [check doubly stochastic loss (Come back to later)](#check-doubly-stochastic-loss)
   * [normalizing image (Come back to later)](#normalizing-image)
   * [20 epochs half lr after 10 and doubly stochastic loss (Not better)](#20-epochs-half-lr-after-10-and-doubly-stochastic-loss)
-  * [min count 10](#min-count-10)
-  * [512x256](#512x256)
+  * [min count 10 (Better)](#min-count-10)
+  * [512x256 (Slightly better)](#512x256)
 
 ## Template
 
@@ -719,10 +719,27 @@ Metrics: {
 
 ### min count 10
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11033579  
-Results:
+Results: Better
 
 ```
-
+Metrics: {
+  "best_epoch": 12,
+  "peak_cpu_memory_MB": 3420.536,
+  "peak_gpu_0_memory_MB": 10899,
+  "training_duration": "02:46:11",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.5793307759203352,
+  "training_cpu_memory_MB": 3420.536,
+  "training_gpu_0_memory_MB": 10899,
+  "validation_BLEU": 0.06647298746871495,
+  "validation_exprate": 0.0050933786078098476,
+  "validation_loss": 0.9654609880277089,
+  "best_validation_BLEU": 0.06420508374862695,
+  "best_validation_exprate": 0.006791171477079796,
+  "best_validation_loss": 0.9295466244220734
+}
 ```
 
 ```
@@ -781,10 +798,26 @@ Results:
 
 ### 512x256
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11034306  
-Results:
+Results: Better
 
 ```
-
+Metrics: {
+  "best_epoch": 12,
+  "peak_cpu_memory_MB": 2652.968,
+  "peak_gpu_0_memory_MB": 9890,
+  "training_duration": "02:43:45",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.4642702749183586,
+  "training_cpu_memory_MB": 2652.968,
+  "training_gpu_0_memory_MB": 9890,
+  "validation_BLEU": 0.06276211994669638,
+  "validation_exprate": 0.001697792869269949,
+  "validation_loss": 0.9946336512054715,
+  "best_validation_BLEU": 0.06912969854662752,
+  "best_validation_exprate": 0.001697792869269949,
+  "best_validation_loss": 0.9179870252098355
 ```
 
 ```
