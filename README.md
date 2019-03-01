@@ -23,7 +23,7 @@
   * [min count 10 (Better)](#min-count-10)
   * [512x256 (Slightly better)](#512x256)
   * [512x128 ()](#512x128)
-  * [reduce on plateau factor 0.5 patience 5](#reduce-on-plateau-factor-0.5-patience-5)
+  * [reduce on plateau factor 0.5 patience 5](#reduce-on-plateau-factor-05-patience-5)
 
 ## Template
 
