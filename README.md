@@ -21,6 +21,7 @@
   * [normalizing image (Come back to later)](#normalizing-image)
   * [20 epochs half lr after 10 and doubly stochastic loss (Not better)](#20-epochs-half-lr-after-10-and-doubly-stochastic-loss)
   * [min count 10](#min-count-10)
+  * [512x256](#512x256)
 
 ## Template
 
@@ -46,7 +47,15 @@ Results:
 
 Only use tokens that appear at least n times **In progress**
 
-Check resizing/padding/rectangular images
+Check resizing/padding/rectangular images **In progress**
+
+AvgPool rectangular
+
+remove first conv?
+
+Doubly stochastic attention
+
+Adaptive avg pool right?
 
 Check grad clipping
 
@@ -709,7 +718,7 @@ Metrics: {
 ```
 
 ### min count 10
-Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11030349   
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11033579  
 Results:
 
 ```
@@ -733,6 +742,72 @@ Results:
     "model": {
         "type": "math-image-captioning",
         "max_timesteps": 20, 
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256,
+        "pretrained": true
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+       "learning_rate_scheduler": {
+            "type": "multi_step",
+            "milestones": [10, 20, 30, 40],
+            "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### 512x256
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11034306  
+Results:
+
+```
+
+```
+
+```
+
+```
+
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 256,
+        "lazy": true,
+        "subset": false
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "max_timesteps": 20,
+        "encoder_height": 16,
+        "encoder_width": 8,
         "embedding_dim": 256,
         "attention_dim": 256,
         "decoder_dim": 256,
