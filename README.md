@@ -29,6 +29,7 @@
   * [no doubly stochastic attention ()](#no-doubly-stochastic-attention)
   * [batch size 16 ()](#batch-size-16)
   * [lr 1e-3 ()](#lr-1e-3)
+  * [bleu as val metric](#bleu-as-val-metric)
 
 ## Template
 
@@ -1394,6 +1395,75 @@ Results:
             "type": "adam",
             "lr": 0.001
         },
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+#             "type": "multi_step",
+#             "milestones": [10, 20, 30, 40],
+#             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### bleu as val metric
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11087901 v51  
+Results:
+
+```
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 20,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+        "validation_metric": "+BLEU",
         "learning_rate_scheduler": {
             "type": "reduce_on_plateau",
             "factor": 0.5,
