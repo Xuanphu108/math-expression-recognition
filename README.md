@@ -23,47 +23,51 @@
   * [min count 10 (Better)](#min-count-10)
   * [512x256 (Slightly better)](#512x256)
   * [512x128 (No difference)](#512x128)
-  * [reduce on plateau factor 0.5 patience 5](#reduce-on-plateau-factor-05-patience-5)
+  * [reduce on plateau factor 0.5 patience 5 (Higher bleu score)](#reduce-on-plateau-factor-05-patience-5)
   * [resnet50 (Not better)](#resnet50)
-  * [character tokenizer ()](#character-tokenizer)
+  * [character tokenizer (Not better)](#character-tokenizer)
+  * [no doubly stochastic attention ()](#no-doubly-stochastic-attention)
+  * [batch size 16 ()](#batch-size-16)
+  * [lr 1e-3 ()](#lr-1e-3)
 
 ## Template
 
   * [](#)
   
-### 
+###
 Kernel:  
 Results:
 
 ```
-
 ```
-
 ```
-
 ```
 
 ## ToDo
 
-maybe go back to character tokenization?
+Doubly stochastic attention
 
-Check if the model actually learns anything?
+Change the batch size
+
+train with lower lr
+
+validaton metric
 
 More timesteps
 
-Doubly stochastic attention
+Check if the model actually learns anything? **How?**
 
 Check grad clipping
 
-Reduce lr on plateau (5? 3?)
-
 Look into all math recognition papers
-
-Change the batch size
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+Reduce lr on plateau (5? 3?)
+
+maybe go back to character tokenization? **Not better**
 
 fix pred printing
 
@@ -972,16 +976,28 @@ Metrics: {
 
 ### Reduce on plateau factor 0.5 patience 5
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11060502  
-Results:
+Results: Better; Higher val bleu 
 
 ```
-
+Metrics: {
+  "best_epoch": 17,
+  "peak_cpu_memory_MB": 2420.088,
+  "peak_gpu_0_memory_MB": 8644,
+  "training_duration": "05:50:41",
+  "training_start_epoch": 0,
+  "training_epochs": 49,
+  "epoch": 49,
+  "training_loss": 0.04867182831439349,
+  "training_cpu_memory_MB": 2420.088,
+  "training_gpu_0_memory_MB": 8644,
+  "validation_BLEU": 0.1269965683674257,
+  "validation_exprate": 0.0050933786078098476,
+  "validation_loss": 1.316885103072439,
+  "best_validation_BLEU": 0.12616028968765172,
+  "best_validation_exprate": 0.005659309564233163,
+  "best_validation_loss": 1.0380352096898215
+}
 ```
-
-```
-
-```
-
 ```
 {
     "dataset_reader": {
@@ -1119,12 +1135,28 @@ Metrics: {
 
 ### character tokenizer
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11065538  
-Results:
+Results: Not better
 
 ```
-
+Metrics: {
+  "best_epoch": 13,
+  "peak_cpu_memory_MB": 2428.216,
+  "peak_gpu_0_memory_MB": 8652,
+  "training_duration": "02:17:47",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.5576974188422298,
+  "training_cpu_memory_MB": 2428.216,
+  "training_gpu_0_memory_MB": 8652,
+  "validation_BLEU": 0.10014560136932416,
+  "validation_exprate": 0.0005659309564233164,
+  "validation_loss": 0.9400272007499423,
+  "best_validation_BLEU": 0.08305926681458821,
+  "best_validation_exprate": 0.0028296547821165816,
+  "best_validation_loss": 0.8667837998696736
+}
 ```
-
 ```
 {
     "dataset_reader": {
@@ -1167,6 +1199,208 @@ Results:
             "type": "multi_step",
             "milestones": [10, 20, 30, 40],
             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### no doubly stochastic attention
+Kernel: V46 https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11083975  
+Results:
+
+```
+
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 20,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": false,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.001
+        },
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### batch size 16
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11086134 v49  
+Results:
+
+```
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 20,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+        "learning_rate_scheduler": {
+             "type": "reduce_on_plateau",
+             "factor": 0.5,
+             "patience": 5
+#            "type": "multi_step",
+#            "milestones": [10, 20, 30, 40],
+#            "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### lr 1e-3
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11086184 V50  
+Results:
+
+```
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 20,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.001
+        },
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+#             "type": "multi_step",
+#             "milestones": [10, 20, 30, 40],
+#             "gamma": 0.5
         },
         "num_serialized_models_to_keep": 6,
         "summary_interval": 10,
