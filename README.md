@@ -24,7 +24,8 @@
   * [512x256 (Slightly better)](#512x256)
   * [512x128 (No difference)](#512x128)
   * [reduce on plateau factor 0.5 patience 5](#reduce-on-plateau-factor-05-patience-5)
-  * [resnet50](#resnet50)
+  * [resnet50 (Not better)](#resnet50)
+  * [character tokenizer ()](#character-tokenizer)
 
 ## Template
 
@@ -44,6 +45,8 @@ Results:
 
 ## ToDo
 
+maybe go back to character tokenization?
+
 Check if the model actually learns anything?
 
 More timesteps
@@ -56,13 +59,15 @@ Reduce lr on plateau (5? 3?)
 
 Look into all math recognition papers
 
-Increase the batch size
-
-Larger resnet **Do next**
+Change the batch size
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+fix pred printing
+
+Larger resnet **Not better as of yet**
 
 remove first conv? **No**
 
@@ -1034,10 +1039,27 @@ Results:
 
 ### Resnet50
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11060551  
-Results:
+Results: Not better
 
 ```
-
+Metrics: {
+  "best_epoch": 15,
+  "peak_cpu_memory_MB": 2531.904,
+  "peak_gpu_0_memory_MB": 10425,
+  "training_duration": "03:34:20",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.5602430024662534,
+  "training_cpu_memory_MB": 2531.904,
+  "training_gpu_0_memory_MB": 10425,
+  "validation_BLEU": 0.07483617344219004,
+  "validation_exprate": 0.0011318619128466328,
+  "validation_loss": 1.0261380757604326,
+  "best_validation_BLEU": 0.06389102246869556,
+  "best_validation_exprate": 0.003961516694963215,
+  "best_validation_loss": 0.9615265663181033
+}
 ```
 
 ```
@@ -1079,6 +1101,72 @@ Results:
             "type": "multi_step",
             "milestones": [10, 20, 30, 40],
             "gamma": 0.1
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### character tokenizer
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11065538  
+Results:
+
+```
+
+```
+
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "character"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 20,
+        "embedding_dim": 256,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+       "learning_rate_scheduler": {
+            "type": "multi_step",
+            "milestones": [10, 20, 30, 40],
+            "gamma": 0.5
         },
         "num_serialized_models_to_keep": 6,
         "summary_interval": 10,
