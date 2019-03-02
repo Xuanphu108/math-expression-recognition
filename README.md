@@ -26,10 +26,11 @@
   * [reduce on plateau factor 0.5 patience 5 (Higher bleu score)](#reduce-on-plateau-factor-05-patience-5)
   * [resnet50 (Not better)](#resnet50)
   * [character tokenizer (Not better)](#character-tokenizer)
-  * [no doubly stochastic attention ()](#no-doubly-stochastic-attention)
+  * [no doubly stochastic attention (slightly worse)](#no-doubly-stochastic-attention)
   * [batch size 16 ()](#batch-size-16)
-  * [lr 1e-3 ()](#lr-1e-3)
+  * [lr 1e-3 (Not significatly better now)](#lr-1e-3)
   * [bleu as val metric](#bleu-as-val-metric)
+  * [print logits](#print-logits)
 
 ## Template
 
@@ -46,11 +47,9 @@ Results:
 
 ## ToDo
 
-Doubly stochastic attention
+see raw train preds
 
 Change the batch size
-
-train with lower lr
 
 validaton metric
 
@@ -65,6 +64,10 @@ Look into all math recognition papers
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+train with lower lr **Slightly worse; more epochs?**
+
+Doubly stochastic attention **Slightly worse**
 
 Reduce lr on plateau (5? 3?)
 
@@ -1218,10 +1221,27 @@ Metrics: {
 
 ### no doubly stochastic attention
 Kernel: V46 https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11083975  
-Results:
+Results: slightly worse
 
 ```
-
+Metrics: {
+  "best_epoch": 18,
+  "peak_cpu_memory_MB": 2424.304,
+  "peak_gpu_0_memory_MB": 8632,
+  "training_duration": "02:12:22",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.48250934293678216,
+  "training_cpu_memory_MB": 2424.304,
+  "training_gpu_0_memory_MB": 8632,
+  "validation_BLEU": 0.11427185889087516,
+  "validation_exprate": 0.003395585738539898,
+  "validation_loss": 1.08288340483393,
+  "best_validation_BLEU": 0.12441254787132351,
+  "best_validation_exprate": 0.0028296547821165816,
+  "best_validation_loss": 1.0762296978916441
+}
 ```
 ```
 {
@@ -1352,9 +1372,27 @@ Results:
 
 ### lr 1e-3
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11086184 V50  
-Results:
+Results: Not significatly better now
 
 ```
+Metrics: {
+  "best_epoch": 15,
+  "peak_cpu_memory_MB": 2426.076,
+  "peak_gpu_0_memory_MB": 8644,
+  "training_duration": "02:24:45",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.487113605211447,
+  "training_cpu_memory_MB": 2426.076,
+  "training_gpu_0_memory_MB": 8644,
+  "validation_BLEU": 0.10456420856035056,
+  "validation_exprate": 0.00792303338992643,
+  "validation_loss": 1.120521530508995,
+  "best_validation_BLEU": 0.12984879191769547,
+  "best_validation_exprate": 0.0050933786078098476,
+  "best_validation_loss": 1.074400497334344
+}
 ```
 ```
 {
@@ -1420,6 +1458,75 @@ Results:
 
 ### bleu as val metric
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11087901 v51  
+Results:
+
+```
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 20,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 64
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+        "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+#             "type": "multi_step",
+#             "milestones": [10, 20, 30, 40],
+#             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### print logits
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11090482 v52  
 Results:
 
 ```
