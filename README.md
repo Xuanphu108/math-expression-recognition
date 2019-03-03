@@ -32,7 +32,7 @@
   * [bleu as val metric (Better; but won't use just yet)](#bleu-as-val-metric)
   * [75 timesteps (Better)](#75-timesteps)
   * [Double everything (Doesn't help)](#double-everything)
-  * [different img loading](#different-img-loading)
+  * [different img loading (Better; helps with model not learning anything)](#different-img-loading)
   * [different img loading cv2](#different-img-loading-cv2)
 
 ## Template
@@ -1721,9 +1721,12 @@ Results:Doesn't help
 
 ### different img loading
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11114322 v55  
-Results:
+Results: Better;
 
 ```
+2019-03-03 19:46:57,262 - INFO - allennlp.commands.evaluate - BLEU: 0.18469591785909167
+2019-03-03 19:46:57,262 - INFO - allennlp.commands.evaluate - exprate: 0.04640633842671194
+2019-03-03 19:46:57,262 - INFO - allennlp.commands.evaluate - loss: 0.9052463579285253
 ```
 ```
         img = (1 - plt.imread(path)[:,:,0])
