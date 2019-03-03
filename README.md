@@ -30,8 +30,9 @@
   * [batch size 16 (Better)](#batch-size-16)
   * [lr 1e-3 (Not significatly better now)](#lr-1e-3)
   * [bleu as val metric (Better; but won't use just yet)](#bleu-as-val-metric)
-  * [75 timesteps](#75-timesteps)
-  * [Double everything](#double-everything)
+  * [75 timesteps (Better)](#75-timesteps)
+  * [Double everything (Doesn't help)](#double-everything)
+  * [different img loading](#different-img-loading)
 
 ## Template
 
@@ -48,11 +49,9 @@ Results:
 
 ## ToDo
 
-see raw train preds
+beam size
 
-More timesteps
-
-Bigger model
+input channels
 
 Non pretrained
 
@@ -65,6 +64,12 @@ Look into all math recognition papers
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+see raw train preds
+
+More timesteps **Better**
+
+Bigger model **Doesn't help yet**
 
 Change the batch size **16 is better**
 
@@ -1553,9 +1558,27 @@ Metrics: {
 
 ### 75 timesteps
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11091031 v53  
-Results:
+Results: Better; Higher bleu
 
 ```
+Metrics: {
+  "best_epoch": 19,
+  "peak_cpu_memory_MB": 2155.596,
+  "peak_gpu_0_memory_MB": 5398,
+  "training_duration": "03:50:13",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.5110849919497158,
+  "training_cpu_memory_MB": 2155.596,
+  "training_gpu_0_memory_MB": 5398,
+  "validation_BLEU": 0.14157844837004005,
+  "validation_exprate": 0.009620826259196379,
+  "validation_loss": 0.9945293479674572,
+  "best_validation_BLEU": 0.14157844837004005,
+  "best_validation_exprate": 0.009620826259196379,
+  "best_validation_loss": 0.9945293479674572
+}
 ```
 ```
 {
@@ -1621,10 +1644,14 @@ Results:
 ```
 
 ### Double everything
-Kernel:  
-Results:
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11093072 v54  
+Results:Doesn't help
 
 ```
+2019-03-03 07:18:05,723 - INFO - allennlp.commands.evaluate - Metrics:
+2019-03-03 07:18:05,723 - INFO - allennlp.commands.evaluate - BLEU: 0.053972748235069194
+2019-03-03 07:18:05,723 - INFO - allennlp.commands.evaluate - exprate: 0.003961516694963215
+2019-03-03 07:18:05,723 - INFO - allennlp.commands.evaluate - loss: 1.3646348623542097
 ```
 ```
 {
@@ -1688,3 +1715,80 @@ Results:
     },
 }
 ```
+
+### different img loading
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11114322 v55  
+Results:
+
+```
+```
+```
+        img = (1 - plt.imread(path)[:,:,0])
+        img = img.reshape(1, img.shape[0], img.shape[1])
+        img = np.concatenate((img, img, img))
+        img = cv2.resize(img.transpose(1, 2, 0), (self.height, self.width)).transpose(2, 0, 1)
+
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 75,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+        "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+#             "type": "multi_step",
+#             "milestones": [10, 20, 30, 40],
+#             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
