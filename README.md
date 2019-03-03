@@ -33,6 +33,7 @@
   * [75 timesteps (Better)](#75-timesteps)
   * [Double everything (Doesn't help)](#double-everything)
   * [different img loading](#different-img-loading)
+  * [different img loading cv2](#different-img-loading-cv2)
 
 ## Template
 
@@ -49,11 +50,11 @@ Results:
 
 ## ToDo
 
+transparent background
+
 beam size
 
 input channels
-
-Non pretrained
 
 Check if the model actually learns anything? **How?**
 
@@ -64,6 +65,8 @@ Look into all math recognition papers
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+Non pretrained **Won't do yet**
 
 see raw train preds
 
@@ -1792,3 +1795,78 @@ Results:
 }
 ```
 
+### different img loading cv2
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11116779 v56  
+Results:
+
+```
+```
+```
+        img = cv2.imread(path)
+        img = img / 255
+        img = 1 - img
+        img = cv2.resize(img, (self.height, self.width))
+        img = img.reshape(3, self.height, self.width)
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 512,
+        "width": 128,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 75,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+        "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+#             "type": "multi_step",
+#             "milestones": [10, 20, 30, 40],
+#             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
