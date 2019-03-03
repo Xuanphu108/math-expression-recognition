@@ -31,6 +31,7 @@
   * [lr 1e-3 (Not significatly better now)](#lr-1e-3)
   * [bleu as val metric (Better; but won't use just yet)](#bleu-as-val-metric)
   * [75 timesteps](#75-timesteps)
+  * [Double everything](#double-everything)
 
 ## Template
 
@@ -1616,4 +1617,74 @@ Results:
         }
 #         "directory_path": "/path/to/vocab"
     },
-}```
+}
+```
+
+### Double everything
+Kernel:  
+Results:
+
+```
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 1024,
+        "width": 256,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 32,
+        "encoder_width": 8,
+        "max_timesteps": 75,
+        "embedding_dim": 512,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 512,
+        "decoder_dim": 512
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.01
+        },
+        "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+#             "type": "multi_step",
+#             "milestones": [10, 20, 30, 40],
+#             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
