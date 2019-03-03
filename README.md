@@ -27,10 +27,10 @@
   * [resnet50 (Not better)](#resnet50)
   * [character tokenizer (Not better)](#character-tokenizer)
   * [no doubly stochastic attention (slightly worse)](#no-doubly-stochastic-attention)
-  * [batch size 16 ()](#batch-size-16)
+  * [batch size 16 (Better)](#batch-size-16)
   * [lr 1e-3 (Not significatly better now)](#lr-1e-3)
-  * [bleu as val metric](#bleu-as-val-metric)
-  * [print logits](#print-logits)
+  * [bleu as val metric (Better; but won't use just yet)](#bleu-as-val-metric)
+  * [75 timesteps](#75-timesteps)
 
 ## Template
 
@@ -49,11 +49,11 @@ Results:
 
 see raw train preds
 
-Change the batch size
-
-validaton metric
-
 More timesteps
+
+Bigger model
+
+Non pretrained
 
 Check if the model actually learns anything? **How?**
 
@@ -64,6 +64,10 @@ Look into all math recognition papers
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+Change the batch size **16 is better**
+
+validaton metric **bleu is better, but won't use until model is working
 
 train with lower lr **Slightly worse; more epochs?**
 
@@ -1304,9 +1308,12 @@ Metrics: {
 
 ### batch size 16
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11086134 v49  
-Results:
+Results: Better; Loss is lower
 
 ```
+2019-03-02 23:40:28,090 - INFO - allennlp.commands.evaluate - BLEU: 0.06955897954768596
+2019-03-02 23:40:28,091 - INFO - allennlp.commands.evaluate - exprate: 0.0050933786078098476
+2019-03-02 23:40:28,091 - INFO - allennlp.commands.evaluate - loss: 0.9873247804405453
 ```
 ```
 {
@@ -1458,9 +1465,27 @@ Metrics: {
 
 ### bleu as val metric
 Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11087901 v51  
-Results:
+Results: Better; But use after model is working
 
 ```
+Metrics: {
+  "best_epoch": 14,
+  "peak_cpu_memory_MB": 2390.612,
+  "peak_gpu_0_memory_MB": 8644,
+  "training_duration": "02:17:28",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 0.5430574360731486,
+  "training_cpu_memory_MB": 2390.612,
+  "training_gpu_0_memory_MB": 8644,
+  "validation_BLEU": 0.07345152212269282,
+  "validation_exprate": 0.006791171477079796,
+  "validation_loss": 0.9656095079013279,
+  "best_validation_BLEU": 0.08023707957732544,
+  "best_validation_exprate": 0.008488964346349746,
+  "best_validation_loss": 0.9554811652217593
+}
 ```
 ```
 {
@@ -1525,8 +1550,8 @@ Results:
 }
 ```
 
-### print logits
-Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11090482 v52  
+### 75 timesteps
+Kernel:https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11091031 v53  
 Results:
 
 ```
@@ -1552,7 +1577,7 @@ Results:
         "pretrained": true,
         "encoder_height": 16,
         "encoder_width": 4,
-        "max_timesteps": 20,
+        "max_timesteps": 75,
         "embedding_dim": 256,
         "doubly_stochastic_attention": true,
         "attention_dim": 256,
@@ -1561,7 +1586,7 @@ Results:
     "iterator": {
         "type": "bucket",
         "sorting_keys":[["label", "num_tokens"]],
-        "batch_size": 64
+        "batch_size": 16
     },
     "trainer": {
         "num_epochs": 20,
@@ -1591,5 +1616,4 @@ Results:
         }
 #         "directory_path": "/path/to/vocab"
     },
-}
-```
+}```
