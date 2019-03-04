@@ -52,6 +52,10 @@ Results:
 
 ## ToDo
 
+split numbers
+
+Lowercase?
+
 `\\` vocab token
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
