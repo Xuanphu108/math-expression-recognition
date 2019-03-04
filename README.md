@@ -34,8 +34,8 @@
   * [Double everything (Doesn't help)](#double-everything)
   * [different img loading (Better; helps with model not learning anything)](#different-img-loading)
   * [different img loading cv2 (worse)](#different-img-loading-cv2)
-  * [beam size 10](#beam-size-10)
-  * [fixed beam search](#fixed-beam-search)
+  * [beam size 10)](#beam-size-10)
+  * [fixed beam search (Fixes beam search; Better)](#fixed-beam-search)
 
 ## Template
 
@@ -52,11 +52,13 @@ Results:
 
 ## ToDo
 
-beam size
+`\\` vocab token
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+beam size **Better**
 
 print top 50
 
@@ -1881,9 +1883,13 @@ Results: Worse
 
 ### beam size 10
 Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11124199 v58  
-Results:
+Results: Better, but really doesn't mean anything since beam search is fixed in the next experiment
 
 ```
+2019-03-04 04:09:25,679 - INFO - allennlp.commands.evaluate - Metrics:
+2019-03-04 04:09:25,679 - INFO - allennlp.commands.evaluate - BLEU: 0.128425063311222
+2019-03-04 04:09:25,679 - INFO - allennlp.commands.evaluate - exprate: 0.04640633842671194
+2019-03-04 04:09:25,679 - INFO - allennlp.commands.evaluate - loss: 0.9284863885458525
 ```
 ```
 {
@@ -1954,7 +1960,10 @@ Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11125346
 Results:
 
 ```
-
+2019-03-04 04:59:23,734 - INFO - allennlp.commands.evaluate - Metrics:
+2019-03-04 04:59:23,734 - INFO - allennlp.commands.evaluate - BLEU: 0.22114275113523937
+2019-03-04 04:59:23,734 - INFO - allennlp.commands.evaluate - exprate: 0.11544991511035653
+2019-03-04 04:59:23,734 - INFO - allennlp.commands.evaluate - loss: 0.8966405372898858
 ```
 ```
             state['h'], state['c'] = self._init_hidden(state['x'])
