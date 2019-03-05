@@ -37,7 +37,7 @@
   * [beam size 10)](#beam-size-10)
   * [fixed beam search (Fixes beam search; Better)](#fixed-beam-search)
   * [fix tokenization (Will use)](#fix-tokenization)
-  * [smaller beam size and no min count](#smaller-beam-size-and-no-min-count)
+  * [smaller beam size and no min count (worse)](#smaller-beam-size-and-no-min-count)
 
 ## Template
 
@@ -54,15 +54,15 @@ Results:
 
 ## ToDo
 
+Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
+
+## Done
+
 no min count
 
 use loss as validation metric
 
-use smaller beam width
-
-Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
-
-## Done
+use smaller beam width **Worse**
 
 split numbers
 
@@ -2156,9 +2156,13 @@ Results: Higher loss and lower bleu score but correct tokenization
 
 ### smaller beam size and no min count
 Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11162145 v61  
-Results:
+Results: Worse
 
 ```
+2019-03-05 04:08:07,499 - INFO - allennlp.commands.evaluate - Metrics:
+2019-03-05 04:08:07,499 - INFO - allennlp.commands.evaluate - BLEU: 0.052254567852234896
+2019-03-05 04:08:07,499 - INFO - allennlp.commands.evaluate - exprate: 0.01867572156196944
+2019-03-05 04:08:07,499 - INFO - allennlp.commands.evaluate - loss: 1.4841137861346339
 ```
 ```
 {
