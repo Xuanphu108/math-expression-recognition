@@ -57,11 +57,17 @@ Results:
 
 ## ToDo
 
-Visualize attention heatmaps
+Show only right amount of timesteps
+
+Show beam searched predictions at timesteps
+
+Refactor prediction and visualization code
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+Visualize attention heatmaps
 
 Visualize source images of preds
 
