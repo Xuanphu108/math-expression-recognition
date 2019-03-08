@@ -57,15 +57,23 @@ Results:
 
 ## ToDo
 
-Show only right amount of timesteps
-
-Show beam searched predictions at timesteps
-
-Refactor prediction and visualization code
+use doubly stochastic attention and loss **consider later; they alter attention heatmaps**
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+use values other than 0 for background? **No, shouldn't be necessary**
+
+reshape img to right size
+
+print out preds
+
+Refactor prediction and visualization code
+
+Show only right amount of timesteps
+
+Show beam searched predictions at timesteps
 
 Visualize attention heatmaps
 
