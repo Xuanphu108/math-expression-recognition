@@ -41,7 +41,8 @@
   * [lr 0.1 patience 1 (worse)](#lr-01-patience-1)
   * [SGD momentum 0.9 (Better!!)](#sgd)
   * [min count](#min-count)
-  * [doubly stochastic attention](#doubly-stochastic-attention)
+  * [doubly stochastic attention (better)](#doubly-stochastic-attention)
+  * [30 epochs (better)](#30-epochs)
 
 ## Template
 
@@ -58,11 +59,11 @@ Results:
 
 ## ToDo
 
-use doubly stochastic attention and loss **consider later; they alter attention heatmaps**
-
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+use doubly stochastic attention and loss *consider later; they alter attention heatmaps* **Done**
 
 use values other than 0 for background? **No, shouldn't be necessary**
 
@@ -2475,9 +2476,27 @@ Results:
 
 ### doubly stochastic attention
 Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11329944 v80  
-Results:
+Results: Better
 
 ```
+{
+  "best_epoch": 19,
+  "peak_cpu_memory_MB": 2695.14,
+  "peak_gpu_0_memory_MB": 1481,
+  "training_duration": "01:26:48",
+  "training_start_epoch": 0,
+  "training_epochs": 19,
+  "epoch": 19,
+  "training_loss": 1.105314669431065,
+  "training_cpu_memory_MB": 2695.14,
+  "training_gpu_0_memory_MB": 1481,
+  "validation_BLEU": 0.4384247738592014,
+  "validation_exprate": 0.11941143180531975,
+  "validation_loss": 1.7994500860437617,
+  "best_validation_BLEU": 0.4384247738592014,
+  "best_validation_exprate": 0.11941143180531975,
+  "best_validation_loss": 1.7994500860437617
+}
 ```
 ```
 {
@@ -2514,6 +2533,95 @@ Results:
     },
     "trainer": {
         "num_epochs": 20,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+#             "type": "multi_step",
+#             "milestones": [10, 20, 30, 40],
+#             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### 30 epochs
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11330549 v81  
+Results: Better;
+
+```
+{
+  "best_epoch": 27,
+  "peak_cpu_memory_MB": 2695.224,
+  "peak_gpu_0_memory_MB": 1481,
+  "training_duration": "02:09:20",
+  "training_start_epoch": 0,
+  "training_epochs": 29,
+  "epoch": 29,
+  "training_loss": 0.8273943196055037,
+  "training_cpu_memory_MB": 2695.224,
+  "training_gpu_0_memory_MB": 1481,
+  "validation_BLEU": 0.48553515163211886,
+  "validation_exprate": 0.16921335597057158,
+  "validation_loss": 1.7258416113552746,
+  "best_validation_BLEU": 0.4841102772382667,
+  "best_validation_exprate": 0.16355404640633842,
+  "best_validation_loss": 1.7124873668223888
+}
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 75,
+        "beam_size": 10,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 30,
         "cuda_device": 0,
         "optimizer": {
             "type": "sgd",
