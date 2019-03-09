@@ -43,6 +43,7 @@
   * [min count](#min-count)
   * [doubly stochastic attention (better)](#doubly-stochastic-attention)
   * [30 epochs (better)](#30-epochs)
+  * [50 epochs (better; best epoch 37)](#50-epochs)
 
 ## Template
 
@@ -58,6 +59,12 @@ Results:
 ```
 
 ## ToDo
+
+encode image features with bilstm
+
+resize images to 2:1 aspect ratio
+
+render predicted latex
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
@@ -338,6 +345,14 @@ first input to decoder at validation is start token
 > Details
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
  * Images are resized to ~200x50
+ 
+ ### Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns
+ 
+ > Paper: file:///C:/Users/Bilal/Documents/research/math%20expression%20recognition/Crohme-papers/ICDAR2017-(Training_an_End-to-End_System_for_Handwritten_Mathematical_expressions_by_generated_patterns).pdf
+ 
+ > Details:
+ * Encodes input features with a bilstm
+ * Img augmentation
  
 ## Experiments
  
@@ -2638,6 +2653,95 @@ Results: Better;
 #             "gamma": 0.5
         },
         "num_serialized_models_to_keep": 6,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### 50 epochs
+Kernel:  v83  
+Results: Better
+
+```
+{
+  "best_epoch": 37,
+  "peak_cpu_memory_MB": 2698.308,
+  "peak_gpu_0_memory_MB": 1481,
+  "training_duration": "03:26:32",
+  "training_start_epoch": 0,
+  "training_epochs": 49,
+  "epoch": 49,
+  "training_loss": 0.619864522399406,
+  "training_cpu_memory_MB": 2698.308,
+  "training_gpu_0_memory_MB": 1481,
+  "validation_BLEU": 0.5237166993736423,
+  "validation_exprate": 0.2037351443123939,
+  "validation_loss": 1.7937162706443854,
+  "best_validation_BLEU": 0.536373875131854,
+  "best_validation_exprate": 0.21675155631013016,
+  "best_validation_loss": 1.704390459232502
+}
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 4,
+        "max_timesteps": 75,
+        "beam_size": 10,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 50,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+#             "type": "multi_step",
+#             "milestones": [10, 20, 30, 40],
+#             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 1,
         "summary_interval": 10,
         "histogram_interval": 10,
         "should_log_parameter_statistics": true,
