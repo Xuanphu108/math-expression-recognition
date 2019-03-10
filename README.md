@@ -44,7 +44,7 @@
   * [doubly stochastic attention (better)](#doubly-stochastic-attention)
   * [30 epochs (better)](#30-epochs)
   * [50 epochs (better; best epoch 37)](#50-epochs)
-  * [2x1 aspect ratio](#2x1-aspect-ratio)
+  * [2x1 aspect ratio (Worse)](#2x1-aspect-ratio)
 
 ## Template
 
@@ -2759,9 +2759,27 @@ Results: Better
 
 ### 2x1 aspect ratio
 Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11374251 v84  
-Results:
+Results: Worse
 
 ```
+{
+  "best_epoch": 31,
+  "peak_cpu_memory_MB": 2785.936,
+  "peak_gpu_0_memory_MB": 2159,
+  "training_duration": "03:53:37",
+  "training_start_epoch": 0,
+  "training_epochs": 49,
+  "epoch": 49,
+  "training_loss": 0.8311249016366933,
+  "training_cpu_memory_MB": 2785.936,
+  "training_gpu_0_memory_MB": 2159,
+  "validation_BLEU": 0.4629746433532945,
+  "validation_exprate": 0.15166949632144877,
+  "validation_loss": 2.116068430849024,
+  "best_validation_BLEU": 0.4300333402055585,
+  "best_validation_exprate": 0.13978494623655913,
+  "best_validation_loss": 2.0138201047708324
+}
 ```
 ```
 {
