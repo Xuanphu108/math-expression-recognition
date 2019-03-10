@@ -63,13 +63,21 @@ Results:
 
 encode image features with bilstm
 
-resize images to 2:1 aspect ratio
+encode each row of feature map with rnn
+
+encode last timestep's hidden state with lstm
+
+Larger models
 
 render predicted latex **Do later**
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+Rename image to math **Done**
+
+resize images to 2:1 aspect ratio **Worse**
 
 use doubly stochastic attention and loss *consider later; they alter attention heatmaps* **Done**
 
@@ -336,8 +344,9 @@ first input to decoder at validation is start token
 
 > Details
 * Train with lr of 1e-8 until metric doesn't improve
+* Encode last hidden state with rnn before decoder cell
 
-### Image to markup generation with coarse to fine attention:
+### Image to markup generation with coarse to fine attention (im2latex):
 
 > Paper: https://arxiv.org/pdf/1609.04938.pdf
 
@@ -346,6 +355,7 @@ first input to decoder at validation is start token
 > Details
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
  * Images are resized to ~200x50
+ * Each row of the feature map is encoded with rnn then attention is computed
  
  ### Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns
  
