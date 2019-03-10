@@ -44,6 +44,7 @@
   * [doubly stochastic attention (better)](#doubly-stochastic-attention)
   * [30 epochs (better)](#30-epochs)
   * [50 epochs (better; best epoch 37)](#50-epochs)
+  * [2x1 aspect ratio](#2x1-aspect-ratio)
 
 ## Template
 
@@ -64,7 +65,7 @@ encode image features with bilstm
 
 resize images to 2:1 aspect ratio
 
-render predicted latex
+render predicted latex **Do later**
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
@@ -2740,6 +2741,74 @@ Results: Better
 #             "type": "multi_step",
 #             "milestones": [10, 20, 30, 40],
 #             "gamma": 0.5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### 2x1 aspect ratio
+Kernel: https://www.kaggle.com/bkkaggle/allennlp-config?scriptVersionId=11374251 v84  
+Results:
+
+```
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 256,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "math-image-captioning",
+        "encoder_type": 'resnet18',
+        "pretrained": true,
+        "encoder_height": 16,
+        "encoder_width": 8,
+        "max_timesteps": 75,
+        "beam_size": 10,
+        "embedding_dim": 256,
+        "doubly_stochastic_attention": true,
+        "attention_dim": 256,
+        "decoder_dim": 256
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 50,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
         },
         "num_serialized_models_to_keep": 1,
         "summary_interval": 10,
