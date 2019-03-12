@@ -2962,7 +2962,7 @@ Results: Better
 ```
 
 ### encode hidden state
-Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11463963 v2  
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11489654 v5  
 Results:
 
 ```
@@ -3042,7 +3042,7 @@ Results:
 ```
 
 ### encode image features and hidden state
-Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11465558 v3  
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11489754 v6  
 Results:
 
 ```
@@ -3128,7 +3128,7 @@ Results:
 ```
 
 ### encode image features bidirectional
-Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11465650 v4  
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11489940 v7   
 Results:
 
 ```
