@@ -46,9 +46,9 @@
   * [50 epochs (better; best epoch 37)](#50-epochs)
   * [2x1 aspect ratio (Worse)](#2x1-aspect-ratio)
   * [encode image features (Better)](#encode-image-features)
-  * [encode hidden state](#encode-hidden-state)
-  * [encode image features and hidden state](#encode-image-features-and-hidden-state)
-  * [encode image features bidirectional](#encode-image-features-bidirectional)
+  * [encode hidden state (Better)](#encode-hidden-state)
+  * [encode image features and hidden state (Worse)](#encode-image-features-and-hidden-state)
+  * [encode image features bidirectional (Worse)](#encode-image-features-bidirectional)
 
 ## Template
 
@@ -65,9 +65,7 @@ Results:
 
 ## ToDo
 
-encode image features with bilstm
-
-encode last timestep's hidden state with lstm
+Concat bilstm hidden state features instead of adding
 
 encode each row of feature map with rnn
 
@@ -78,6 +76,14 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+encode image features with bilstm **Worse**
+
+encode image features and hidden state **Worse**
+
+encode image features with lstm **Better**
+
+encode last timestep's hidden state with lstm **Better**
 
 Rename image to math **Done**
 
@@ -2963,9 +2969,27 @@ Results: Better
 
 ### encode hidden state
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11489654 v5  
-Results:
+Results: Better
 
 ```
+{
+  "best_epoch": 35,
+  "peak_cpu_memory_MB": 2726.884,
+  "peak_gpu_0_memory_MB": 1517,
+  "training_duration": "03:07:06",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.6874275887174304,
+  "training_cpu_memory_MB": 2726.884,
+  "training_gpu_0_memory_MB": 1517,
+  "validation_BLEU": 0.5846165226826109,
+  "validation_exprate": 0.27504244482173174,
+  "validation_loss": 1.6777625062444188,
+  "best_validation_BLEU": 0.5821900393791162,
+  "best_validation_exprate": 0.2722127900396152,
+  "best_validation_loss": 1.6422494188085333
+}
 ```
 ```
 {
@@ -3043,9 +3067,27 @@ Results:
 
 ### encode image features and hidden state
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11489754 v6  
-Results:
+Results: Worse
 
 ```
+{
+  "best_epoch": 34,
+  "peak_cpu_memory_MB": 2715.056,
+  "peak_gpu_0_memory_MB": 1503,
+  "training_duration": "03:02:29",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.8380908595221075,
+  "training_cpu_memory_MB": 2715.056,
+  "training_gpu_0_memory_MB": 1503,
+  "validation_BLEU": 0.5324456424223838,
+  "validation_exprate": 0.23486134691567628,
+  "validation_loss": 1.7174942772667687,
+  "best_validation_BLEU": 0.5224509928136901,
+  "best_validation_exprate": 0.23429541595925296,
+  "best_validation_loss": 1.6811244401845846
+}
 ```
 ```
 {
@@ -3129,9 +3171,27 @@ Results:
 
 ### encode image features bidirectional
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11489940 v7   
-Results:
+Results: Worse
 
 ```
+{
+  "best_epoch": 33,
+  "peak_cpu_memory_MB": 2725.508,
+  "peak_gpu_0_memory_MB": 1517,
+  "training_duration": "03:03:15",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.6923653325613808,
+  "training_cpu_memory_MB": 2725.508,
+  "training_gpu_0_memory_MB": 1517,
+  "validation_BLEU": 0.5725510916952119,
+  "validation_exprate": 0.2693831352574986,
+  "validation_loss": 1.7210015735110722,
+  "best_validation_BLEU": 0.5621851301574926,
+  "best_validation_exprate": 0.26089417091114886,
+  "best_validation_loss": 1.6640424964664218
+}
 ```
 ```
 {
