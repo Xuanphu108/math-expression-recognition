@@ -45,8 +45,10 @@
   * [30 epochs (better)](#30-epochs)
   * [50 epochs (better; best epoch 37)](#50-epochs)
   * [2x1 aspect ratio (Worse)](#2x1-aspect-ratio)
-  * [encode image features](#encode-image-features)
+  * [encode image features (Better)](#encode-image-features)
   * [encode hidden state](#encode-hidden-state)
+  * [encode image features and hidden state](#encode-image-features-and-hidden-state)
+  * [encode image features bidirectional](#encode-image-features-bidirectional)
 
 ## Template
 
@@ -2857,9 +2859,27 @@ Results: Worse
 
 ### encode image features
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11461311 v1  
-Results:
+Results: Better
 
 ```
+{
+  "best_epoch": 32,
+  "peak_cpu_memory_MB": 2708.044,
+  "peak_gpu_0_memory_MB": 1501,
+  "training_duration": "02:58:50",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.7506400365635281,
+  "training_cpu_memory_MB": 2708.044,
+  "training_gpu_0_memory_MB": 1501,
+  "validation_BLEU": 0.552877996250616,
+  "validation_exprate": 0.2693831352574986,
+  "validation_loss": 1.6795133416717116,
+  "best_validation_BLEU": 0.5445483999399532,
+  "best_validation_exprate": 0.2591963780418789,
+  "best_validation_loss": 1.621857388599499
+}
 ```
 ```
 {
@@ -2973,6 +2993,178 @@ Results:
         },
         "decoder": {
             "type": "msa-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256,
+            "doubly_stochastic_attention": true
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### encode image features and hidden state
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11465558 v3  
+Results:
+
+```
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "lstm",
+            "encoder": {
+                "type": 'resnet',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true                
+            },
+            "hidden_size": 512, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "msa-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256,
+            "doubly_stochastic_attention": true
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### encode image features bidirectional
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11465650 v4  
+Results:
+
+```
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "lstm",
+            "encoder": {
+                "type": 'resnet',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true                
+            },
+            "hidden_size": 512, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": true
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
             "attention": {
                 "type": 'image-captioning-attention',
                 "encoder_dim": 512, # Must be encoder dim of chosen encoder
