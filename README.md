@@ -13,6 +13,7 @@
 * [Papers](#papers)
   * [Multi scale attention with dense encoder](#multi-scale-attention-with-dense-encoder)
   * [Image to markup generation with coarse to fine attention](#image-to-markup-generation-with-coarse-to-fine-attention)
+  * [Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns](#Training-an-End-to-End-System-for-Handwritten-Mathematical-Expression-Recognition-by-Generated-Patterns)
 * [Experiments](#experiments)
   * [Larger Decoder (Better)](#larger-decoder)
   * [Pretrained Resnet 18 (Better)](#pretrained-resnet18)
