@@ -50,7 +50,7 @@
   * [encode hidden state (Better)](#encode-hidden-state)
   * [encode image features and hidden state (Worse)](#encode-image-features-and-hidden-state)
   * [encode image features bidirectional (Worse)](#encode-image-features-bidirectional)
-  * [fixed bidirectional image features ()](#fixed-bidirectional-image-features)
+  * [fixed bidirectional image features (Better, but not good enough)](#fixed-bidirectional-image-features)
 
 ## Template
 
@@ -67,8 +67,6 @@ Results:
 
 ## ToDo
 
-Reverse bidirectional image feature when adding **Better Worse**
-
 encode each row of feature map with rnn
 
 Larger models
@@ -78,6 +76,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+Reverse bidirectional image feature when adding **Better but not good enough**
 
 encode image features with bilstm **Worse**
 
@@ -3277,9 +3277,27 @@ Results: Worse
 
 ### fixed bidirectional image features
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11511988 v8  
-Results:
+Results: Better than previous, but worse than best
 
 ```
+{
+  "best_epoch": 39,
+  "peak_cpu_memory_MB": 2725.284,
+  "peak_gpu_0_memory_MB": 1517,
+  "training_duration": "03:07:54",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.7793162158981168,
+  "training_cpu_memory_MB": 2725.284,
+  "training_gpu_0_memory_MB": 1517,
+  "validation_BLEU": 0.5702787243312304,
+  "validation_exprate": 0.26825127334465193,
+  "validation_loss": 1.668770626858548,
+  "best_validation_BLEU": 0.5702787243312304,
+  "best_validation_exprate": 0.26825127334465193,
+  "best_validation_loss": 1.668770626858548
+}
 ```
 ```
 {
