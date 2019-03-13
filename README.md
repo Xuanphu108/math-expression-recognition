@@ -357,6 +357,7 @@ first input to decoder at validation is start token
 > Details
 * Train with lr of 1e-8 until metric doesn't improve
 * Encode last hidden state with rnn before decoder cell
+* exprate of ~0.5 on 2016
 
 ### Image to markup generation with coarse to fine attention (im2latex):
 
@@ -368,6 +369,7 @@ first input to decoder at validation is start token
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
  * Images are resized to ~200x50
  * Each row of the feature map is encoded with rnn then attention is computed
+ * exprate on 2013: 33.53
  
  ### Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns
  
@@ -376,6 +378,7 @@ first input to decoder at validation is start token
  > Details:
  * Encodes input features with a bilstm
  * Img augmentation
+ * 2014: 35.19
  
 ## Experiments
  
