@@ -11,6 +11,7 @@
 * [Other](#other)
 * [Beam Search](#beam-search-stuff)
 * [Papers](#papers)
+  * [WAP](#wap)
   * [Multi scale attention with dense encoder](#multi-scale-attention-with-dense-encoder)
   * [Image to markup generation with coarse to fine attention](#image-to-markup-generation-with-coarse-to-fine-attention)
   * [Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns](#Training-an-End-to-End-System-for-Handwritten-Mathematical-Expression-Recognition-by-Generated-Patterns)
@@ -66,6 +67,8 @@ Results:
 ```
 
 ## ToDo
+
+custom first conv with 3x3 kernel
 
 encode each row of feature map with rnn
 
@@ -347,6 +350,18 @@ first input to decoder at validation is start token
 `python split_data.py`
 
 ## Papers
+
+### WAP
+
+> Paper: file:///C:/Users/Bilal/Documents/research/math%20expression%20recognition/Crohme-papers/WAP.pdf
+
+> Github: https://github.com/JianshuZhang/WAP
+
+> Details
+ * 8-directional features
+ * Coverage: conv over sum of past attention weights
+ * exprate of 46.55 on 2014
+ * exprate of 44.55 on 2016
 
 ### Multi scale attention with dense encoder:
 
