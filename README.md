@@ -52,7 +52,7 @@
   * [encode image features and hidden state (Worse)](#encode-image-features-and-hidden-state)
   * [encode image features bidirectional (Worse)](#encode-image-features-bidirectional)
   * [fixed bidirectional image features (Better, but not good enough)](#fixed-bidirectional-image-features)
-  * [3x3 inconv](#3x3-inconv)
+  * [3x3 inconv (Worse)](#3x3-inconv)
   * [no avg pooling](#no-avg-pooling)
 
 ## Template
@@ -3403,9 +3403,27 @@ Results: Better than previous, but worse than best
 
 ### 3x3 inconv
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11553644 v10  
-Results:
+Results: Worse
 
 ```
+{
+  "best_epoch": 29,
+  "peak_cpu_memory_MB": 2730.412,
+  "peak_gpu_0_memory_MB": 3497,
+  "training_duration": "04:02:08",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.1236782585064211,
+  "training_cpu_memory_MB": 2730.412,
+  "training_gpu_0_memory_MB": 3497,
+  "validation_BLEU": 0.47243654416987246,
+  "validation_exprate": 0.20316921335597057,
+  "validation_loss": 2.20243712803265,
+  "best_validation_BLEU": 0.43021217181796484,
+  "best_validation_exprate": 0.16864742501414828,
+  "best_validation_loss": 2.1513477134275005
+}
 ```
 ```
 {
@@ -3489,7 +3507,7 @@ Results:
 ```
 
 ### no avg pooling
-Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11553743 v11  
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11576248 v13  
 Results:
 
 ```
@@ -3516,8 +3534,8 @@ Results:
             "encoder": {
                 "type": 'resnet',
                 "encoder_type": 'resnet18',
-                "encoder_height": 8,
-                "encoder_width": 32,
+                "encoder_height": 4,
+                "encoder_width": 16,
                 "pretrained": true,
                 "custom_in_conv": false
             },
