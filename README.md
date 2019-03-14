@@ -70,7 +70,17 @@ Results:
 
 ## ToDo
 
-encode each row of feature map with rnn
+num params
+
+encode each row of feature map with rnn:
+
+ * bidirectional row encoder
+ * trainable initial hidden state for each row; "Positional embeddings" (Embedding with vocab size height of encoded image)
+ * Add vs concat vs reverse + add
+ * INFO on pytorch bidirectional add vs concat:
+ * https://discuss.pytorch.org/t/concatenation-of-the-hidden-states-produced-by-a-bidirectional-lstm/3686/2
+ * https://discuss.pytorch.org/t/about-bidirectional-gru-with-seq2seq-example-and-some-modifications/15588/5
+ * Pretty sure im2latex either add or reverse + add bidirectional hidden states; add is more likely
 
 Larger models
 
@@ -389,7 +399,10 @@ first input to decoder at validation is start token
  * Images are resized to ~200x50
  * Each row of the feature map is encoded with rnn then attention is computed
  * exprate on 2013: 33.53
- 
+ * bidirectional row encoder
+ * trainable initial hidden state for each row; "Positional embeddings" (Embedding with vocab size height of encoded image)
+ * Pretty sure they either add or reverse + add bidirectional hidden states
+
  ### Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns
  
  > Paper: file:///C:/Users/Bilal/Documents/research/math%20expression%20recognition/Crohme-papers/ICDAR2017-(Training_an_End-to-End_System_for_Handwritten_Mathematical_expressions_by_generated_patterns).pdf
