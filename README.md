@@ -53,7 +53,7 @@
   * [encode image features bidirectional (Worse)](#encode-image-features-bidirectional)
   * [fixed bidirectional image features (Better, but not good enough)](#fixed-bidirectional-image-features)
   * [3x3 inconv (Worse)](#3x3-inconv)
-  * [no avg pooling](#no-avg-pooling)
+  * [no avg pooling (doesn't make a difference, Good)](#no-avg-pooling)
 
 ## Template
 
@@ -70,10 +70,6 @@ Results:
 
 ## ToDo
 
-custom first conv with 3x3 kernel
-
-no avg pooling?
-
 encode each row of feature map with rnn
 
 Larger models
@@ -83,6 +79,10 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+custom first conv with 3x3 kernel **Worse**
+
+no avg pooling? **No change; good**
 
 Reverse bidirectional image feature when adding **Better but not good enough**
 
@@ -3508,9 +3508,27 @@ Results: Worse
 
 ### no avg pooling
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11576248 v13  
-Results:
+Results: No change; Good
 
 ```
+{
+  "best_epoch": 35,
+  "peak_cpu_memory_MB": 2723.636,
+  "peak_gpu_0_memory_MB": 1517,
+  "training_duration": "03:02:46",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.7321721876368803,
+  "training_cpu_memory_MB": 2723.636,
+  "training_gpu_0_memory_MB": 1517,
+  "validation_BLEU": 0.5696917663314149,
+  "validation_exprate": 0.2705149971703452,
+  "validation_loss": 1.6747943077001486,
+  "best_validation_BLEU": 0.5584485780871594,
+  "best_validation_exprate": 0.2614601018675722,
+  "best_validation_loss": 1.6364673859364278
+}
 ```
 ```
 {
