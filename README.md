@@ -70,8 +70,6 @@ Results:
 
 ## ToDo
 
-Check last few experiments to check if they were configured and evaluated correctly wrt other experiments
-
 num params
 
 encode each row of feature map with rnn:
@@ -92,6 +90,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
 
 ## Done
+
+Check last few experiments to check if they were configured and evaluated correctly wrt other experiments **They are**
 
 custom first conv with 3x3 kernel **Worse**
 
