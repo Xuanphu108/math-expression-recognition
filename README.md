@@ -70,6 +70,8 @@ Results:
 
 ## ToDo
 
+Check last few experiments to check if they were configured and evaluated correctly wrt other experiments
+
 num params
 
 encode each row of feature map with rnn:
@@ -81,6 +83,7 @@ encode each row of feature map with rnn:
  * https://discuss.pytorch.org/t/concatenation-of-the-hidden-states-produced-by-a-bidirectional-lstm/3686/2
  * https://discuss.pytorch.org/t/about-bidirectional-gru-with-seq2seq-example-and-some-modifications/15588/5
  * Pretty sure im2latex either add or reverse + add bidirectional hidden states; add is more likely
+ * Not sure what to pass as initial context state of lstm; paper only refers to hidden state
 
 Larger models
 
