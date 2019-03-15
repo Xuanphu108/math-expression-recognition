@@ -54,6 +54,9 @@
   * [fixed bidirectional image features (Better, but not good enough)](#fixed-bidirectional-image-features)
   * [3x3 inconv (Worse)](#3x3-inconv)
   * [no avg pooling (doesn't make a difference, Good)](#no-avg-pooling)
+  * [gru row encoder (Worse)](#gru-row-encoder)
+  * [gru row encoder 256 units (Better; but not good enough)](#gru-row-encoder-256-units)
+  * [bidirectional row encoder](#bidirectional-row-encoder)
 
 ## Template
 
@@ -81,7 +84,7 @@ encode each row of feature map with rnn:
  * https://discuss.pytorch.org/t/concatenation-of-the-hidden-states-produced-by-a-bidirectional-lstm/3686/2
  * https://discuss.pytorch.org/t/about-bidirectional-gru-with-seq2seq-example-and-some-modifications/15588/5
  * Pretty sure im2latex either add or reverse + add bidirectional hidden states; add is more likely
- * Not sure what to pass as initial context state of lstm; paper only refers to hidden state
+ * Not sure what to pass as initial context state of lstm; paper only refers to hidden state **Use gru**
 
 Larger models
 
@@ -3582,6 +3585,305 @@ Results: No change; Good
             "attention": {
                 "type": 'image-captioning-attention',
                 "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256,
+            "doubly_stochastic_attention": true
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### gru row encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11621828 v17  
+Results: Worse
+
+```
+{
+  "best_epoch": 32,
+  "peak_cpu_memory_MB": 2707.028,
+  "peak_gpu_0_memory_MB": 1495,
+  "training_duration": "02:58:16",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.6961522034929888,
+  "training_cpu_memory_MB": 2707.028,
+  "training_gpu_0_memory_MB": 1495,
+  "validation_BLEU": 0.5153442739581302,
+  "validation_exprate": 0.20430107526881722,
+  "validation_loss": 1.7591714075019769,
+  "best_validation_BLEU": 0.4971638464552332,
+  "best_validation_exprate": 0.20090548953027731,
+  "best_validation_loss": 1.6868121366243105
+}
+```
+```
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "im2latex",
+            "encoder": {
+                "type": 'resnet',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 512,
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256,
+            "doubly_stochastic_attention": true
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### gru row encoder 256 units
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments/data?scriptVersionId=11631017 v19  
+Results: Better than previous; still not better than baseline
+
+```
+{
+  "best_epoch": 36,
+  "peak_cpu_memory_MB": 2706.208,
+  "peak_gpu_0_memory_MB": 1483,
+  "training_duration": "02:48:12",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.7056815314077144,
+  "training_cpu_memory_MB": 2706.208,
+  "training_gpu_0_memory_MB": 1483,
+  "validation_BLEU": 0.5106420258942483,
+  "validation_exprate": 0.2144878324844369,
+  "validation_loss": 1.756954265070391,
+  "best_validation_BLEU": 0.5121589619488466,
+  "best_validation_exprate": 0.2144878324844369,
+  "best_validation_loss": 1.7092307269036233
+}
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "im2latex",
+            "encoder": {
+                "type": 'resnet',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 256,
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 256,#512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256,
+            "doubly_stochastic_attention": true
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+  
+### bidirectional row encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11635961 v21  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "im2latex",
+            "encoder": {
+                "type": 'resnet',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 256,
+            "layers": 1,
+            "bidirectional": true
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 256,#512, # Must be encoder dim of chosen encoder
                 "decoder_dim": 256, # Must be same as decoder's decoder_dim
                 "attention_dim": 256,
                 "doubly_stochastic_attention": true
