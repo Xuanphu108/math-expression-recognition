@@ -73,6 +73,12 @@ Results:
 
 ## ToDo
 
+View saved tensorboard logs
+
+Log config to tensorboard
+
+Log attention visualizations to tensorboard
+
 num params
 
 encode each row of feature map with rnn:
