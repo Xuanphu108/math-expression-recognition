@@ -56,7 +56,8 @@
   * [no avg pooling (doesn't make a difference, Good)](#no-avg-pooling)
   * [gru row encoder (Worse)](#gru-row-encoder)
   * [gru row encoder 256 units (Better; but not good enough)](#gru-row-encoder-256-units)
-  * [bidirectional row encoder](#bidirectional-row-encoder)
+  * [bidirectional row encoder (Worse)](#bidirectional-row-encoder)
+  * [reversed bidirectional row encoder](#reversed-bidirectional-row-encoder)
 
 ## Template
 
@@ -3849,6 +3850,112 @@ Results: Better than previous; still not better than baseline
   
 ### bidirectional row encoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11635961 v21  
+Results: Worse
+
+```
+{
+  "best_epoch": 26,
+  "peak_cpu_memory_MB": 2703.776,
+  "peak_gpu_0_memory_MB": 1489,
+  "training_duration": "02:51:11",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.6700914836577161,
+  "training_cpu_memory_MB": 2703.776,
+  "training_gpu_0_memory_MB": 1489,
+  "validation_BLEU": 0.5088521130107576,
+  "validation_exprate": 0.18902093944538767,
+  "validation_loss": 1.8061693283888671,
+  "best_validation_BLEU": 0.45641710998488655,
+  "best_validation_exprate": 0.15449915110356535,
+  "best_validation_loss": 1.7392937342325847
+}
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "im2latex",
+            "encoder": {
+                "type": 'resnet',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 256,
+            "layers": 1,
+            "bidirectional": true
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 256,#512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256,
+            "doubly_stochastic_attention": true
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### reversed bidirectional row encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11639778 v22  
 Results:
 
 ```
