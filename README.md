@@ -57,7 +57,7 @@
   * [gru row encoder (Worse)](#gru-row-encoder)
   * [gru row encoder 256 units (Better; but not good enough)](#gru-row-encoder-256-units)
   * [bidirectional row encoder (Worse)](#bidirectional-row-encoder)
-  * [reversed bidirectional row encoder](#reversed-bidirectional-row-encoder)
+  * [reversed bidirectional row encoder (Better than ^, but worse)](#reversed-bidirectional-row-encoder)
 
 ## Template
 
@@ -3956,9 +3956,27 @@ Results: Worse
 
 ### reversed bidirectional row encoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11639778 v22  
-Results:
+Results: Better than non reversed bidirectional, but worse than non bidirectional
 
 ```
+{
+  "best_epoch": 36,
+  "peak_cpu_memory_MB": 2702.792,
+  "peak_gpu_0_memory_MB": 1487,
+  "training_duration": "02:43:01",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.7076727373028233,
+  "training_cpu_memory_MB": 2702.792,
+  "training_gpu_0_memory_MB": 1487,
+  "validation_BLEU": 0.48874979640617267,
+  "validation_exprate": 0.19128466327108093,
+  "validation_loss": 1.7938354112006523,
+  "best_validation_BLEU": 0.4958804156988936,
+  "best_validation_exprate": 0.19807583474816073,
+  "best_validation_loss": 1.7431748010016777
+}
 ```
 ```
 %%writefile config.json
