@@ -82,7 +82,15 @@ Log attention visualizations to tensorboard
 
 num params
 
-encode each row of feature map with rnn:
+Larger models
+
+render predicted latex **Do later**
+
+Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
+
+## Done
+
+encode each row of feature map with rnn: **Worse**
 
  * bidirectional row encoder **Worse for me**
  * trainable initial hidden state for each row; "Positional embeddings" (Embedding with vocab size height of encoded image) **Better**
@@ -92,14 +100,6 @@ encode each row of feature map with rnn:
  * https://discuss.pytorch.org/t/about-bidirectional-gru-with-seq2seq-example-and-some-modifications/15588/5
  * Pretty sure im2latex either add or reverse + add bidirectional hidden states; add is more likely
  * Not sure what to pass as initial context state of lstm; paper only refers to hidden state **Use gru**
-
-Larger models
-
-render predicted latex **Do later**
-
-Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
-
-## Done
 
 Check last few experiments to check if they were configured and evaluated correctly wrt other experiments **They are**
 
