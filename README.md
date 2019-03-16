@@ -84,9 +84,9 @@ num params
 
 encode each row of feature map with rnn:
 
- * bidirectional row encoder
- * trainable initial hidden state for each row; "Positional embeddings" (Embedding with vocab size height of encoded image)
- * Add vs concat vs reverse + add
+ * bidirectional row encoder **Worse for me**
+ * trainable initial hidden state for each row; "Positional embeddings" (Embedding with vocab size height of encoded image) **Better**
+ * Add vs concat vs reverse + add **Add is better; concat isn't an option**
  * INFO on pytorch bidirectional add vs concat:
  * https://discuss.pytorch.org/t/concatenation-of-the-hidden-states-produced-by-a-bidirectional-lstm/3686/2
  * https://discuss.pytorch.org/t/about-bidirectional-gru-with-seq2seq-example-and-some-modifications/15588/5
