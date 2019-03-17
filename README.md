@@ -59,7 +59,7 @@
   * [bidirectional row encoder (Worse)](#bidirectional-row-encoder)
   * [reversed bidirectional row encoder (Better than ^, but worse)](#reversed-bidirectional-row-encoder)
   * [vgg encoder](#vgg-encoder)
-  * [densenet encoder](#densenet-encoder)
+  * [New baseline](#new-baseline)
 
 ## Template
 
@@ -76,7 +76,9 @@ Results:
 
 ## ToDo
 
-Densenet encoder 
+Redo all encoders and decoders
+
+Densenet encoder
 
 VGG 
 
@@ -4157,8 +4159,8 @@ Results:
 }
 ```
 
-### densenet encoder
-Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11722832 v27  
+### new baseline
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11723206 v28  
 Results:
 
 ```
@@ -4183,17 +4185,17 @@ Results:
         "type": "image-captioning",
         "encoder": {
             "type": 'backbone',
-            "encoder_type": 'densenetMSA',
-            "encoder_height": 8,
-            "encoder_width": 32,
+            "encoder_type": 'resnet18',
+            "encoder_height": 4,
+            "encoder_width": 16,
             "pretrained": true,
             "custom_in_conv": false
         },
         "decoder": {
-            "type": "msa-decoder",
+            "type": "image-captioning-decoder",
             "attention": {
                 "type": 'image-captioning-attention',
-                "encoder_dim": 1356, # Must be encoder dim of chosen encoder
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
                 "decoder_dim": 256, # Must be same as decoder's decoder_dim
                 "attention_dim": 256,
                 "doubly_stochastic_attention": true
