@@ -58,6 +58,8 @@
   * [gru row encoder 256 units (Better; but not good enough)](#gru-row-encoder-256-units)
   * [bidirectional row encoder (Worse)](#bidirectional-row-encoder)
   * [reversed bidirectional row encoder (Better than ^, but worse)](#reversed-bidirectional-row-encoder)
+  * [vgg encoder](#vgg-encoder)
+  * [densenet encoder](#densenet-encoder)
 
 ## Template
 
@@ -73,6 +75,10 @@ Results:
 ```
 
 ## ToDo
+
+Densenet encoder 
+
+VGG 
 
 Larger models
 
@@ -401,7 +407,7 @@ first input to decoder at validation is start token
 > Github: https://github.com/JianshuZhang/WAP
 
 > Details
-* Train with lr of 1e-8 until metric doesn't improve
+* Train with adadelta wd 1e-4 until metric doesn't improve
 * Encode last hidden state with rnn before decoder cell
 * exprate of ~0.5 on 2016
 
@@ -4026,6 +4032,168 @@ Results: Better than non reversed bidirectional, but worse than non bidirectiona
             "embedding_dim": 256,
             "decoder_dim": 256,
             "doubly_stochastic_attention": true
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### vgg encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11714309 v26  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": 'vgg',
+            "encoder_type": 'vgg16',
+            "encoder_height": 4,
+            "encoder_width": 16,
+            "pretrained": true,
+            "custom_in_conv": false
+        },
+        "decoder": {
+            "type": "msa-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### densenet encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11722832 v27  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": 'backbone',
+            "encoder_type": 'densenetMSA',
+            "encoder_height": 8,
+            "encoder_width": 32,
+            "pretrained": true,
+            "custom_in_conv": false
+        },
+        "decoder": {
+            "type": "msa-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 1356, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
         },
         "max_timesteps": 75,
         "beam_size": 10
