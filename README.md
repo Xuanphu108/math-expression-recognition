@@ -74,8 +74,6 @@ Results:
 
 ## ToDo
 
-more ifttt
-
 Larger models
 
 render predicted latex **Do later**
@@ -83,6 +81,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+more ifttt **Done**
 
 View saved tensorboard logs **Will do when needed**
 
