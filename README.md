@@ -74,21 +74,25 @@ Results:
 
 ## ToDo
 
-View saved tensorboard logs
-
-Log config to tensorboard
-
-Log attention visualizations to tensorboard
-
-num params
+more ifttt
 
 Larger models
 
 render predicted latex **Do later**
 
-Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/
+Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+View saved tensorboard logs **Will do when needed**
+
+num params **Already shown in train logs**
+
+Log attention visualizations to tensorboard **Done**
+
+Log config to tensorboard **Won't work with old version of tensorboardX**
+
+duplicate doubly stochastic attention in decoder **Done**
 
 encode each row of feature map with rnn: **Worse**
 
