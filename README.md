@@ -3069,14 +3069,20 @@ Results: Better
     "model": {
         "type": "image-captioning",
         "encoder": {
-            "type": 'resnet',
-            "encoder_type": 'resnet18',
-            "encoder_height": 4,
-            "encoder_width": 16,
-            "pretrained": true
+            "type": "lstm",
+            "encoder": {
+                "type": 'resnet',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true                
+            },
+            "hidden_size": 512, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": true
         },
         "decoder": {
-            "type": "msa-decoder",
+            "type": "image-captioning-decoder",
             "attention": {
                 "type": 'image-captioning-attention',
                 "encoder_dim": 512, # Must be encoder dim of chosen encoder
