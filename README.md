@@ -62,7 +62,7 @@
   * [New baseline (1.775)](#new-baseline)
   * [lstm encoder (1.6892)](#lstm-encoder)
   * [im2latex encoder (1.73)](#im2latex-encoder)
-  * [msa-decoder](#msa-decoder)
+  * [msa-decoder (1.77)](#msa-decoder)
   * [densenet encoder](#densenet-encoder)
 
 ## Template
@@ -4474,9 +4474,27 @@ Results: Worse
 
 ### msa decoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11761029 v37  
-Results:
+Results: Not as good, why?
 
 ```
+{
+  "best_epoch": 36,
+  "peak_cpu_memory_MB": 2690.792,
+  "peak_gpu_0_memory_MB": 1489,
+  "training_duration": "02:48:23",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.0838393571689657,
+  "training_cpu_memory_MB": 2690.792,
+  "training_gpu_0_memory_MB": 1489,
+  "validation_BLEU": 0.4205424116071523,
+  "validation_exprate": 0.16355404640633842,
+  "validation_loss": 1.8273741769361067,
+  "best_validation_BLEU": 0.40925322499626376,
+  "best_validation_exprate": 0.1658177702320317,
+  "best_validation_loss": 1.7702094219826363
+}
 ```
 ```
 %%writefile config.json
