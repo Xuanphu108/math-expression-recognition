@@ -61,7 +61,7 @@
   * [vgg encoder (Failed)](#vgg-encoder)
   * [New baseline (1.775)](#new-baseline)
   * [lstm encoder (1.6892)](#lstm-encoder)
-  * [im2latex encoder](#im2latex-encoder)
+  * [im2latex encoder (1.73)](#im2latex-encoder)
 
 ## Template
 
@@ -4367,10 +4367,27 @@ Results: Better
 
 ### im2latex encoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11751138 v36  
-Results:
+Results: Worse
 
 ```
-
+{
+  "best_epoch": 38,
+  "peak_cpu_memory_MB": 2710.012,
+  "peak_gpu_0_memory_MB": 1491,
+  "training_duration": "02:52:14",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.1476542361721194,
+  "training_cpu_memory_MB": 2710.012,
+  "training_gpu_0_memory_MB": 1491,
+  "validation_BLEU": 0.4305185428847582,
+  "validation_exprate": 0.200339558573854,
+  "validation_loss": 1.7398730054631963,
+  "best_validation_BLEU": 0.4186060126765994,
+  "best_validation_exprate": 0.19864176570458403,
+  "best_validation_loss": 1.735885628708848
+}
 ```
 ```
 %%writefile config.json
