@@ -58,8 +58,8 @@
   * [gru row encoder 256 units (Better; but not good enough)](#gru-row-encoder-256-units)
   * [bidirectional row encoder (Worse)](#bidirectional-row-encoder)
   * [reversed bidirectional row encoder (Better than ^, but worse)](#reversed-bidirectional-row-encoder)
-  * [vgg encoder](#vgg-encoder)
-  * [New baseline](#new-baseline)
+  * [vgg encoder (Failed)](#vgg-encoder)
+  * [New baseline (1.775)](#new-baseline)
 
 ## Template
 
@@ -4080,7 +4080,7 @@ Results: Better than non reversed bidirectional, but worse than non bidirectiona
 
 ### vgg encoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11714309 v26  
-Results:
+Results: Failed
 
 ```
 ```
@@ -4161,9 +4161,27 @@ Results:
 
 ### new baseline
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11723206 v28  
-Results:
+Results: OK
 
 ```
+{
+  "best_epoch": 38,
+  "peak_cpu_memory_MB": 2705.504,
+  "peak_gpu_0_memory_MB": 1479,
+  "training_duration": "02:35:33",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.0644252321838794,
+  "training_cpu_memory_MB": 2705.504,
+  "training_gpu_0_memory_MB": 1479,
+  "validation_BLEU": 0.4346189755582612,
+  "validation_exprate": 0.16411997736276174,
+  "validation_loss": 1.795390358916274,
+  "best_validation_BLEU": 0.43352269478593225,
+  "best_validation_exprate": 0.16468590831918506,
+  "best_validation_loss": 1.7752251764675517
+}
 ```
 ```
 %%writefile config.json
