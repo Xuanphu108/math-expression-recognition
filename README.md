@@ -62,6 +62,8 @@
   * [New baseline (1.775)](#new-baseline)
   * [lstm encoder (1.6892)](#lstm-encoder)
   * [im2latex encoder (1.73)](#im2latex-encoder)
+  * [msa-decoder](#msa-decoder)
+  * [densenet encoder](#densenet-encoder)
 
 ## Template
 
@@ -4426,6 +4428,168 @@ Results: Worse
             "attention": {
                 "type": 'image-captioning-attention',
                 "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### msa decoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11761029 v37  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": 'backbone',
+            "encoder_type": 'resnet18',
+            "encoder_height": 4,
+            "encoder_width": 16,
+            "pretrained": true,
+            "custom_in_conv": false
+        },
+        "decoder": {
+            "type": "msa-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### densenet encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11761029 v38  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": 'backbone',
+            "encoder_type": 'densenetMSA',
+            "encoder_height": 8,
+            "encoder_width": 32,
+            "pretrained": false,
+            "custom_in_conv": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 1356, # Must be encoder dim of chosen encoder
                 "decoder_dim": 256, # Must be same as decoder's decoder_dim
                 "attention_dim": 256,
                 "doubly_stochastic_attention": true
