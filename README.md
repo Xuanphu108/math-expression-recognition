@@ -64,6 +64,7 @@
   * [im2latex encoder (1.73)](#im2latex-encoder)
   * [msa-decoder (1.77)](#msa-decoder)
   * [densenet encoder](#densenet-encoder)
+  * [lstm and msa](#lstm-and-msa)
 
 ## Template
 
@@ -4608,6 +4609,93 @@ Results:
             "attention": {
                 "type": 'image-captioning-attention',
                 "encoder_dim": 1356, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 100,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### lstm and msa
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11767751 v40  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "lstm",
+            "encoder": {
+                "type": 'backbone',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 512, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "msa-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
                 "decoder_dim": 256, # Must be same as decoder's decoder_dim
                 "attention_dim": 256,
                 "doubly_stochastic_attention": true
