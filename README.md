@@ -60,6 +60,8 @@
   * [reversed bidirectional row encoder (Better than ^, but worse)](#reversed-bidirectional-row-encoder)
   * [vgg encoder (Failed)](#vgg-encoder)
   * [New baseline (1.775)](#new-baseline)
+  * [lstm encoder (1.6892)](#lstm-encoder)
+  * [im2latex encoder](#im2latex-encoder)
 
 ## Template
 
@@ -4208,6 +4210,199 @@ Results: OK
             "encoder_width": 16,
             "pretrained": true,
             "custom_in_conv": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### lstm encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11728189 v35  
+Results: Better
+
+```
+{
+  "best_epoch": 36,
+  "peak_cpu_memory_MB": 2710.908,
+  "peak_gpu_0_memory_MB": 1499,
+  "training_duration": "02:51:44",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.1359341515405146,
+  "training_cpu_memory_MB": 2710.908,
+  "training_gpu_0_memory_MB": 1499,
+  "validation_BLEU": 0.4251209276848993,
+  "validation_exprate": 0.16921335597057158,
+  "validation_loss": 1.7454834199166513,
+  "best_validation_BLEU": 0.4452744087548317,
+  "best_validation_exprate": 0.2014714204867006,
+  "best_validation_loss": 1.6892793468526892
+}
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "lstm",
+            "encoder": {
+                "type": 'backbone',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 512, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 10,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### im2latex encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11751138 v36  
+Results:
+
+```
+
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "im2latex",
+            "encoder": {
+                "type": 'backbone',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 512, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": false
         },
         "decoder": {
             "type": "image-captioning-decoder",
