@@ -4572,7 +4572,7 @@ Results: Not as good, why?
 ```
 
 ### densenet encoder
-Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11761029 v38  
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11767602 v39  
 Results:
 
 ```
@@ -4639,7 +4639,7 @@ Results:
         },
         "num_serialized_models_to_keep": 1,
         "summary_interval": 10,
-        "histogram_interval": 10,
+        "histogram_interval": 100,
         "should_log_parameter_statistics": true,
         "should_log_learning_rate": true
     },
