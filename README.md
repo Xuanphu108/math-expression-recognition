@@ -4654,7 +4654,7 @@ Results:
 ```
 
 ### lstm and msa
-Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11767751 v40  
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11770601 v41  
 Results:
 
 ```
