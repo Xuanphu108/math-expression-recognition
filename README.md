@@ -63,7 +63,7 @@
   * [lstm encoder (1.6892)](#lstm-encoder)
   * [im2latex encoder (1.73)](#im2latex-encoder)
   * [msa-decoder (1.77)](#msa-decoder)
-  * [densenet encoder](#densenet-encoder)
+  * [densenet encoder (2.22 but similar exprate)](#densenet-encoder)
   * [lstm and msa (1.69)](#lstm-and-msa)
 
 ## Template
@@ -4574,9 +4574,27 @@ Results: Not as good, why?
 
 ### densenet encoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11767602 v39  
-Results:
+Results: higher loss, but similar bleu and exprate
 
 ```
+{
+  "best_epoch": 30,
+  "peak_cpu_memory_MB": 2695.172,
+  "peak_gpu_0_memory_MB": 16017,
+  "training_duration": "05:46:15",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.128351241485026,
+  "training_cpu_memory_MB": 2695.172,
+  "training_gpu_0_memory_MB": 16017,
+  "validation_BLEU": 0.4100378826948628,
+  "validation_exprate": 0.15280135823429541,
+  "validation_loss": 2.312613185461577,
+  "best_validation_BLEU": 0.4090073179044538,
+  "best_validation_exprate": 0.1420486700622524,
+  "best_validation_loss": 2.222365846505036
+}
 ```
 ```
 %%writefile config.json
