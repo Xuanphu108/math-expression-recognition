@@ -64,7 +64,7 @@
   * [im2latex encoder (1.73)](#im2latex-encoder)
   * [msa-decoder (1.77)](#msa-decoder)
   * [densenet encoder](#densenet-encoder)
-  * [lstm and msa](#lstm-and-msa)
+  * [lstm and msa (1.69)](#lstm-and-msa)
 
 ## Template
 
@@ -4655,9 +4655,27 @@ Results:
 
 ### lstm and msa
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11770601 v41  
-Results:
+Results: Worse
 
 ```
+{
+  "best_epoch": 39,
+  "peak_cpu_memory_MB": 2699.896,
+  "peak_gpu_0_memory_MB": 1501,
+  "training_duration": "01:43:59",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.1725350708713358,
+  "training_cpu_memory_MB": 2699.896,
+  "training_gpu_0_memory_MB": 1501,
+  "validation_BLEU": 0.4056459938803575,
+  "validation_exprate": 0.19241652518392757,
+  "validation_loss": 1.6966624399563213,
+  "best_validation_BLEU": 0.4056459938803575,
+  "best_validation_exprate": 0.19241652518392757,
+  "best_validation_loss": 1.6966624399563213
+}
 ```
 ```
 %%writefile config.json
