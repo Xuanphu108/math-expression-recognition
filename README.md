@@ -66,9 +66,9 @@
   * [densenet encoder (2.22 but similar exprate)](#densenet-encoder)
   * [lstm and msa (1.69)](#lstm-and-msa)
   * [lstm encoder bidirectional no reverse (1.708)](#lstm-encoder-bidirectional-no-reverse)
-  * [lstm encoder bidirectional reverse ()](#lstm-encoder-bidirectional-reverse)
-  * [im2latex encoder bidirectional no reverse](#im2latex-encoder-bidirectional-no-reverse)
-  * [lstm encoder 2 layers](#lstm-encoder-2-layers)
+  * [lstm encoder bidirectional reverse (1.699)](#lstm-encoder-bidirectional-reverse)
+  * [im2latex encoder bidirectional no reverse (1.78)](#im2latex-encoder-bidirectional-no-reverse)
+  * [lstm encoder 2 layers (1.70)](#lstm-encoder-2-layers)
   * [WAP backbone encoder](#wap-backbone-encoder)
   * [Im2latex backbone enoder](#im2latex-backbone-encoder)
 
@@ -92,11 +92,11 @@ Im2latex backbone as encoder ()
 WAP backbone as encoder ()
 
 lstm encoder (Better):
-* Bidirectional (reverse () or no reverse (Not better))
-* layers (1, 2 ())
+* Bidirectional (reverse (Not better) or no reverse (Not better))
+* layers (1, 2 (Not better))
 
 im2latex encoder (Worse):
-* Bidirectional (reverse (Won't try) or no reverse ())
+* Bidirectional (reverse (Won't try) or no reverse (Worse))
 
 Densenet encoder (Higher loss)
 
@@ -4898,9 +4898,27 @@ Results: Worse loss; little higher metrics
 
 ### lstm encoder bidirectional reverse
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11809823 v44  
-Results:
+Results: Not better
 
 ```
+{
+  "best_epoch": 36,
+  "peak_cpu_memory_MB": 2719.652,
+  "peak_gpu_0_memory_MB": 1515,
+  "training_duration": "02:10:22",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.1355797504138083,
+  "training_cpu_memory_MB": 2719.652,
+  "training_gpu_0_memory_MB": 1515,
+  "validation_BLEU": 0.448015105532121,
+  "validation_exprate": 0.20656479909451048,
+  "validation_loss": 1.7041660343204532,
+  "best_validation_BLEU": 0.43883514544612573,
+  "best_validation_exprate": 0.2071307300509338,
+  "best_validation_loss": 1.6998484370944735
+}
 ```
 ```
 %%writefile config.json
@@ -4985,9 +5003,27 @@ Results:
 
 ### im2latex encoder bidirectional no reverse
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11809941 v45  
-Results:
+Results: Not better
 
 ```
+{
+  "best_epoch": 36,
+  "peak_cpu_memory_MB": 2722.064,
+  "peak_gpu_0_memory_MB": 1543,
+  "training_duration": "02:00:54",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.146014416784183,
+  "training_cpu_memory_MB": 2722.064,
+  "training_gpu_0_memory_MB": 1543,
+  "validation_BLEU": 0.42446887790815874,
+  "validation_exprate": 0.18166383701188454,
+  "validation_loss": 1.8029189743437208,
+  "best_validation_BLEU": 0.4452330041894771,
+  "best_validation_exprate": 0.17713638936049803,
+  "best_validation_loss": 1.783592737472809
+}
 ```
 ```
 %%writefile config.json
@@ -5072,9 +5108,27 @@ Results:
 
 ### lstm encoder 2 layers
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11809994 v46  
-Results:
+Results: Not better
 
 ```
+{
+  "best_epoch": 38,
+  "peak_cpu_memory_MB": 2776.204,
+  "peak_gpu_0_memory_MB": 1671,
+  "training_duration": "01:58:51",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.2119314309159015,
+  "training_cpu_memory_MB": 2776.204,
+  "training_gpu_0_memory_MB": 1671,
+  "validation_BLEU": 0.4021780161673791,
+  "validation_exprate": 0.189586870401811,
+  "validation_loss": 1.7044743643150673,
+  "best_validation_BLEU": 0.4046472627041309,
+  "best_validation_exprate": 0.18902093944538767,
+  "best_validation_loss": 1.7007347313133445
+}
 ```
 ```
 %%writefile config.json
