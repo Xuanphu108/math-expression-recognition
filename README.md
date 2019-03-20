@@ -87,7 +87,21 @@ Results:
 
 ## ToDo
 
+Use avg pool to downsample feature map
+
+Remove last conv block from resnet
+
+Remove extra avg pool from resnet
+
+Not pretrained
+
+Resnet with one less block
+
+multiscale attention
+
 Larger/Smaller models
+
+transformer decoder
 
 render predicted latex **Do later**
 
