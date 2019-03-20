@@ -69,8 +69,8 @@
   * [lstm encoder bidirectional reverse (1.699)](#lstm-encoder-bidirectional-reverse)
   * [im2latex encoder bidirectional no reverse (1.78)](#im2latex-encoder-bidirectional-no-reverse)
   * [lstm encoder 2 layers (1.70)](#lstm-encoder-2-layers)
-  * [WAP backbone encoder](#wap-backbone-encoder)
-  * [Im2latex backbone enoder](#im2latex-backbone-encoder)
+  * [WAP backbone encoder (2.144)](#wap-backbone-encoder)
+  * [Im2latex backbone enoder (2.40))](#im2latex-backbone-encoder)
 
 ## Template
 
@@ -89,7 +89,7 @@ Results:
 
 Im2latex backbone as encoder ()
 
-WAP backbone as encoder ()
+WAP backbone as encoder (Worse)
 
 lstm encoder (Better):
 * Bidirectional (reverse (Not better) or no reverse (Not better))
@@ -5213,9 +5213,27 @@ Results: Not better
 
 ### WAP backbone encoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11810822 v47  
-Results:
+Results: 2.14
 
 ```
+{
+  "best_epoch": 37,
+  "peak_cpu_memory_MB": 2574.18,
+  "peak_gpu_0_memory_MB": 3839,
+  "training_duration": "02:07:52",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.5559201550699466,
+  "training_cpu_memory_MB": 2574.18,
+  "training_gpu_0_memory_MB": 3839,
+  "validation_BLEU": 0.3135305133877175,
+  "validation_exprate": 0.13695529145444255,
+  "validation_loss": 2.147862047762484,
+  "best_validation_BLEU": 0.2900647413818954,
+  "best_validation_exprate": 0.1245048104131296,
+  "best_validation_loss": 2.144687180046563
+}
 ```
 ```
 %%writefile config.json
@@ -5294,9 +5312,27 @@ Results:
 
 ### im2latex backbone encoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11812125 v48  
-Results:
+Results: Not better
 
 ```
+{
+  "best_epoch": 31,
+  "peak_cpu_memory_MB": 2630.544,
+  "peak_gpu_0_memory_MB": 4147,
+  "training_duration": "02:59:57",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.6092503421446855,
+  "training_cpu_memory_MB": 2630.544,
+  "training_gpu_0_memory_MB": 4147,
+  "validation_BLEU": 0.23920498060894252,
+  "validation_exprate": 0.06734578381437464,
+  "validation_loss": 2.458981562305141,
+  "best_validation_BLEU": 0.20928067807681497,
+  "best_validation_exprate": 0.05263157894736842,
+  "best_validation_loss": 2.406644803983671
+}
 ```
 ```
 %%writefile config.json
