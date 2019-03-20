@@ -87,7 +87,15 @@ Results:
 
 ## ToDo
 
-Im2latex backbone as encoder ()
+Larger/Smaller models
+
+render predicted latex **Do later**
+
+Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
+
+## Done
+
+Im2latex backbone as encoder (Worse)
 
 WAP backbone as encoder (Worse)
 
@@ -100,15 +108,7 @@ im2latex encoder (Worse):
 
 Densenet encoder (Higher loss)
 
-VGG like small encoder
-
-Larger/Smaller models
-
-render predicted latex **Do later**
-
-Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
-
-## Done
+VGG like small encoder (Worse)
 
 more ifttt **Done**
 
