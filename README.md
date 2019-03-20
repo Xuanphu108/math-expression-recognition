@@ -72,6 +72,9 @@
   * [WAP backbone encoder (2.144)](#wap-backbone-encoder)
   * [Im2latex backbone enoder (2.40))](#im2latex-backbone-encoder)
   * [remove extra avg pool](#remove-extra-avg-pool)
+  * [small resnet 18](#small-resnet-18)
+  * [downsample feature map](#downsample-feature-map)
+  * [not pretrained](#not-pretrained)
 
 ## Template
 
@@ -88,15 +91,13 @@ Results:
 
 ## ToDo
 
+Not pretrained ()
+
+Use avg pool to downsample feature map from (8,32) -> (4,16) ()
+
+Remove last conv block from resnet18 ()
+
 Remove extra avg pool from resnet ()
-
-Use avg pool to downsample feature map
-
-Remove last conv block from resnet
-
-Not pretrained
-
-Resnet with one less block
 
 multiscale attention
 
@@ -5456,6 +5457,267 @@ Results:
                 "encoder_height": 4,
                 "encoder_width": 16,
                 "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 512, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 100,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### small resnet 18
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11856466 v54  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "lstm",
+            "encoder": {
+                "type": 'backbone',
+                "encoder_type": 'smallResnet18',
+                "encoder_height": 8,
+                "encoder_width": 32,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 256, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 256, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 100,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### downsample feature map
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11856676 v55  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "lstm",
+            "encoder": {
+                "type": 'backbone',
+                "encoder_type": 'smallResnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 256, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'image-captioning-attention',
+                "encoder_dim": 256, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 100,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### not pretrained
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11856749 v56  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "lstm",
+            "encoder": {
+                "type": 'backbone',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": false,
                 "custom_in_conv": false
             },
             "hidden_size": 512, # Must be encoder dim of chosen encoder
