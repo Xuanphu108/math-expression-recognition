@@ -71,10 +71,10 @@
   * [lstm encoder 2 layers (1.70)](#lstm-encoder-2-layers)
   * [WAP backbone encoder (2.144)](#wap-backbone-encoder)
   * [Im2latex backbone enoder (2.40))](#im2latex-backbone-encoder)
-  * [remove extra avg pool](#remove-extra-avg-pool)
-  * [small resnet 18](#small-resnet-18)
-  * [downsample feature map](#downsample-feature-map)
-  * [not pretrained](#not-pretrained)
+  * [remove extra avg pool (1.636)](#remove-extra-avg-pool)
+  * [small resnet 18 (2.12)](#small-resnet-18)
+  * [downsample feature map (1.706)](#downsample-feature-map)
+  * [not pretrained (1.835)](#not-pretrained)
 
 ## Template
 
@@ -91,13 +91,13 @@ Results:
 
 ## ToDo
 
-Not pretrained ()
+Not pretrained (1.835; worse)
 
-Use avg pool to downsample feature map from (8,32) -> (4,16) ()
+Use avg pool to downsample feature map from (8,32) -> (4,16) (1.706; Big increase over below; try more epochs like below)
 
-Remove last conv block from resnet18 ()
+Remove last conv block from resnet18 (2.12; try more epochs)
 
-Remove extra avg pool from resnet ()
+Remove extra avg pool from resnet (1.636)
 
 multiscale attention
 
@@ -5427,9 +5427,27 @@ Results: Not better
 
 ### remove extra avg pool
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11856132 v53  
-Results:
+Results: Better
 
 ```
+{
+  "best_epoch": 33,
+  "peak_cpu_memory_MB": 2705.844,
+  "peak_gpu_0_memory_MB": 1499,
+  "training_duration": "01:41:30",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.7535412389768195,
+  "training_cpu_memory_MB": 2705.844,
+  "training_gpu_0_memory_MB": 1499,
+  "validation_BLEU": 0.5518747903715289,
+  "validation_exprate": 0.2654216185625354,
+  "validation_loss": 1.6942083105310664,
+  "best_validation_BLEU": 0.5618913934686638,
+  "best_validation_exprate": 0.2705149971703452,
+  "best_validation_loss": 1.6360182171469335
+}
 ```
 ```
 %%writefile config.json
@@ -5514,9 +5532,27 @@ Results:
 
 ### small resnet 18
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11856466 v54  
-Results:
+Results: 2.12; probably needs more epochs
 
 ```
+{
+  "best_epoch": 36,
+  "peak_cpu_memory_MB": 2692.096,
+  "peak_gpu_0_memory_MB": 1525,
+  "training_duration": "01:51:03",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.6009607727711017,
+  "training_cpu_memory_MB": 2692.096,
+  "training_gpu_0_memory_MB": 1525,
+  "validation_BLEU": 0.33237756320058653,
+  "validation_exprate": 0.15053763440860216,
+  "validation_loss": 2.135711184493056,
+  "best_validation_BLEU": 0.2978331278712403,
+  "best_validation_exprate": 0.13582342954159593,
+  "best_validation_loss": 2.1211826425414904
+}
 ```
 ```
 %%writefile config.json
@@ -5601,9 +5637,27 @@ Results:
 
 ### downsample feature map
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11856676 v55  
-Results:
+Results: 1.706
 
 ```
+{
+  "best_epoch": 39,
+  "peak_cpu_memory_MB": 2701.564,
+  "peak_gpu_0_memory_MB": 1437,
+  "training_duration": "01:43:16",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 1.2705452269558453,
+  "training_cpu_memory_MB": 2701.564,
+  "training_gpu_0_memory_MB": 1437,
+  "validation_BLEU": 0.37160467788392215,
+  "validation_exprate": 0.17487266553480477,
+  "validation_loss": 1.7060529090262748,
+  "best_validation_BLEU": 0.37160467788392215,
+  "best_validation_exprate": 0.17487266553480477,
+  "best_validation_loss": 1.7060529090262748
+}
 ```
 ```
 %%writefile config.json
@@ -5688,9 +5742,27 @@ Results:
 
 ### not pretrained
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11856749 v56  
-Results:
+Results: 1.835
 
 ```
+{
+  "best_epoch": 33,
+  "peak_cpu_memory_MB": 2704.68,
+  "peak_gpu_0_memory_MB": 1499,
+  "training_duration": "01:41:59",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.8682422310248759,
+  "training_cpu_memory_MB": 2704.68,
+  "training_gpu_0_memory_MB": 1499,
+  "validation_BLEU": 0.44884223052834626,
+  "validation_exprate": 0.17826825127334464,
+  "validation_loss": 1.8906518274599367,
+  "best_validation_BLEU": 0.4484330879487077,
+  "best_validation_exprate": 0.18053197509903793,
+  "best_validation_loss": 1.8356320525074865
+}
 ```
 ```
 %%writefile config.json
