@@ -91,25 +91,25 @@ Results:
 
 ## ToDo
 
-Not pretrained (1.835; worse)
-
-Use avg pool to downsample feature map from (8,32) -> (4,16) (1.706; Big increase over below; try more epochs like below)
-
-Remove last conv block from resnet18 (2.12; try more epochs)
-
-Remove extra avg pool from resnet (1.636)
-
 multiscale attention
 
-Larger/Smaller models
-
 transformer decoder
+
+Larger/Smaller models
 
 render predicted latex **Do later**
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+Not pretrained (1.835; worse)
+
+Use avg pool to downsample feature map from (8,32) -> (4,16) (1.706; Big increase over below; try more epochs like below)
+
+Remove last conv block from resnet18 (2.12; try more epochs (1.687))
+
+Remove extra avg pool from resnet (1.636)
 
 Im2latex backbone as encoder (Worse)
 
