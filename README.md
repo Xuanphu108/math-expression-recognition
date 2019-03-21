@@ -75,6 +75,7 @@
   * [small resnet 18 (2.12)](#small-resnet-18)
   * [downsample feature map (1.706)](#downsample-feature-map)
   * [not pretrained (1.835)](#not-pretrained)
+  * [multi scale encoder](#multi-scale-encoder)
 
 ## Template
 
@@ -91,7 +92,16 @@ Results:
 
 ## ToDo
 
-multiscale attention
+rename all @register vars without -attention, etc
+
+rename base classes
+
+make sure all subclasses use same params as superclass
+
+multiscale attention:
+ * doubly stochastic loss with multiscale **MSA doesn't use it; won't use either**
+ * lstm encoder needs to be changed to work with two feature maps
+ * 
 
 transformer decoder
 
@@ -5804,6 +5814,90 @@ Results: 1.835
                 "decoder_dim": 256, # Must be same as decoder's decoder_dim
                 "attention_dim": 256,
                 "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 100,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### multi scale encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11907049 v64  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "multiscale",
+        "encoder": {
+            "type": 'multiscale',
+            "encoder_type": 'resnet18',
+            "encoder_height": 4,
+            "encoder_width": 16,
+            "pretrained": true,
+            "custom_in_conv": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'multiscale',
+                "attention": {
+                    "type": 'image-captioning-attention',
+                    "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                    "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                    "attention_dim": 256,
+                    "doubly_stochastic_attention": false                    
+                }
             },
             "embedding_dim": 256,
             "decoder_dim": 256
