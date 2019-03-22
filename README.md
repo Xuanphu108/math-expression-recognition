@@ -71,13 +71,13 @@
   * [lstm encoder 2 layers (1.70)](#lstm-encoder-2-layers)
   * [WAP backbone encoder (2.144)](#wap-backbone-encoder)
   * [Im2latex backbone enoder (2.40))](#im2latex-backbone-encoder)
-  * [remove extra avg pool (1.636)](#remove-extra-avg-pool)
+  * [**Best** remove extra avg pool (1.636)](#remove-extra-avg-pool)
   * [small resnet 18 (2.12)](#small-resnet-18)
   * [downsample feature map (1.706)](#downsample-feature-map)
   * [not pretrained (1.835)](#not-pretrained)
   * [multi scale encoder (1.13, but similar to 1.636)](#multi-scale-encoder)
   * [multi scale lstm encoder (1.13; but slightly higher metrics)](#multi-scale-lstm-encoder)
-  * [multiscale encoder and decoder](#multiscale-encoder-and-decoder)
+  * [multiscale encoder and decoder (1.136; but slightly worse metrics)](#multiscale-encoder-and-decoder)
 
 ## Template
 
@@ -94,11 +94,11 @@ Results:
 
 ## ToDo
 
-multiscale attention: (1.13)
- * doubly stochastic loss with multiscale **MSA doesn't use it; won't use either**
- * lstm encoder needs to be changed to work with two feature maps **1.13; but higher metrics**
- * msa encoder and decoder
- * msa dense encoder
+im2latex style; token embeddings 256 instead of 80 and different optimizer hyperparameters
+
+smaller embeddings?
+
+Try other people's code
 
 transformer decoder
 
@@ -109,6 +109,14 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+check metrics functions **exprate looks right**
+
+multiscale attention: (1.13)
+ * doubly stochastic loss with multiscale **MSA doesn't use it; won't use either**
+ * lstm encoder needs to be changed to work with two feature maps **1.13; but higher metrics**
+ * msa encoder and decoder **1.13; but lower metrics**
+ * msa dense encoder
 
 make sure all subclasses use same params as superclass **Done**
 
@@ -453,7 +461,7 @@ first input to decoder at validation is start token
 
 ### Multi scale attention with dense encoder:
 
-> Paper: https://arxiv.org/abs/1801.03530
+> Paper: file:///C:/Users/Bilal/Documents/research/math%20expression%20recognition/Crohme-papers/Multi%20scale%20attention%20with%20dense%20encoder.pdf
 
 > Github: https://github.com/JianshuZhang/WAP
 
@@ -464,7 +472,7 @@ first input to decoder at validation is start token
 
 ### Image to markup generation with coarse to fine attention (im2latex):
 
-> Paper: https://arxiv.org/pdf/1609.04938.pdf
+> Paper: file:///C:/Users/Bilal/Documents/research/math%20expression%20recognition/Crohme-papers/Image%20to%20markup%20generation%20with%20coarse%20to%20fine%20attention.pdf
 
 > Github: https://github.com/harvardnlp/im2markup
 
@@ -6069,9 +6077,27 @@ Results: 1.13; but bleu and exprate is a bit higher
 
 ### multiscale encoder and decoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11931072 v67  
-Results:
+Results: same loss worse metrics
 
 ```
+{
+  "best_epoch": 35,
+  "peak_cpu_memory_MB": 2573.6,
+  "peak_gpu_0_memory_MB": 1959,
+  "training_duration": "02:39:19",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.25082658531304397,
+  "training_cpu_memory_MB": 2573.6,
+  "training_gpu_0_memory_MB": 1959,
+  "validation_BLEU": 0.552428977897469,
+  "validation_exprate": 0.26485568760611206,
+  "validation_loss": 1.1610306138927873,
+  "best_validation_BLEU": 0.5216430022519188,
+  "best_validation_exprate": 0.2484436898698359,
+  "best_validation_loss": 1.1368801502494124
+}
 ```
 ```
 %%writefile config.json
