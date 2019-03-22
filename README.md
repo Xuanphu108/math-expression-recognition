@@ -93,6 +93,10 @@ Results:
 
 ## ToDo
 
+msa dense encoder
+
+msa encoder and decoder
+
 rename all @register vars without -attention, etc
 
 rename base classes
