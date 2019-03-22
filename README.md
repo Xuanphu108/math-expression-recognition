@@ -75,7 +75,8 @@
   * [small resnet 18 (2.12)](#small-resnet-18)
   * [downsample feature map (1.706)](#downsample-feature-map)
   * [not pretrained (1.835)](#not-pretrained)
-  * [multi scale encoder](#multi-scale-encoder)
+  * [multi scale encoder (1.13, but similar to 1.636)](#multi-scale-encoder)
+  * [multi scale lstm encoder (1.13; but slightly higher metrics)](#multi-scale-lstm-encoder)
 
 ## Template
 
@@ -98,10 +99,10 @@ rename base classes
 
 make sure all subclasses use same params as superclass
 
-multiscale attention:
+multiscale attention: (1.13)
  * doubly stochastic loss with multiscale **MSA doesn't use it; won't use either**
- * lstm encoder needs to be changed to work with two feature maps
- * 
+ * lstm encoder needs to be changed to work with two feature maps **1.13; but higher metrics**
+ *  
 
 transformer decoder
 
@@ -5857,9 +5858,27 @@ Results: 1.835
 
 ### multi scale encoder
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11907049 v64  
-Results:
+Results: 1.13; but loss values aren't reliable
 
 ```
+{
+  "best_epoch": 29,
+  "peak_cpu_memory_MB": 2552.312,
+  "peak_gpu_0_memory_MB": 1837,
+  "training_duration": "02:15:43",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.08730281049141247,
+  "training_cpu_memory_MB": 2552.312,
+  "training_gpu_0_memory_MB": 1837,
+  "validation_BLEU": 0.5593781049121032,
+  "validation_exprate": 0.23429541595925296,
+  "validation_loss": 1.2164559353579272,
+  "best_validation_BLEU": 0.5533631088763901,
+  "best_validation_exprate": 0.2354272778720996,
+  "best_validation_loss": 1.1377181824263152
+}
 ```
 ```
 %%writefile config.json
@@ -5897,6 +5916,113 @@ Results:
                     "decoder_dim": 256, # Must be same as decoder's decoder_dim
                     "attention_dim": 256,
                     "doubly_stochastic_attention": false                    
+                }
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 100,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+### multi scale lstm encoder
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments?scriptVersionId=11930877 v66  
+Results: 1.13; but bleu and exprate is a bit higher
+
+```
+{
+  "best_epoch": 33,
+  "peak_cpu_memory_MB": 2547.368,
+  "peak_gpu_0_memory_MB": 1951,
+  "training_duration": "02:30:05",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.17908455267953116,
+  "training_cpu_memory_MB": 2547.368,
+  "training_gpu_0_memory_MB": 1951,
+  "validation_BLEU": 0.5652890622663765,
+  "validation_exprate": 0.2597623089983022,
+  "validation_loss": 1.1906401821084924,
+  "best_validation_BLEU": 0.5524230597155718,
+  "best_validation_exprate": 0.26485568760611206,
+  "best_validation_loss": 1.1319132146534618
+}
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "math-dataset",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "math"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "multiscale",
+        "encoder": {
+            "type": "multiscale-lstm",
+            "encoder": {
+                "type": 'multiscale',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 512,
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "image-captioning-decoder",
+            "attention": {
+                "type": 'multiscale',
+                "attention": {
+                    "type": 'image-captioning-attention',
+                    "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                    "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                    "attention_dim": 256,
+                    "doubly_stochastic_attention": true                    
                 }
             },
             "embedding_dim": 256,
