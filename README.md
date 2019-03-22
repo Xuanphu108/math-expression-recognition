@@ -94,9 +94,8 @@ Results:
 
 ## ToDo
 
-im2latex style; token embeddings 256 instead of 80 and different optimizer hyperparameters
-
-smaller embeddings?
+im2latex style (v69); token embeddings 256 instead of 80 and different optimizer hyperparameters
+exact im2latex copy (v70)
 
 Try other people's code
 
