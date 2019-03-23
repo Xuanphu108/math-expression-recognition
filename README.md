@@ -94,12 +94,6 @@ Results:
 
 ## ToDo
 
-remove relu from attention (1.641; v72)
-
-im2latex style (2.11; v69); token embeddings 256 instead of 80 and different optimizer hyperparameters
-exact im2latex copy except bidirectional (3.509; v70)
-with bidirectional (v71)
-
 Try other people's code
 
 transformer decoder
@@ -111,6 +105,12 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+remove relu from attention (1.641; v72)
+
+im2latex style (2.11; v69); token embeddings 256 instead of 80 and different optimizer hyperparameters
+exact im2latex copy except bidirectional (3.509; v70)
+with bidirectional (6.177; v71)
 
 check metrics functions **exprate looks right**
 
