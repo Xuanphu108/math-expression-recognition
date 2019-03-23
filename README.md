@@ -94,8 +94,11 @@ Results:
 
 ## ToDo
 
-im2latex style (v69); token embeddings 256 instead of 80 and different optimizer hyperparameters
-exact im2latex copy (v70)
+remove relu from attention (v72)
+
+im2latex style (2.11; v69); token embeddings 256 instead of 80 and different optimizer hyperparameters
+exact im2latex copy except bidirectional (v70)
+with bidirectional (v71)
 
 Try other people's code
 
