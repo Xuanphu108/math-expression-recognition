@@ -95,26 +95,24 @@ Results:
 
 ## ToDo
 
-Redo architecture experiments with new lr
+#### Redo architecture experiments with new lr
+
+Baseline (v77;)
 
 Encoders:
 
-Plain ()  
-LSTM encoder ()  
+LSTM encoder (v76; 1.4731)  
 BILSTM encoder ()  
 
 Im2latex encoder:
 
 Im2latex backbone ()  
-Im2latex encoder ()
-Both ()
+Im2latex encoder ()  
+Both (v78;)
 
-WAP encoder ()
-densenet encoder ()
-small resnet18 ()
-
-Decoders:
-
+WAP encoder (v79;)  
+densenet encoder ()  
+small resnet18 ()  
 
 Try other people's code
 
