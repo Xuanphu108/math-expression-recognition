@@ -71,13 +71,14 @@
   * [lstm encoder 2 layers (1.70)](#lstm-encoder-2-layers)
   * [WAP backbone encoder (2.144)](#wap-backbone-encoder)
   * [Im2latex backbone enoder (2.40))](#im2latex-backbone-encoder)
-  * [**Best** remove extra avg pool (1.636)](#remove-extra-avg-pool)
+  * [remove extra avg pool (1.636)](#remove-extra-avg-pool)
   * [small resnet 18 (2.12)](#small-resnet-18)
   * [downsample feature map (1.706)](#downsample-feature-map)
   * [not pretrained (1.835)](#not-pretrained)
   * [multi scale encoder (1.13, but similar to 1.636)](#multi-scale-encoder)
   * [multi scale lstm encoder (1.13; but slightly higher metrics)](#multi-scale-lstm-encoder)
   * [multiscale encoder and decoder (1.136; but slightly worse metrics)](#multiscale-encoder-and-decoder)
+  * [**BEST** lstm lr 0.1](#lstm-lr-01)
 
 ## Template
 
@@ -94,6 +95,27 @@ Results:
 
 ## ToDo
 
+Redo architecture experiments with new lr
+
+Encoders:
+
+Plain ()  
+LSTM encoder ()  
+BILSTM encoder ()  
+
+Im2latex encoder:
+
+Im2latex backbone ()  
+Im2latex encoder ()
+Both ()
+
+WAP encoder ()
+densenet encoder ()
+small resnet18 ()
+
+Decoders:
+
+
 Try other people's code
 
 transformer decoder
@@ -105,6 +127,10 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+SGD lr 0.1 (1.4731; 16 epochs) **WAY BETTER**
+
+Adam default params (1.509; 12 epochs)
 
 remove relu from attention (1.641; v72)
 
@@ -6162,6 +6188,93 @@ Results: same loss worse metrics
         "optimizer": {
             "type": "sgd",
             "lr": 0.01,
+            "momentum": 0.9
+        },
+#         "validation_metric": "+BLEU",
+        "learning_rate_scheduler": {
+            "type": "reduce_on_plateau",
+            "factor": 0.5,
+            "patience": 5
+        },
+        "num_serialized_models_to_keep": 1,
+        "summary_interval": 10,
+        "histogram_interval": 100,
+        "should_log_parameter_statistics": true,
+        "should_log_learning_rate": true
+    },
+    "vocabulary": {
+        "min_count": {
+            'tokens': 10
+        }
+#         "directory_path": "/path/to/vocab"
+    },
+}
+```
+
+### lstm lr 0.1
+Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments/data?scriptVersionId=11977575 v75  
+Results:
+
+```
+```
+```
+%%writefile config.json
+{
+    "dataset_reader": {
+        "type": "CROHME",
+        "root_path": "./2013",
+        "height": 128,
+        "width": 512,
+        "lazy": true,
+        "subset": false,
+        "tokenizer": {
+            "type": "latex"
+        }
+    },
+    "train_data_path": "train.csv",
+    "validation_data_path": "val.csv",
+    "model": {
+        "type": "image-captioning",
+        "encoder": {
+            "type": "lstm",
+            "encoder": {
+                "type": 'backbone',
+                "encoder_type": 'resnet18',
+                "encoder_height": 4,
+                "encoder_width": 16,
+                "pretrained": true,
+                "custom_in_conv": false
+            },
+            "hidden_size": 512, # Must be encoder dim of chosen encoder
+            "layers": 1,
+            "bidirectional": false
+        },
+        "decoder": {
+            "type": "image-captioning",
+            "attention": {
+                "type": 'image-captioning',
+                "encoder_dim": 512, # Must be encoder dim of chosen encoder
+                "decoder_dim": 256, # Must be same as decoder's decoder_dim
+                "attention_dim": 256,
+                "doubly_stochastic_attention": true
+            },
+            "embedding_dim": 256,
+            "decoder_dim": 256
+        },
+        "max_timesteps": 75,
+        "beam_size": 10
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys":[["label", "num_tokens"]],
+        "batch_size": 16
+    },
+    "trainer": {
+        "num_epochs": 40,
+        "cuda_device": 0,
+        "optimizer": {
+            "type": "sgd",
+            "lr": 0.1,
             "momentum": 0.9
         },
 #         "validation_metric": "+BLEU",
