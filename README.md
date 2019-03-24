@@ -106,13 +106,13 @@ BILSTM encoder ()
 
 Im2latex encoder:
 
-Im2latex backbone ()  
+Im2latex backbone (v83;)  
 Im2latex encoder ()  
 Both (v78;)
 
 WAP encoder (v79;)  
-densenet encoder ()  
-small resnet18 ()  
+densenet encoder (v80;)  
+small resnet18 (v82;)  
 
 Try other people's code
 
