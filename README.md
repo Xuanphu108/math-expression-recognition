@@ -95,24 +95,45 @@ Results:
 
 ## ToDo
 
-#### Redo architecture experiments with new lr
+Use a gru to only need h_0?
 
-Baseline (v77;)
+correctly predicting h_0, c_0?
+
+Is masking padded data correct?
+
+model is overfitting on train
+
+visualize raw attention heatmaps
+
+gradient clipping?
+batchnorm?
+
+#### Redo architecture experiments with new lr and val metric exprate
+
+Baseline (v85; 0.31)
 
 Encoders:
 
-LSTM encoder (v76; 1.4731)  
+LSTM encoder (v86; 0.3888)  
 BILSTM encoder ()  
 
 Im2latex encoder:
 
-Im2latex backbone (v83;)  
+Im2latex backbone ()  
 Im2latex encoder ()  
-Both (v78;)
+Both (v87; 0.2286)  
+Im2latex exact copy (next)  
 
-WAP encoder (v79;)  
-densenet encoder (v80;)  
-small resnet18 (v82;)  
+WAP encoder (v88; 0.2196)  
+WAP exact copy (next)  
+densenet encoder (v91;)  
+small resnet18 (next)  
+
+multiscale:  
+baseline (v90; 0.2530)
+lstm encoder ()
+Exact copy except for dense encoder (next)
+Exact copy (next)
 
 Try other people's code
 
@@ -501,6 +522,7 @@ first input to decoder at validation is start token
 > Paper: file:///C:/Users/Bilal/Documents/research/math%20expression%20recognition/Crohme-papers/Image%20to%20markup%20generation%20with%20coarse%20to%20fine%20attention.pdf
 
 > Github: https://github.com/harvardnlp/im2markup
+> Pytorch version: https://github.com/OpenNMT/OpenNMT-py/blob/master/docs/source/im2text.md
 
 > Details
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
