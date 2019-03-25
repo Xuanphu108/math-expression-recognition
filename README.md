@@ -122,11 +122,11 @@ Im2latex encoder:
 Im2latex backbone ()  
 Im2latex encoder ()  
 Both (v87; 0.2286)  
-Im2latex exact copy (v92;)  
+Im2latex exact copy (v92; 0.2173)  
 
 WAP encoder (v88; 0.2196)  
 WAP exact copy (next)  
-densenet encoder (v91;)  
+densenet encoder (v91; 0.01)  
 small resnet18 (next)  
 
 multiscale:  
