@@ -95,6 +95,8 @@ Results:
 
 ## ToDo
 
+teacher forcing
+
 Use a gru to only need h_0?
 
 correctly predicting h_0, c_0?
@@ -117,23 +119,22 @@ Encoders:
 LSTM encoder (v86; 0.3888)  
 BILSTM encoder ()  
 
-Im2latex encoder:
+Im2latex:  
+**Im2latex exact copy** (v92; 0.2173) *0.1 less since original is trained on external data*  
+Backbone and encoder (v87; 0.2286)  
 
-Im2latex backbone ()  
-Im2latex encoder ()  
-Both (v87; 0.2286)  
-Im2latex exact copy (v92; 0.2173)  
-
+WAP:  
 WAP encoder (v88; 0.2196)  
 WAP exact copy (next)  
-densenet encoder (v91; 0.01)  
-small resnet18 (next)  
 
-multiscale:  
+Multiscale:  
+Exact copy (next)  
 baseline (v90; 0.2530)  
 lstm encoder ()  
 Exact copy except for dense encoder (next)  
-Exact copy (next)
+
+densenet encoder (v91; 0.01)  
+small resnet18 (next)  
 
 Try other people's code
 
@@ -505,6 +506,9 @@ first input to decoder at validation is start token
  * Coverage: conv over sum of past attention weights
  * exprate of 46.55 on 2014
  * exprate of 44.55 on 2016
+ * GRU decoder dim 256
+ * encoder output dim 128
+ * coverage over past attention weights
 
 ### Multi scale attention with dense encoder:
 
@@ -528,10 +532,12 @@ first input to decoder at validation is start token
  * Train starting with lr of 0.1 and halve when metric doesn't improve for a total of 12 epochs
  * Images are resized to ~200x50
  * Each row of the feature map is encoded with rnn then attention is computed
- * exprate on 2013: 33.53
+ * exprate on 2013: 33.53 (With external data) 
  * bidirectional row encoder
  * trainable initial hidden state for each row; "Positional embeddings" (Embedding with vocab size height of encoded image)
  * Pretty sure they either add or reverse + add bidirectional hidden states
+ 
+**Im2latex exact copy** (v92; 0.2173) *0.1 less since original is trained on external data*  
 
  ### Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns
  
@@ -6233,9 +6239,27 @@ Results: same loss worse metrics
 
 ### lstm lr 0.1
 Kernel: https://www.kaggle.com/bkkaggle/math-recognition-experiments/data?scriptVersionId=11977575 v75  
-Results:
+Results: Good!
 
 ```
+{
+  "best_epoch": 16,
+  "peak_cpu_memory_MB": 2474.772,
+  "peak_gpu_0_memory_MB": 1441,
+  "training_duration": "01:41:13",
+  "training_start_epoch": 0,
+  "training_epochs": 39,
+  "epoch": 39,
+  "training_loss": 0.5624248934277581,
+  "training_cpu_memory_MB": 2474.772,
+  "training_gpu_0_memory_MB": 1441,
+  "validation_BLEU": 0.645596960102569,
+  "validation_exprate": 0.40860215053763443,
+  "validation_loss": 1.6618222970146317,
+  "best_validation_BLEU": 0.6203121678315959,
+  "best_validation_exprate": 0.4012450481041313,
+  "best_validation_loss": 1.4731372686119768
+}
 ```
 ```
 %%writefile config.json
