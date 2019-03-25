@@ -122,7 +122,7 @@ Im2latex encoder:
 Im2latex backbone ()  
 Im2latex encoder ()  
 Both (v87; 0.2286)  
-Im2latex exact copy (next)  
+Im2latex exact copy (v92;)  
 
 WAP encoder (v88; 0.2196)  
 WAP exact copy (next)  
@@ -130,9 +130,9 @@ densenet encoder (v91;)
 small resnet18 (next)  
 
 multiscale:  
-baseline (v90; 0.2530)
-lstm encoder ()
-Exact copy except for dense encoder (next)
+baseline (v90; 0.2530)  
+lstm encoder ()  
+Exact copy except for dense encoder (next)  
 Exact copy (next)
 
 Try other people's code
