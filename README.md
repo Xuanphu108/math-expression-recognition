@@ -119,19 +119,19 @@ Encoders:
 LSTM encoder (v86; 0.3888)  
 BILSTM encoder ()  
 
-Im2latex:  
+##### Im2latex:  
 **Im2latex exact copy** (v92; 0.2173) *0.1 less since original is trained on external data*  
 Backbone and encoder (v87; 0.2286)  
 
-WAP:  
+##### WAP:  
 WAP encoder (v88; 0.2196)  
-WAP exact copy (next)  
+WAP exact copy (v95;)  
 
-Multiscale:  
-Exact copy (next)  
+##### Multiscale:  
 baseline (v90; 0.2530)  
-lstm encoder ()  
 Exact copy except for dense encoder (next)  
+Exact copy (next)  
+lstm encoder ()  
 
 densenet encoder (v91; 0.01)  
 small resnet18 (next)  
@@ -506,9 +506,12 @@ first input to decoder at validation is start token
  * Coverage: conv over sum of past attention weights
  * exprate of 46.55 on 2014
  * exprate of 44.55 on 2016
- * GRU decoder dim 256
+ * exprate increases almost 0.1 with coverage
  * encoder output dim 128
- * coverage over past attention weights
+ * attention dim 512
+ * GRU decoder dim 256
+ * coverage over past attention weights and attention over coverage
+ * https://github.com/JianshuZhang/WAP/issues/2
 
 ### Multi scale attention with dense encoder:
 
