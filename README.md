@@ -95,20 +95,18 @@ Results:
 
 ## ToDo
 
+vocab size (437 vs 136)
+
 teacher forcing
 
-Use a gru to only need h_0?
-
-correctly predicting h_0, c_0?
-
-Is masking padded data correct?
+Use a gru to only need h_0? **Shouldn't be a huge difference; but check anyway**
 
 model is overfitting on train
 
 visualize raw attention heatmaps
 
 gradient clipping?
-batchnorm?
+batchnorm? **before or after relu or dropout**
 
 #### Redo architecture experiments with new lr and val metric exprate
 
@@ -126,7 +124,7 @@ Backbone and encoder (v87; 0.2286)
 ##### WAP:  
 WAP encoder (v88; 0.2196)  
 WAP exact copy (v95; 0.25)  
-Exact copy 1024x256 (v100;)  
+Exact copy 1024x256 (v101;)  
 
 ##### Multiscale:  
 baseline (v90; 0.2530)  
@@ -148,6 +146,10 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+correctly predicting h_0, c_0? **Yes**
+
+Is masking padded data correct? **Yes again**
 
 SGD lr 0.1 (1.4731; 16 epochs) **WAY BETTER**
 
