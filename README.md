@@ -126,6 +126,7 @@ Backbone and encoder (v87; 0.2286)
 ##### WAP:  
 WAP encoder (v88; 0.2196)  
 WAP exact copy (v95; 0.25)  
+Exact copy 1024x256 (v100;)  
 
 ##### Multiscale:  
 baseline (v90; 0.2530)  
