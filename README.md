@@ -115,6 +115,7 @@ Baseline (v85; 0.31)
 Encoders:
 
 LSTM encoder (v86; 0.3888)  
+Full vocab (v105;)
 BILSTM encoder ()  
 
 ##### Im2latex:  
@@ -124,7 +125,8 @@ Backbone and encoder (v87; 0.2286)
 ##### WAP:  
 WAP encoder (v88; 0.2196)  
 WAP exact copy (v95; 0.25)  
-Exact copy 1024x256 (v101;)  
+Exact copy 1024x256 (v101; 0.21)  
+Full vocab (v104; )
 
 ##### Multiscale:  
 baseline (v90; 0.2530)  
