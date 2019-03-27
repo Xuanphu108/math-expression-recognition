@@ -95,9 +95,11 @@ Results:
 
 ## ToDo
 
-vocab size (437 vs 136)
+2016 vs 2013?
 
-teacher forcing
+vocab on train or val?
+
+vocab size (437 vs 136) (Not much difference, update)
 
 Use a gru to only need h_0? **Shouldn't be a huge difference; but check anyway**
 
@@ -115,7 +117,8 @@ Baseline (v85; 0.31)
 Encoders:
 
 LSTM encoder (v86; 0.3888)  
-Full vocab (v105;)
+Full vocab (v106; 0.357)
+min token count 20 (v108;)
 BILSTM encoder ()  
 
 ##### Im2latex:  
@@ -126,7 +129,9 @@ Backbone and encoder (v87; 0.2286)
 WAP encoder (v88; 0.2196)  
 WAP exact copy (v95; 0.25)  
 Exact copy 1024x256 (v101; 0.21)  
-Full vocab (v104; )
+Full vocab (v104; 0.24)
+correct convs and min_count 20 (v109; ~0.25)
+grad clipping (v110; ~0.25)
 
 ##### Multiscale:  
 baseline (v90; 0.2530)  
@@ -137,7 +142,7 @@ lstm encoder ()
 densenet encoder (v91; 0.01)  
 small resnet18 (next)  
 
-Try other people's code
+teacher forcing
 
 transformer decoder
 
@@ -148,6 +153,12 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+check exprate function; try out official implementation? (No official implementation)
+
+Try other people's code **Not worth it**
+
+Round img values to nearest int (no difference; but use anyway)
 
 correctly predicting h_0, c_0? **Yes**
 
