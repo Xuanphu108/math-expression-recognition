@@ -97,11 +97,9 @@ Results:
 
 2016 vs 2013?
 
-vocab on train or val?
+vocab size all vs 10 vs 20 (437 vs 136 vs 127) (Not much difference)
 
-vocab size (437 vs 136) (Not much difference, update)
-
-Use a gru to only need h_0? **Shouldn't be a huge difference; but check anyway**
+Use a gru to only need h_0? **Shouldn't be a huge difference; but check gru instead of lstm**
 
 model is overfitting on train
 
@@ -116,31 +114,42 @@ Baseline (v85; 0.31)
 
 Encoders:
 
-LSTM encoder (v86; 0.3888)  
+##### LSTM encoder (v86; 0.3888)  
 Full vocab (v106; 0.357)
-min token count 20 (v108;)
-BILSTM encoder ()  
+min token count 20 (v108; 0.3791; no difference)
+256x1024 (v111; 0.3033)
+keep aspect ratio (NEXT)
+BILSTM encoder (v112; 0.2869)
+
+##### Lstm Resnet 50
+256x1024 (v122)
+256x1024 downsampled to 4x16 (v123)
+128x512 (v124)
 
 ##### Im2latex:  
 **Im2latex exact copy** (v92; 0.2173) *0.1 less since original is trained on external data*  
 Backbone and encoder (v87; 0.2286)  
 
-##### WAP:  
+##### WAP: **Stuck around 0.25**  
 WAP encoder (v88; 0.2196)  
 WAP exact copy (v95; 0.25)  
 Exact copy 1024x256 (v101; 0.21)  
 Full vocab (v104; 0.24)
 correct convs and min_count 20 (v109; ~0.25)
 grad clipping (v110; ~0.25)
+lstm (v115; 0.2456; No change)
 
 ##### Multiscale:  
 baseline (v90; 0.2530)  
-Exact copy except for dense encoder (next)  
-Exact copy (next)  
-lstm encoder ()  
+Exact copy except for dense encoder (NEXT)  
+Exact copy (NEXT)  
+lstm encoder (v116; 0.2863; Better, but not that much)  
 
+##### Densenet
 densenet encoder (v91; 0.01)  
-small resnet18 (next)  
+
+##### Small resnet18
+small resnet18 (v114; 0.2761; worse than baseline)  
 
 teacher forcing
 
@@ -153,6 +162,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+vocab on train or val **Both by default**
 
 check exprate function; try out official implementation? (No official implementation)
 
