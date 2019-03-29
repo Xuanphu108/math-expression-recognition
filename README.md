@@ -95,6 +95,8 @@ Results:
 
 ## ToDo
 
+average size and aspect ratio
+
 2016 vs 2013?
 
 vocab size all vs 10 vs 20 (437 vs 136 vs 127) (Not much difference)
@@ -105,7 +107,6 @@ model is overfitting on train
 
 visualize raw attention heatmaps
 
-gradient clipping?
 batchnorm? **before or after relu or dropout**
 
 #### Redo architecture experiments with new lr and val metric exprate
@@ -115,18 +116,18 @@ Baseline (v85; 0.31)
 Encoders:
 
 ##### LSTM encoder (v86; 0.3888)  
-Full vocab (v106; 0.357)
-min token count 20 (v108; 0.3791; no difference)
-256x1024 (v111; 0.3033)
-keep aspect ratio (NEXT)
-BILSTM encoder (v112; 0.2869)
+Full vocab (v106; 0.357)  
+min token count 20 (v108; 0.3791; no difference)  
+256x1024 (v111; 0.3033)  
+BILSTM encoder (v112; 0.2869)  
+keep aspect ratio 512x512 (v125)  
 
 ##### Lstm Resnet 50
-256x1024 (v122)
-256x1024 downsampled to 4x16 (v123)
-128x512 (v124)
+256x1024 (v122; 0.2982)  
+256x1024 downsampled to 4x16 (v123; 0.3486)  
+128x512 (v124; 0.3684)  
 
-##### Im2latex:  
+##### Im2latex: **Stuck at 0.21; expected**  
 **Im2latex exact copy** (v92; 0.2173) *0.1 less since original is trained on external data*  
 Backbone and encoder (v87; 0.2286)  
 
@@ -141,7 +142,7 @@ lstm (v115; 0.2456; No change)
 
 ##### Multiscale:  
 baseline (v90; 0.2530)  
-Exact copy except for dense encoder (NEXT)  
+Exact copy except for dense encoder uses resnet 18 5x5 and 7x7 coverage (v126)  
 Exact copy (NEXT)  
 lstm encoder (v116; 0.2863; Better, but not that much)  
 
@@ -162,6 +163,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+gradient clipping **No difference**
 
 vocab on train or val **Both by default**
 
