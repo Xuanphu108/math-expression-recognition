@@ -120,7 +120,7 @@ Full vocab (v106; 0.357)
 min token count 20 (v108; 0.3791; no difference)  
 256x1024 (v111; 0.3033)  
 BILSTM encoder (v112; 0.2869)  
-keep aspect ratio 512x512 (v125)  
+keep aspect ratio 512x512 (v125; 0.3157)  
 
 ##### Lstm Resnet 50
 256x1024 (v122; 0.2982)  
