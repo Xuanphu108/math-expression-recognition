@@ -142,8 +142,10 @@ lstm (v115; 0.2456; No change)
 
 ##### Multiscale:  
 baseline (v90; 0.2530)  
-Exact copy except for dense encoder uses resnet 18 5x5 and 7x7 coverage (v126)  
-Exact copy (NEXT)  
+Exact copy except for dense encoder uses resnet 18 5x5 and 7x7 coverage (v126; 0.2801)  
+Exact copy (v133) 
+adam lr 1e-3 (v134)
+adadelta lr 1e-8 (v135)
 lstm encoder (v116; 0.2863; Better, but not that much)  
 
 ##### Densenet
@@ -163,6 +165,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+90:10 train val split best model (v129; 0.3902; slight increase)
 
 gradient clipping **No difference**
 
