@@ -95,19 +95,45 @@ Results:
 
 ## ToDo
 
-average size and aspect ratio
+densenet msa no teacher forcing (v7)
+
+msa doesn't pass in previous timestep's predictions to gru; try with (v6)
+
+use lstm to decrease feature map size (v4)
+
+lstm 128x512 non teacher forcing (v2)
+
+check attention
 
 2016 vs 2013?
-
-vocab size all vs 10 vs 20 (437 vs 136 vs 127) (Not much difference)
-
-Use a gru to only need h_0? **Shouldn't be a huge difference; but check gru instead of lstm**
 
 model is overfitting on train
 
 visualize raw attention heatmaps
 
-batchnorm? **before or after relu or dropout**
+teacher forcing **Check drawbacks**
+
+transformer decoder
+
+Larger/Smaller models
+
+render predicted latex **Do later**
+
+Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
+
+## Done
+
+can't concat attention since encoder returns h\*w and decoder returns 1
+
+lstm 256x512 (v1; 0.3687; https://www.kaggle.com/bkkaggle/math-recognition?scriptVersionId=12274376)
+
+average size and aspect ratio (200x450; 2.4:1)
+
+Use a gru to only need h_0? **Shouldn't be a huge difference**
+
+vocab size all vs 10 vs 20 (437 vs 136 vs 127) (Not much difference)
+
+batchnorm? **before or after relu or dropout** *bn -> relu -> dropout*
 
 #### Redo architecture experiments with new lr and val metric exprate
 
@@ -143,9 +169,9 @@ lstm (v115; 0.2456; No change)
 ##### Multiscale:  
 baseline (v90; 0.2530)  
 Exact copy except for dense encoder uses resnet 18 5x5 and 7x7 coverage (v126; 0.2801)  
-Exact copy (v133) 
-adam lr 1e-3 (v134)
-adadelta lr 1e-8 (v135)
+Exact copy (v133; 0.2092) 
+adam lr 1e-3 (v134; 0.1470)
+adadelta lr 1e-8 (v135; 0)
 lstm encoder (v116; 0.2863; Better, but not that much)  
 
 ##### Densenet
@@ -153,18 +179,6 @@ densenet encoder (v91; 0.01)
 
 ##### Small resnet18
 small resnet18 (v114; 0.2761; worse than baseline)  
-
-teacher forcing
-
-transformer decoder
-
-Larger/Smaller models
-
-render predicted latex **Do later**
-
-Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
-
-## Done
 
 90:10 train val split best model (v129; 0.3902; slight increase)
 
