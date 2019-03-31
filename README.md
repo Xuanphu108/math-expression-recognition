@@ -93,19 +93,37 @@ Results:
 ```
 ```
 
-## ToDo
+## Questions
 
-densenet msa no teacher forcing (v7)
+resnet vs vgg vs densenet
 
-msa doesn't pass in previous timestep's predictions to gru; try with (v6)
+exprate at different architectures
 
-use lstm to decrease feature map size (v4)
-
-lstm 128x512 non teacher forcing (v2)
-
-check attention
+image size dynamic
 
 2016 vs 2013?
+
+loss values
+
+how to normalize
+
+what techniques to reduce overfitting
+
+scheduled sampling/teacher forcing
+
+## ToDo
+
+scheduled sampling
+
+print overall accuracy x/x
+
+latex ground truth isn't normalized
+
+more normalization to prevent overfitting
+
+multiscale only gets 0.44 with a single model
+
+2013 is ~4% harder than 2014
 
 model is overfitting on train
 
@@ -122,6 +140,12 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+use lstm to decrease feature map size (v4; 0.2409)
+
+lstm 128x512 non teacher forcing (v2; 0.2567)
+
+check attention **it's correct**
 
 can't concat attention since encoder returns h\*w and decoder returns 1
 
@@ -147,6 +171,10 @@ min token count 20 (v108; 0.3791; no difference)
 256x1024 (v111; 0.3033)  
 BILSTM encoder (v112; 0.2869)  
 keep aspect ratio 512x512 (v125; 0.3157)  
+lstm no bias no teacher forcing (v8; 0.2642)  
+better tokenizer and full vocab (v9; 0.3834)  
+better tokenizer; no teacher forcing (v10; 0.2455)  
+batch size 8 (v12)
 
 ##### Lstm Resnet 50
 256x1024 (v122; 0.2982)  
@@ -161,18 +189,21 @@ Backbone and encoder (v87; 0.2286)
 WAP encoder (v88; 0.2196)  
 WAP exact copy (v95; 0.25)  
 Exact copy 1024x256 (v101; 0.21)  
-Full vocab (v104; 0.24)
-correct convs and min_count 20 (v109; ~0.25)
-grad clipping (v110; ~0.25)
-lstm (v115; 0.2456; No change)
+Full vocab (v104; 0.24)  
+correct convs and min_count 20 (v109; ~0.25)  
+grad clipping (v110; ~0.25)  
+lstm (v115; 0.2456; No change)  
 
 ##### Multiscale:  
 baseline (v90; 0.2530)  
 Exact copy except for dense encoder uses resnet 18 5x5 and 7x7 coverage (v126; 0.2801)  
-Exact copy (v133; 0.2092) 
-adam lr 1e-3 (v134; 0.1470)
-adadelta lr 1e-8 (v135; 0)
+Exact copy (v133; 0.2092)  
+adam lr 1e-3 (v134; 0.1470)  
+adadelta lr 1e-8 (v135; 0)  
 lstm encoder (v116; 0.2863; Better, but not that much)  
+densenet msa no teacher forcing (v7; 0.052)  
+msa doesn't pass in previous timestep's predictions to gru; try with (v6; 0.242)  
+new tokenizer (v11)
 
 ##### Densenet
 densenet encoder (v91; 0.01)  
