@@ -12,11 +12,17 @@
 * [Other](#other)
 * [Beam Search](#beam-search-stuff)
 * [Papers](#papers)
+<details>
+  <summary>Papers</summary>
+
   * [WAP](#wap)
   * [Multi scale attention with dense encoder](#multi-scale-attention-with-dense-encoder)
   * [Image to markup generation with coarse to fine attention](#image-to-markup-generation-with-coarse-to-fine-attention)
   * [Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns](#Training-an-End-to-End-System-for-Handwritten-Mathematical-Expression-Recognition-by-Generated-Patterns)
-* [Experiments](#experiments)
+</details>
+<details>
+  <summary>Experiments</summary>
+ 
   * [Larger Decoder (Better)](#larger-decoder)
   * [Pretrained Resnet 18 (Better)](#pretrained-resnet18)
   * [20 epochs half lr after 10 (Better)](#20-epochs-half-lr-after-10)
@@ -80,6 +86,8 @@
   * [multi scale lstm encoder (1.13; but slightly higher metrics)](#multi-scale-lstm-encoder)
   * [multiscale encoder and decoder (1.136; but slightly worse metrics)](#multiscale-encoder-and-decoder)
   * [**BEST** lstm lr 0.1](#lstm-lr-01)
+</details>
+
 
 ## Template
 
