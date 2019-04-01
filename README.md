@@ -111,7 +111,7 @@
   lstm no bias no teacher forcing (v8; 0.2642)  
   better tokenizer and full vocab (v9; 0.3834)  
   better tokenizer; no teacher forcing (v10; 0.2455)  
-  batch size 8 (v12)
+  batch size 8 (v12; 0.3880)
 
   ##### Lstm Resnet 50
   256x1024 (v122; 0.2982)  
@@ -140,7 +140,7 @@
   lstm encoder (v116; 0.2863; Better, but not that much)  
   densenet msa no teacher forcing (v7; 0.052)  
   msa doesn't pass in previous timestep's predictions to gru; try with (v6; 0.242)  
-  new tokenizer (v11)
+  new tokenizer (v11; 0.1561)
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
