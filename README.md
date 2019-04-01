@@ -5,6 +5,7 @@
 * [Template](#template)
 * [Todo](#todo)
 * [Done](#done)
+* [Questions](#questions)
 * [Notes](#notes)
 * [Transformers](#transformers)
 * [Later](#later)
@@ -93,25 +94,9 @@ Results:
 ```
 ```
 
-## Questions
-
-resnet vs vgg vs densenet
-
-exprate at different architectures
-
-image size dynamic
-
-2016 vs 2013?
-
-loss values
-
-how to normalize
-
-what techniques to reduce overfitting
-
-scheduled sampling/teacher forcing
-
 ## ToDo
+
+view predicted text and check if correct
 
 scheduled sampling
 
@@ -449,6 +434,23 @@ Prepend all private instance variables with _
 
 Try allennlp's embedding Done
 
+## Questions
+
+resnet vs vgg vs densenet
+
+exprate at different architectures
+
+image size dynamic
+
+2016 vs 2013?
+
+loss values
+
+how to normalize
+
+what techniques to reduce overfitting
+
+scheduled sampling/teacher forcing
 
 ## Notes
 
