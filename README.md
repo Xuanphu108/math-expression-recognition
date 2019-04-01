@@ -22,7 +22,10 @@
 </details>
 <details>
   <summary>Experiments</summary>
- 
+
+  <details>
+    <summary>Original experiments</summary>
+  
   * [Larger Decoder (Better)](#larger-decoder)
   * [Pretrained Resnet 18 (Better)](#pretrained-resnet18)
   * [20 epochs half lr after 10 (Better)](#20-epochs-half-lr-after-10)
@@ -61,6 +64,11 @@
   * [fixed bidirectional image features (Better, but not good enough)](#fixed-bidirectional-image-features)
   * [3x3 inconv (Worse)](#3x3-inconv)
   * [no avg pooling (doesn't make a difference, Good)](#no-avg-pooling)
+  </details>
+
+  <details>
+    <summary>Reaching baseline experiments</summary>
+  
   * [gru row encoder (Worse)](#gru-row-encoder)
   * [gru row encoder 256 units (Better; but not good enough)](#gru-row-encoder-256-units)
   * [bidirectional row encoder (Worse)](#bidirectional-row-encoder)
@@ -85,7 +93,62 @@
   * [multi scale encoder (1.13, but similar to 1.636)](#multi-scale-encoder)
   * [multi scale lstm encoder (1.13; but slightly higher metrics)](#multi-scale-lstm-encoder)
   * [multiscale encoder and decoder (1.136; but slightly worse metrics)](#multiscale-encoder-and-decoder)
+
   * [**BEST** lstm lr 0.1](#lstm-lr-01)
+  
+  #### Redo architecture experiments with new lr and val metric exprate
+
+  Baseline (v85; 0.31)
+
+  Encoders:
+
+  ##### LSTM encoder (v86; 0.3888)  
+  Full vocab (v106; 0.357)  
+  min token count 20 (v108; 0.3791; no difference)  
+  256x1024 (v111; 0.3033)  
+  BILSTM encoder (v112; 0.2869)  
+  keep aspect ratio 512x512 (v125; 0.3157)  
+  lstm no bias no teacher forcing (v8; 0.2642)  
+  better tokenizer and full vocab (v9; 0.3834)  
+  better tokenizer; no teacher forcing (v10; 0.2455)  
+  batch size 8 (v12)
+
+  ##### Lstm Resnet 50
+  256x1024 (v122; 0.2982)  
+  256x1024 downsampled to 4x16 (v123; 0.3486)  
+  128x512 (v124; 0.3684)  
+
+  ##### Im2latex: **Stuck at 0.21; expected**  
+  **Im2latex exact copy** (v92; 0.2173) *0.1 less since original is trained on external data*  
+  Backbone and encoder (v87; 0.2286)  
+
+  ##### WAP: **Stuck around 0.25**  
+  WAP encoder (v88; 0.2196)  
+  WAP exact copy (v95; 0.25)  
+  Exact copy 1024x256 (v101; 0.21)  
+  Full vocab (v104; 0.24)  
+  correct convs and min_count 20 (v109; ~0.25)  
+  grad clipping (v110; ~0.25)  
+  lstm (v115; 0.2456; No change)  
+
+  ##### Multiscale:  
+  baseline (v90; 0.2530)  
+  Exact copy except for dense encoder uses resnet 18 5x5 and 7x7 coverage (v126; 0.2801)  
+  Exact copy (v133; 0.2092)  
+  adam lr 1e-3 (v134; 0.1470)  
+  adadelta lr 1e-8 (v135; 0)  
+  lstm encoder (v116; 0.2863; Better, but not that much)  
+  densenet msa no teacher forcing (v7; 0.052)  
+  msa doesn't pass in previous timestep's predictions to gru; try with (v6; 0.242)  
+  new tokenizer (v11)
+
+  ##### Densenet
+  densenet encoder (v91; 0.01)  
+
+  ##### Small resnet18
+  small resnet18 (v114; 0.2761; worse than baseline)  
+  </details>
+
 </details>
 
 
@@ -122,7 +185,7 @@ model is overfitting on train
 
 visualize raw attention heatmaps
 
-teacher forcing **Check drawbacks**
+teacher forcing **no teacher forcing gets you ~0.25**
 
 transformer decoder
 
@@ -151,58 +214,6 @@ Use a gru to only need h_0? **Shouldn't be a huge difference**
 vocab size all vs 10 vs 20 (437 vs 136 vs 127) (Not much difference)
 
 batchnorm? **before or after relu or dropout** *bn -> relu -> dropout*
-
-#### Redo architecture experiments with new lr and val metric exprate
-
-Baseline (v85; 0.31)
-
-Encoders:
-
-##### LSTM encoder (v86; 0.3888)  
-Full vocab (v106; 0.357)  
-min token count 20 (v108; 0.3791; no difference)  
-256x1024 (v111; 0.3033)  
-BILSTM encoder (v112; 0.2869)  
-keep aspect ratio 512x512 (v125; 0.3157)  
-lstm no bias no teacher forcing (v8; 0.2642)  
-better tokenizer and full vocab (v9; 0.3834)  
-better tokenizer; no teacher forcing (v10; 0.2455)  
-batch size 8 (v12)
-
-##### Lstm Resnet 50
-256x1024 (v122; 0.2982)  
-256x1024 downsampled to 4x16 (v123; 0.3486)  
-128x512 (v124; 0.3684)  
-
-##### Im2latex: **Stuck at 0.21; expected**  
-**Im2latex exact copy** (v92; 0.2173) *0.1 less since original is trained on external data*  
-Backbone and encoder (v87; 0.2286)  
-
-##### WAP: **Stuck around 0.25**  
-WAP encoder (v88; 0.2196)  
-WAP exact copy (v95; 0.25)  
-Exact copy 1024x256 (v101; 0.21)  
-Full vocab (v104; 0.24)  
-correct convs and min_count 20 (v109; ~0.25)  
-grad clipping (v110; ~0.25)  
-lstm (v115; 0.2456; No change)  
-
-##### Multiscale:  
-baseline (v90; 0.2530)  
-Exact copy except for dense encoder uses resnet 18 5x5 and 7x7 coverage (v126; 0.2801)  
-Exact copy (v133; 0.2092)  
-adam lr 1e-3 (v134; 0.1470)  
-adadelta lr 1e-8 (v135; 0)  
-lstm encoder (v116; 0.2863; Better, but not that much)  
-densenet msa no teacher forcing (v7; 0.052)  
-msa doesn't pass in previous timestep's predictions to gru; try with (v6; 0.242)  
-new tokenizer (v11)
-
-##### Densenet
-densenet encoder (v91; 0.01)  
-
-##### Small resnet18
-small resnet18 (v114; 0.2761; worse than baseline)  
 
 90:10 train val split best model (v129; 0.3902; slight increase)
 
