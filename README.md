@@ -111,7 +111,8 @@
   lstm no bias no teacher forcing (v8; 0.2642)  
   better tokenizer and full vocab (v9; 0.3834)  
   better tokenizer; no teacher forcing (v10; 0.2455)  
-  batch size 8 (v12; 0.3880)
+  batch size 8 (v12; 0.3880)  
+  removing latex $ symbol (v13)  
 
   ##### Lstm Resnet 50
   256x1024 (v122; 0.2982)  
@@ -166,6 +167,8 @@ Results:
 ```
 
 ## ToDo
+
+some labels have $ symbol, others don't
 
 view predicted text and check if correct
 
