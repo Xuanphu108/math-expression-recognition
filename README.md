@@ -112,7 +112,7 @@
   better tokenizer and full vocab (v9; 0.3834)  
   better tokenizer; no teacher forcing (v10; 0.2455)  
   batch size 8 (v12; 0.3880)  
-  removing latex $ symbol (v13)  
+  removing latex $ symbol (v13; 0.3903) **BETTER**  
 
   ##### Lstm Resnet 50
   256x1024 (v122; 0.2982)  
@@ -168,13 +168,15 @@ Results:
 
 ## ToDo
 
-some labels have $ symbol, others don't
+Best model may be at max possible score?
 
-view predicted text and check if correct
+Why are attention maps uniform?
+
+use pandoc to convert latex to other formats to evaluate
+
+run lr finder on msa
 
 scheduled sampling
-
-print overall accuracy x/x
 
 latex ground truth isn't normalized
 
@@ -188,8 +190,6 @@ model is overfitting on train
 
 visualize raw attention heatmaps
 
-teacher forcing **no teacher forcing gets you ~0.25**
-
 transformer decoder
 
 Larger/Smaller models
@@ -199,6 +199,14 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+stop teacher forcing **no teacher forcing gets you ~0.25**
+
+print overall accuracy x/x **Not necessary**
+
+view predicted text and check if correct **It is**
+
+some labels have $ symbol, others don't **removing all '$' helps increase exprate to 0.39**
 
 use lstm to decrease feature map size (v4; 0.2409)
 
