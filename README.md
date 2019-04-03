@@ -142,6 +142,7 @@
   densenet msa no teacher forcing (v7; 0.052)  
   msa doesn't pass in previous timestep's predictions to gru; try with (v6; 0.242)  
   new tokenizer (v11; 0.1561)
+  lr 0.01 (v16)
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
@@ -168,27 +169,30 @@ Results:
 
 ## ToDo
 
+Why are attention maps uniform? **V18**
+
+no doubly stochastic attention (v19)
+
+figure out why msa doesn't get higher exprate
+
+### Normalizing Ground truth:
+* latex ground truth isn't normalized
+
+* latex to pmml: https://github.com/JianshuZhang/WAP/issues/18#issuecomment-456792764
+
+* use pandoc to convert latex to other formats to evaluate
+
 Best model may be at max possible score?
-
-Why are attention maps uniform?
-
-use pandoc to convert latex to other formats to evaluate
-
-run lr finder on msa
-
-scheduled sampling
-
-latex ground truth isn't normalized
-
-more normalization to prevent overfitting
 
 multiscale only gets 0.44 with a single model
 
-2013 is ~4% harder than 2014
+2013 is ~4% harder than 2014 https://github.com/JianshuZhang/WAP/issues/6#issuecomment-388676301
 
 model is overfitting on train
 
-visualize raw attention heatmaps
+more normalization to prevent overfitting
+
+scheduled sampling
 
 transformer decoder
 
@@ -199,6 +203,12 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+Check original attention implementation **correct**
+
+run lr finder on msa **Done**
+
+visualize raw attention heatmaps (v14) **No change between timesteps**
 
 stop teacher forcing **no teacher forcing gets you ~0.25**
 
