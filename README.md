@@ -142,7 +142,10 @@
   densenet msa no teacher forcing (v7; 0.052)  
   msa doesn't pass in previous timestep's predictions to gru; try with (v6; 0.242)  
   new tokenizer (v11; 0.1561)
-  lr 0.01 (v16)
+  lr 0.01 30 epochs (v16; 0.07)
+  dropout 0.2 (v22)
+  weight decay 1e-4 (v23)
+  nesterov (v24)
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
@@ -169,18 +172,13 @@ Results:
 
 ## ToDo
 
-Why are attention maps uniform? **V18**
+add regularization
 
-no doubly stochastic attention (v19)
+weight decay
 
 figure out why msa doesn't get higher exprate
 
-### Normalizing Ground truth:
-* latex ground truth isn't normalized
-
-* latex to pmml: https://github.com/JianshuZhang/WAP/issues/18#issuecomment-456792764
-
-* use pandoc to convert latex to other formats to evaluate
+msa overfits more to train set
 
 Best model may be at max possible score?
 
@@ -203,6 +201,17 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+### Normalizing Ground truth: **Shouldn't make more than a ~1% difference**
+* latex ground truth isn't normalized
+
+* latex to pmml: https://github.com/JianshuZhang/WAP/issues/18#issuecomment-456792764
+
+* use pandoc to convert latex to other formats to evaluate **Can't**
+
+Why are attention maps uniform? (V18) **Attention attending to entire image**
+
+no doubly stochastic attention (v19) **Attention attending to single part of image for all timesteps**
 
 Check original attention implementation **correct**
 
