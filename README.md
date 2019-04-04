@@ -652,6 +652,8 @@ first input to decoder at validation is start token
 > Paper: file:///C:/Users/Bilal/Documents/research/math%20expression%20recognition/Crohme-papers/Multi%20scale%20attention%20with%20dense%20encoder.pdf
 
 > Github: https://github.com/JianshuZhang/WAP
+> Reimplementation: https://github.com/whywhs/Pytorch-Handwritten-Mathematical-Expression-Recognition/blob/master/Attention_RNN.py
+  * Gets 0.32 exprate
 
 > Details
 * Train with adadelta wd 1e-4 until metric doesn't improve
