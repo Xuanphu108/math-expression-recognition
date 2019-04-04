@@ -144,8 +144,8 @@
   new tokenizer (v11; 0.1561)
   lr 0.01 30 epochs (v16; 0.07)
   dropout 0.2 (v22; 0.2048)
-  weight decay 1e-4 (v23)
-  nesterov (v24)
+  weight decay 1e-4 (v23; 0.2296)
+  dropout + weight decay + nesterov (v24)
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
