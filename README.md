@@ -143,7 +143,7 @@
   msa doesn't pass in previous timestep's predictions to gru; try with (v6; 0.242)  
   new tokenizer (v11; 0.1561)
   lr 0.01 30 epochs (v16; 0.07)
-  dropout 0.2 (v22)
+  dropout 0.2 (v22; 0.2048)
   weight decay 1e-4 (v23)
   nesterov (v24)
 
