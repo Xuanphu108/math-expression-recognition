@@ -113,6 +113,7 @@
   better tokenizer; no teacher forcing (v10; 0.2455)  
   batch size 8 (v12; 0.3880)  
   removing latex $ symbol (v13; 0.3903) **BETTER**  
+  tanh in attention; nesterov; weight decay (v27)
 
   ##### Lstm Resnet 50
   256x1024 (v122; 0.2982)  
@@ -143,9 +144,10 @@
   msa doesn't pass in previous timestep's predictions to gru; try with (v6; 0.242)  
   new tokenizer (v11; 0.1561)
   lr 0.01 30 epochs (v16; 0.07)
-  dropout 0.2 (v22; 0.2048)
-  weight decay 1e-4 (v23; 0.2296)
-  dropout + weight decay + nesterov (v24)
+  dropout 0.2 (v22; 0.2048)  
+  dropout + weight decay 1e-4 (v23; 0.2296)  
+  dropout + weight decay + nesterov (v24; 0.2307)  
+  tanh in attention (v26)  
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
@@ -172,13 +174,9 @@ Results:
 
 ## ToDo
 
-add regularization
-
-weight decay
+missing tanh in attention
 
 figure out why msa doesn't get higher exprate
-
-msa overfits more to train set
 
 Best model may be at max possible score?
 
@@ -201,6 +199,12 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+msa overfits more to train set **It's a larger model**
+
+add regularization **weight decay, dropout, and nesterov increase msa by ~0.1**
+
+weight decay **Helps ~0.02 on msa**
 
 ### Normalizing Ground truth: **Shouldn't make more than a ~1% difference**
 * latex ground truth isn't normalized
@@ -654,7 +658,7 @@ first input to decoder at validation is start token
 * Encode last hidden state with rnn before decoder cell
 * exprate of ~0.5 on 2016
 
-### Image to markup generation with coarse to fine attention (im2latex):
+### Image to markup generation with coarse to fine attention:
 
 > Paper: file:///C:/Users/Bilal/Documents/research/math%20expression%20recognition/Crohme-papers/Image%20to%20markup%20generation%20with%20coarse%20to%20fine%20attention.pdf
 
