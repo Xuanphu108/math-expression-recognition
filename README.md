@@ -113,8 +113,9 @@
   better tokenizer; no teacher forcing (v10; 0.2455)  
   batch size 8 (v12; 0.3880)  
   removing latex $ symbol (v13; 0.3903) **BETTER**  
-  tanh in attention; nesterov; weight decay (v27)
-
+  tanh in attention; nesterov; weight decay (v27; 0.3789)  
+  no nesterov or weight decay and re-add doubly stochastic (v28)  
+  
   ##### Lstm Resnet 50
   256x1024 (v122; 0.2982)  
   256x1024 downsampled to 4x16 (v123; 0.3486)  
@@ -174,6 +175,9 @@ Results:
 
 ## ToDo
 
+Train encoder and decoder with different learning rates
+* Related: https://github.com/allenai/allennlp/issues/2618
+
 missing tanh in attention
 
 figure out why msa doesn't get higher exprate
@@ -199,6 +203,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+params.pop **Only works when parent needs child's param; so can only use on nested encoders**
 
 msa overfits more to train set **It's a larger model**
 
