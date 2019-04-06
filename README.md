@@ -179,17 +179,15 @@ Results:
 Train encoder and decoder with different learning rates
 * Related: https://github.com/allenai/allennlp/issues/2618
 
-figure out why msa doesn't get higher exprate
+figure out why msa doesn't get higher exprate **Almost certainly confirmed to be because of overfitting**
 
-Best model may be at max possible score?
+Best model may be at max possible score? **Decreasing overfitting could increase score a bit**
 
-multiscale only gets 0.44 with a single model
+multiscale only gets 0.44 with a single model 
 
 2013 is ~4% harder than 2014 https://github.com/JianshuZhang/WAP/issues/6#issuecomment-388676301
 
-model is overfitting on train
-
-more normalization to prevent overfitting
+model is overfitting on train **Regularization helps**
 
 scheduled sampling
 
@@ -202,6 +200,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+more normalization to prevent overfitting **Helps a lot for msa, not as much for resnet**
 
 missing tanh in attention **Tanh improves msa by a lot, also helps with attention visualizations**
 
