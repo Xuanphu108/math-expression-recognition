@@ -114,7 +114,7 @@
   batch size 8 (v12; 0.3880)  
   removing latex $ symbol (v13; 0.3903) **BETTER**  
   tanh in attention; nesterov; weight decay (v27; 0.3789)  
-  no nesterov or weight decay and re-add doubly stochastic (v28)  
+  no nesterov or weight decay and re-add doubly stochastic (v28; 0.3812)  
   
   ##### Lstm Resnet 50
   256x1024 (v122; 0.2982)  
@@ -148,7 +148,8 @@
   dropout 0.2 (v22; 0.2048)  
   dropout + weight decay 1e-4 (v23; 0.2296)  
   dropout + weight decay + nesterov (v24; 0.2307)  
-  tanh in attention (v26)  
+  tanh in attention (v26; 0.3065)
+  lstm + everything else (v30;)
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
@@ -178,8 +179,6 @@ Results:
 Train encoder and decoder with different learning rates
 * Related: https://github.com/allenai/allennlp/issues/2618
 
-missing tanh in attention
-
 figure out why msa doesn't get higher exprate
 
 Best model may be at max possible score?
@@ -203,6 +202,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+missing tanh in attention **Tanh improves msa by a lot, also helps with attention visualizations**
 
 params.pop **Only works when parent needs child's param; so can only use on nested encoders**
 
