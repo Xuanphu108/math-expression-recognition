@@ -18,7 +18,11 @@
   * [WAP](#wap)
   * [Multi scale attention with dense encoder](#multi-scale-attention-with-dense-encoder)
   * [Image to markup generation with coarse to fine attention](#image-to-markup-generation-with-coarse-to-fine-attention)
-  * [Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns](#Training-an-End-to-End-System-for-Handwritten-Mathematical-Expression-Recognition-by-Generated-Patterns)
+  * [Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns](#Training-an-End-to-End-
+  * [Image-to-Markup Generation via Paired Adversarial Learning](#Image-to-Markup-Generation-via-Paired-Adversarial-Learning)
+  * [Image To Latex with DenseNet Encoder and Joint Attention](#Image-To-Latex-with-DenseNet-Encoder-and-Joint-Attention)
+  * [Robust Encoder-Decoder Learning Framework towards Offline Handwritten Mathematical Expression Recognition Based on Multi-Scale Deep Neural Network](#Robust-Encoder-Decoder-Learning-Framework-towards-Offline-Handwritten-Mathematical-Expression-Recognition-Based-on-Multi-Scale-Deep-Neural-Network)
+System-for-Handwritten-Mathematical-Expression-Recognition-by-Generated-Patterns)
 </details>
 <details>
   <summary>Experiments</summary>
@@ -708,7 +712,25 @@ first input to decoder at validation is start token
  * Encodes input features with a bilstm
  * Img augmentation
  * 2014: 35.19
+
+ ### Image-to-Markup Generation via Paired Adversarial Learning
  
+ > Paper: http://www.ecmlpkdd2018.org/wp-content/uploads/2018/09/376.pdf
+ 
+ > Details:
+ 
+ ### Image To Latex with DenseNet Encoder and Joint Attention
+ 
+ > Paper: https://pdf.sciencedirectassets.com/280203/1-s2.0-S1877050919X00034/1-s2.0-S1877050919302686/main.pdf?x-amz-security-token=AgoJb3JpZ2luX2VjEGoaCXVzLWVhc3QtMSJGMEQCIHEypBtwzUARttTsICc6A5x9wMfWloxb%2B8ICsfliALw3AiA2vZbmY4bHTq%2FEA4PBkIoHqaboSejnORpZa1jZ6xwk%2ByraAwgzEAIaDDA1OTAwMzU0Njg2NSIMrDR1nz68CarUHDtUKrcDjjWl3uggyL1SW0T%2FeqptoOfJQF98ogu58%2F2XEf3EcTbi%2F38ArIAU%2FXWXDBwDhtCm78MvG1%2BQnG9zsSUIbydK2CA5IEjVNMvVnJ8CjhDotAXtOT4zNRU8OxFRSQXifCa8n7HYbfe%2BTBsB0ePJYYL%2FZsuRYLitY%2BB%2Bp9lv9JgVRLJR5Uo8GeLVKwF55%2FRNwnTDIKkO9zTvk4QogK5V2j1HOUP3JGo0QqKiVGUDrLzcgZs0AT4RI66j40qNUxCjn%2B8KGQheSI3jo0s57fg7IpLO2PGZAdyOh2H535so8yDptmVSdHoLHmlZjhppFOweeo7%2FY%2Biq7HBxKnfAP%2Bt1CKuBF%2FRGpgzXamSutmT5u0S2C4mzRxe0esOJzs%2BDKKR83Muu4byf8E1CPuhsRtz893kV%2BjO%2FlB0gRRJ%2F%2B9swte75D0tl9HBzPRPrLTwXEq%2FOnhrfPvJMKvvrbSoeVNXzfSv2Aji3piD2zWBsUgPKVO57cmz7sIYv0H%2FxMg%2B7JGFQIgRSC1JN68I6myFsNrz%2FIH4t9%2BlIUdwjEbwdVqHkj5zvm2%2FOmYvSjYwVWarStQOHIomyS5rAapGlwDCu7qjlBTq1Aa%2BSbviuIWDsvOrCWeoCmW6ENhMwdKY2w0zhDoQ3s7VBVJPfjqOxVHLMNxgmmp641LqmEnFYksQFabNAcIPCA1eAwgG67lWt60Eb2%2BrOILg7m%2F4A1yZIcODDcSqIzOpcSYFjZ8umYWAGnpJ76E6EKFk9em2%2FoV%2FIaeJlrmUPzK1loHSoqZEro5BzEj36nC%2BEwYv9RLevd0Vq8lyRFayPq7Z%2BV9J3HXiFkPoN8uJh6RUAPQSub28%3D&AWSAccessKeyId=ASIAQ3PHCVTYTAOSHDC5&Expires=1554661398&Signature=FKQMHcE49n5KPEOOTH8%2F%2BFRHF7w%3D&hash=a90e88a61acb8f8b690f1c5b29dcae4ceb57cdd76965707767aeb75d2a0055bc&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S1877050919302686&tid=spdf-1ec0306d-0655-4015-a4c5-cb8d1e019a84&sid=84dca7bc6dca3446e248baa6913273052623gxrqa&type=client
+ 
+> Details:
+
+### Robust Encoder-Decoder Learning Framework towards Offline Handwritten Mathematical Expression Recognition Based on Multi-Scale Deep Neural Network
+
+> Paper: https://arxiv.org/ftp/arxiv/papers/1902/1902.05376.pdf
+
+> Details:
+
 ## Experiments
  
 ### Larger decoder
