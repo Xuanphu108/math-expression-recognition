@@ -18,7 +18,7 @@
   * [WAP](#wap)
   * [Multi scale attention with dense encoder](#multi-scale-attention-with-dense-encoder)
   * [Image to markup generation with coarse to fine attention](#image-to-markup-generation-with-coarse-to-fine-attention)
-  * [Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns](#Training-an-End-to-End-
+  * [Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns](#Training-an-End-to-End-System-for-Handwritten-Mathematical-Expression-Recognition-by-Generated-Patterns)
   * [Image-to-Markup Generation via Paired Adversarial Learning](#Image-to-Markup-Generation-via-Paired-Adversarial-Learning)
   * [Image To Latex with DenseNet Encoder and Joint Attention](#Image-To-Latex-with-DenseNet-Encoder-and-Joint-Attention)
   * [Robust Encoder-Decoder Learning Framework towards Offline Handwritten Mathematical Expression Recognition Based on Multi-Scale Deep Neural Network](#Robust-Encoder-Decoder-Learning-Framework-towards-Offline-Handwritten-Mathematical-Expression-Recognition-Based-on-Multi-Scale-Deep-Neural-Network)
