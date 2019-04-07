@@ -148,8 +148,11 @@
   dropout 0.2 (v22; 0.2048)  
   dropout + weight decay 1e-4 (v23; 0.2296)  
   dropout + weight decay + nesterov (v24; 0.2307)  
-  tanh in attention (v26; 0.3065)
-  lstm + everything else (v30;)
+  tanh in attention (v26; 0.3065)  
+  lstm + everything else (v30; 0.3416)  
+  256x1024 batch size 2 (v31; takes ~3h/epoch)  
+  Dropout after embedding (v32)  
+  Scheduled sampling 0.5 (v34)  
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
@@ -176,12 +179,18 @@ Results:
 
 ## ToDo
 
+scse
+
+Other regularization methods like kmnist + tgs
+
+different attention mechanisms (add, concat, dot, etc)
+
+check attention weights for softmax/scaling problems **This might be the big problem with current models**
+
+img augmentation
+
 Train encoder and decoder with different learning rates
 * Related: https://github.com/allenai/allennlp/issues/2618
-
-figure out why msa doesn't get higher exprate **Almost certainly confirmed to be because of overfitting**
-
-Best model may be at max possible score? **Decreasing overfitting could increase score a bit**
 
 multiscale only gets 0.44 with a single model 
 
@@ -189,17 +198,23 @@ multiscale only gets 0.44 with a single model
 
 model is overfitting on train **Regularization helps**
 
-scheduled sampling
+scheduled sampling **In progress**
 
 transformer decoder
 
 Larger/Smaller models
+
+Get 2016 training data
 
 render predicted latex **Do later**
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+figure out why msa doesn't get higher exprate **Almost certainly confirmed to be because of overfitting**
+
+Best model may be at max possible score? **Decreasing overfitting could increase score a bit**
 
 more normalization to prevent overfitting **Helps a lot for msa, not as much for resnet**
 
