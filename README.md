@@ -20,7 +20,7 @@
   * [Image to markup generation with coarse to fine attention](#image-to-markup-generation-with-coarse-to-fine-attention)
   * [Training an End-to-End System for Handwritten Mathematical Expression Recognition by Generated Patterns](#training-an-end-to-end-system-for-handwritten-mathematical-expression-recognition-by-generated-patterns)
   * [Image-to-Markup Generation via Paired Adversarial Learning](#image-to-markup-generation-via-paired-adversarial-learning)
-  * [Image To Latex with DenseNet Encoder and Joint Attention](#image-to-latex-with-densedet-encoder-and-joint-attention)
+  * [Image To Latex with DenseNet Encoder and Joint Attention](#image-to-latex-with-densenet-encoder-and-joint-attention)
   * [Robust Encoder-Decoder Learning Framework towards Offline Handwritten Mathematical Expression Recognition Based on Multi-Scale    Deep Neural Network](#robust-encoder-decoder-learning-framework-towards-offline-handwritten-mathematical-expression-recognition-based-on-multi-scale-deep-neural-network)
 </details>
 <details>
