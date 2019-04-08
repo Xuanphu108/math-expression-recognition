@@ -154,8 +154,8 @@
   tanh in attention (v26; 0.3065)  
   lstm + everything else (v30; 0.3416)  
   256x1024 batch size 2 (v31; takes ~3h/epoch)  
-  Dropout after embedding (v32)  
-  Scheduled sampling 0.5 (v34)  
+  Dropout after embedding (v36)  
+  Scheduled sampling 0.5 (v35)  
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
@@ -182,6 +182,8 @@ Results:
 
 ## ToDo
 
+scheduled sampling **In progress**
+
 scse
 
 Other regularization methods like kmnist + tgs
@@ -200,8 +202,6 @@ multiscale only gets 0.44 with a single model
 2013 is ~4% harder than 2014 https://github.com/JianshuZhang/WAP/issues/6#issuecomment-388676301
 
 model is overfitting on train **Regularization helps**
-
-scheduled sampling **In progress**
 
 transformer decoder
 
