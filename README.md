@@ -118,6 +118,7 @@
   removing latex $ symbol (v13; 0.3903) **BETTER**  
   tanh in attention; nesterov; weight decay (v27; 0.3789)  
   no nesterov or weight decay and re-add doubly stochastic (v28; 0.3812)  
+  SCSE (v38)
   
   ##### Lstm Resnet 50
   256x1024 (v122; 0.2982)  
@@ -154,8 +155,10 @@
   tanh in attention (v26; 0.3065)  
   lstm + everything else (v30; 0.3416)  
   256x1024 batch size 2 (v31; takes ~3h/epoch)  
-  Dropout after embedding (v36)  
-  Scheduled sampling 0.5 (v35)  
+  Dropout after embedding (v36; 0.3484)  
+  Scheduled sampling 0.5 (v35; 0.2748)  
+  Scheduled sampling 0.8 (v37)  
+  SCSE (v39)
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
@@ -184,15 +187,17 @@ Results:
 
 scheduled sampling **In progress**
 
-scse
+scse **In progress**
 
 Other regularization methods like kmnist + tgs
+
+more regularization in resnet18
+
+img augmentation
 
 different attention mechanisms (add, concat, dot, etc)
 
 check attention weights for softmax/scaling problems **This might be the big problem with current models**
-
-img augmentation
 
 Train encoder and decoder with different learning rates
 * Related: https://github.com/allenai/allennlp/issues/2618
@@ -717,12 +722,19 @@ first input to decoder at validation is start token
  > Paper: http://www.ecmlpkdd2018.org/wp-content/uploads/2018/09/376.pdf
  
  > Details:
+ * Exprate on 2014: 0.39
+ * Paired adversairal learning
  
  ### Image To Latex with DenseNet Encoder and Joint Attention
  
  > Paper: https://pdf.sciencedirectassets.com/280203/1-s2.0-S1877050919X00034/1-s2.0-S1877050919302686/main.pdf?x-amz-security-token=AgoJb3JpZ2luX2VjEGoaCXVzLWVhc3QtMSJGMEQCIHEypBtwzUARttTsICc6A5x9wMfWloxb%2B8ICsfliALw3AiA2vZbmY4bHTq%2FEA4PBkIoHqaboSejnORpZa1jZ6xwk%2ByraAwgzEAIaDDA1OTAwMzU0Njg2NSIMrDR1nz68CarUHDtUKrcDjjWl3uggyL1SW0T%2FeqptoOfJQF98ogu58%2F2XEf3EcTbi%2F38ArIAU%2FXWXDBwDhtCm78MvG1%2BQnG9zsSUIbydK2CA5IEjVNMvVnJ8CjhDotAXtOT4zNRU8OxFRSQXifCa8n7HYbfe%2BTBsB0ePJYYL%2FZsuRYLitY%2BB%2Bp9lv9JgVRLJR5Uo8GeLVKwF55%2FRNwnTDIKkO9zTvk4QogK5V2j1HOUP3JGo0QqKiVGUDrLzcgZs0AT4RI66j40qNUxCjn%2B8KGQheSI3jo0s57fg7IpLO2PGZAdyOh2H535so8yDptmVSdHoLHmlZjhppFOweeo7%2FY%2Biq7HBxKnfAP%2Bt1CKuBF%2FRGpgzXamSutmT5u0S2C4mzRxe0esOJzs%2BDKKR83Muu4byf8E1CPuhsRtz893kV%2BjO%2FlB0gRRJ%2F%2B9swte75D0tl9HBzPRPrLTwXEq%2FOnhrfPvJMKvvrbSoeVNXzfSv2Aji3piD2zWBsUgPKVO57cmz7sIYv0H%2FxMg%2B7JGFQIgRSC1JN68I6myFsNrz%2FIH4t9%2BlIUdwjEbwdVqHkj5zvm2%2FOmYvSjYwVWarStQOHIomyS5rAapGlwDCu7qjlBTq1Aa%2BSbviuIWDsvOrCWeoCmW6ENhMwdKY2w0zhDoQ3s7VBVJPfjqOxVHLMNxgmmp641LqmEnFYksQFabNAcIPCA1eAwgG67lWt60Eb2%2BrOILg7m%2F4A1yZIcODDcSqIzOpcSYFjZ8umYWAGnpJ76E6EKFk9em2%2FoV%2FIaeJlrmUPzK1loHSoqZEro5BzEj36nC%2BEwYv9RLevd0Vq8lyRFayPq7Z%2BV9J3HXiFkPoN8uJh6RUAPQSub28%3D&AWSAccessKeyId=ASIAQ3PHCVTYTAOSHDC5&Expires=1554661398&Signature=FKQMHcE49n5KPEOOTH8%2F%2BFRHF7w%3D&hash=a90e88a61acb8f8b690f1c5b29dcae4ceb57cdd76965707767aeb75d2a0055bc&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S1877050919302686&tid=spdf-1ec0306d-0655-4015-a4c5-cb8d1e019a84&sid=84dca7bc6dca3446e248baa6913273052623gxrqa&type=client
  
 > Details:
+
+* im2latex dataset
+* exprate 37%
+* densenet encoder
+
 
 ### Robust Encoder-Decoder Learning Framework towards Offline Handwritten Mathematical Expression Recognition Based on Multi-Scale Deep Neural Network
 
