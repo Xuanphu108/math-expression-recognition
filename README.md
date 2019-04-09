@@ -115,10 +115,10 @@
   better tokenizer and full vocab (v9; 0.3834)  
   better tokenizer; no teacher forcing (v10; 0.2455)  
   batch size 8 (v12; 0.3880)  
-  removing latex $ symbol (v13; 0.3903) **BETTER**  
+  removing latex $ symbol (v13; 0.3903)  
   tanh in attention; nesterov; weight decay (v27; 0.3789)  
   no nesterov or weight decay and re-add doubly stochastic (v28; 0.3812)  
-  SCSE (v38)
+  SCSE (v38; 0.3981) **BETTER**  
   
   ##### Lstm Resnet 50
   256x1024 (v122; 0.2982)  
@@ -157,8 +157,8 @@
   256x1024 batch size 2 (v31; takes ~3h/epoch)  
   Dropout after embedding (v36; 0.3484)  
   Scheduled sampling 0.5 (v35; 0.2748)  
-  Scheduled sampling 0.8 (v37)  
-  SCSE (v39)
+  Scheduled sampling 0.8 (v37; 0.2895)  
+  SCSE (v39; 0.3122)
 
   ##### Densenet
   densenet encoder (v91; 0.01)  
@@ -185,19 +185,19 @@ Results:
 
 ## ToDo
 
-scheduled sampling **In progress**
+combine feature maps from all blocks
 
-scse **In progress**
+Pool feature maps and use somehow?
 
-Other regularization methods like kmnist + tgs
+clr/sgdr ?
+
+change lr scheduler from 0.5 to 0.1?
 
 more regularization in resnet18
 
 img augmentation
 
 different attention mechanisms (add, concat, dot, etc)
-
-check attention weights for softmax/scaling problems **This might be the big problem with current models**
 
 Train encoder and decoder with different learning rates
 * Related: https://github.com/allenai/allennlp/issues/2618
@@ -219,6 +219,14 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+Other regularization methods like kmnist + tgs **kmnist doesn't have anything**
+
+check attention weights for softmax/scaling problems **This might be the big problem with current models** *Repeatedly can't find anything wrong with it*
+
+scheduled sampling **Always lowers val score**
+
+scse **Helps resnet more than densenet**
 
 figure out why msa doesn't get higher exprate **Almost certainly confirmed to be because of overfitting**
 
