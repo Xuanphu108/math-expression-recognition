@@ -185,6 +185,8 @@ Results:
 
 ## ToDo
 
+2019 data **NEW**
+
 combine feature maps from all blocks
 
 Pool feature maps and use somehow?
@@ -219,6 +221,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+Multiscale now learns more interesting attention maps but not perfect; main attention weights are in columns
 
 Other regularization methods like kmnist + tgs **kmnist doesn't have anything**
 
