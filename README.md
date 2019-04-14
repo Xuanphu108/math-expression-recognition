@@ -205,6 +205,8 @@ Results:
 
 ## ToDo
 
+2019 val set is hard, possible that model isn't overfitting as much
+
 2019 data **NEW**
 
 combine feature maps from all blocks
