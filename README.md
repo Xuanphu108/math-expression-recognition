@@ -184,7 +184,7 @@
   resnet18 not pretrained (v71)  
   embedding dropout (v72)  
   half decoder and attention hidden sizes to 128 (v73)  
-  sgd 0.1 (v74)  
+  sgd 0.1 ()  
   
   </details>
 
