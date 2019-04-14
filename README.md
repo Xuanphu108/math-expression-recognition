@@ -181,7 +181,9 @@
   lr 1e-5 (v66; helps but too slow and probably stops after a few more epochs)  
   densenet backbone (v67; doesn't help)  
   resnet18 dropout (v70)  
-  resnet18 not pretrained (v71)  
+  resnet18 not pretrained (v71; doesn't help)  
+  embedding dropout (v72)  
+  half decoder and attention hidden sizes to 128 (v73)  
   
   </details>
 
