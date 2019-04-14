@@ -185,7 +185,11 @@ Results:
 
 ## ToDo
 
-im2latex encoder (61)
+dropout + adam 1e-4 (v64)
+
+dropout 0.5 (v63)
+
+im2latex encoder (62; doesn't help by itself)
 
 **problem most likely with small and out of distribution val data**
 
