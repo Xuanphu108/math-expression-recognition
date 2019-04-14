@@ -185,6 +185,16 @@ Results:
 
 ## ToDo
 
+im2latex encoder (61)
+
+**problem most likely with small and out of distribution val data**
+
+train on val val on train (60; graph is better; but loss doesn't go down enough (expected))
+
+train on 2013 val on 2019 train (58; Looks normal)
+
+train on 2013 val on 2019 val(57; doesn't help)
+
 2019 data **NEW**
 
 combine feature maps from all blocks
