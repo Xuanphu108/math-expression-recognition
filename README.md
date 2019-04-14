@@ -167,6 +167,24 @@
   small resnet18 (v114; 0.2761; worse than baseline)  
   </details>
 
+  <details>
+    <summary>crohme 2019</summary>
+  
+  train on 2013 val on 2019 val(57; doesn't help)  
+  train on 2013 val on 2019 train (58; Looks normal)  
+  train on val val on train (60; graph is better; but loss doesn't go down enough (expected))  
+  **problem most likely with small and out of distribution val data**  
+  im2latex encoder (62; doesn't help by itself)  
+  dropout 0.5 (v63; slightly better)  
+  dropout + adam 1e-4 (v64; better; but val loss is still higher)  
+  no teacher forcing (v65; doesn't help)  
+  lr 1e-5 (v66; helps but too slow and probably stops after a few more epochs)  
+  densenet backbone (v67; doesn't help)  
+  resnet18 dropout (v70)  
+  resnet18 not pretrained (v71)  
+  
+  </details>
+
 </details>
 
 
@@ -184,20 +202,6 @@ Results:
 ```
 
 ## ToDo
-
-dropout + adam 1e-4 (v64)
-
-dropout 0.5 (v63)
-
-im2latex encoder (62; doesn't help by itself)
-
-**problem most likely with small and out of distribution val data**
-
-train on val val on train (60; graph is better; but loss doesn't go down enough (expected))
-
-train on 2013 val on 2019 train (58; Looks normal)
-
-train on 2013 val on 2019 val(57; doesn't help)
 
 2019 data **NEW**
 
@@ -228,13 +232,13 @@ transformer decoder
 
 Larger/Smaller models
 
-Get 2016 training data
-
 render predicted latex **Do later**
 
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+Get 2016 training data **Don't need**
 
 Multiscale now learns more interesting attention maps but not perfect; main attention weights are in columns
 
