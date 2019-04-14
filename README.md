@@ -181,9 +181,10 @@
   lr 1e-5 (v66; helps but too slow and probably stops after a few more epochs)  
   densenet backbone (v67; doesn't help)  
   resnet18 dropout (v70)  
-  resnet18 not pretrained (v71; doesn't help)  
+  resnet18 not pretrained (v71)  
   embedding dropout (v72)  
   half decoder and attention hidden sizes to 128 (v73)  
+  sgd 0.1 (v74)  
   
   </details>
 
@@ -204,6 +205,8 @@ Results:
 ```
 
 ## ToDo
+
+Try older test sets and see if they also overfit
 
 2019 val set is hard, possible that model isn't overfitting as much
 
