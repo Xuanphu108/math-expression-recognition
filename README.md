@@ -184,7 +184,13 @@
   resnet18 not pretrained (v71)  
   embedding dropout (v72)  
   half decoder and attention hidden sizes to 128 (v73)  
-  sgd 0.1 ()  
+  sgd 0.1 (doesn't help)  
+  ### Problem in model not generalizing (confirmed)  
+  no teacher forcing (v79)  
+  try other people's code  
+  
+  max image size and caption len
+  
   
   </details>
 
