@@ -189,7 +189,19 @@
   no teacher forcing (v79)  
   try other people's code  
   
-  max image size and caption len
+  ### reimplementing https://github.com/whywhs/Pytorch-Handwritten-Mathematical-Expression-Recognition
+  
+  max image size is ~128x512 or 100k pixels  
+  max caption length is 48  
+  50% of images have aspect ratios between 5:1 and 2:1  
+  don't concat images to get channels **No difference**  
+  sort by aspect ratio **Shouldn't be necessary**  
+  
+  max image size and caption len and pad other images to size of largest image  
+  redo sum attention weights properly  
+  output linear should take in y_t-1, h_t, c_t  
+  and use linear to make each item's dim the same  
+  
   
   
   </details>
