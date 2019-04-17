@@ -202,7 +202,9 @@
   output linear should take in y_t-1, h_t, c_t **No change**  
   and use linear to make each item's dim the same  **^**  
   2019 train and val data don't work well with pretrained models. I use pngs, they use bmps  
-  Try original train and val data  
+  Try original train and val data **model works**  
+  train model without val set for 10 epochs then predict on val (v3)  
+  redo new data pipeline  
 
   </details>
 
