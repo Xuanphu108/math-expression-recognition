@@ -198,12 +198,12 @@
   sort by aspect ratio **Shouldn't be necessary**  
   
   max image size and caption len and pad other images to size of largest image  
-  redo sum attention weights properly  
-  output linear should take in y_t-1, h_t, c_t  
-  and use linear to make each item's dim the same  
-  
-  
-  
+  redo sum attention weights properly **Done**  
+  output linear should take in y_t-1, h_t, c_t **No change**  
+  and use linear to make each item's dim the same  **^**  
+  2019 train and val data don't work well with pretrained models. I use pngs, they use bmps  
+  Try original train and val data  
+
   </details>
 
 </details>
@@ -223,8 +223,6 @@ Results:
 ```
 
 ## ToDo
-
-Try older test sets and see if they also overfit
 
 2019 val set is hard, possible that model isn't overfitting as much
 
@@ -262,6 +260,8 @@ render predicted latex **Do later**
 Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
 
 ## Done
+
+Try older test sets and see if they also overfit **Not necessary**
 
 Get 2016 training data **Don't need**
 
