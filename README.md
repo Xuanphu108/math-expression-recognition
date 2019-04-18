@@ -206,6 +206,8 @@
   train model without val set for 10 epochs then predict on val (v3) **Model still doesn't learn**  
   redo new data pipeline  
   use precreated images  
+  use a max length and image shape/size  
+  
   </details>
 
 </details>
