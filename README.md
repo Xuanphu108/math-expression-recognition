@@ -204,9 +204,10 @@
   2019 train and val data don't work well with pretrained models. I use pngs, they use bmps  
   Try original train and val data **model works**  
   train model without val set for 10 epochs then predict on val (v3) **Model still doesn't learn**  
-  redo new data pipeline  
-  use precreated images  
-  use a max length and image shape/size  
+  redo new data pipeline **Done; not much difference**  
+  use precreated images **Not significantly better**  
+  use a max length and image shape/size **doesn't change anything**  
+  Copy WAP code
   
   </details>
 
