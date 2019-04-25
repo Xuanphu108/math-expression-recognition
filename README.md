@@ -210,7 +210,7 @@
   Copy WAP code (v11) **Doesn't change much**  
   bs 4, tf 0.5 (v12) **Doesn't change much**  
   cross entropy loss (v14) **Doesn't help**  
-  2013 data (v16)  
+  2013 data (v16) **Doesn't help**  
   </details>
 
 </details>
@@ -230,6 +230,8 @@ Results:
 ```
 
 ## ToDo
+
+other people's code https://github.com/menglin0320/wap-on-tensor/ **In progress**
 
 2019 val set is hard, possible that model isn't overfitting as much
 
