@@ -231,7 +231,11 @@ Results:
 
 ## ToDo
 
-other people's code https://github.com/menglin0320/wap-on-tensor/ **In progress**
+other code https://github.com/menglin0320/wap-on-tensor/ **In progress**  
+2019: train ~0.4; val 0.001 after 10 epochs  
+2013: train ~1; val 0.15 after 70 epochs
+
+**Model needs to completely memorize the data to get good at the val set**
 
 2019 val set is hard, possible that model isn't overfitting as much
 
