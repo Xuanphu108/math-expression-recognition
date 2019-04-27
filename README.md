@@ -226,6 +226,7 @@
   resnet 50 epochs (https://www.kaggle.com/bkkaggle/fork-of-math-recognition-4bb8bd; )  
   reimplementation of wap on tensor (https://www.kaggle.com/bkkaggle/wap-tensorflow; )  
   sgd 100 epochs (https://www.kaggle.com/bkkaggle/fork-of-2019-recognition; )  
+  wap tensorflow 2019 100 epochs (https://www.kaggle.com/bkkaggle/wap-tensorflow; )  
   
   
   </details>
