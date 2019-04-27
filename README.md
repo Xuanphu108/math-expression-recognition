@@ -211,6 +211,18 @@
   bs 4, tf 0.5 (v12) **Doesn't change much**  
   cross entropy loss (v14) **Doesn't help**  
   2013 data (v16) **Doesn't help**  
+  
+  2019 val set is hard, possible that model isn't overfitting as much **Not true**
+  
+  other code https://github.com/menglin0320/wap-on-tensor/ **Works**  
+  2019: train ~0.4; val 0.001 after 10 epochs  
+  2013: train ~1; val 0.15 after 70 epochs  
+
+  **Model needs to completely memorize the data to get good at the val set**
+
+  2019 training until train loss is close to 0 adam lr 1e-4 50 epochs (v22; doesn't go to 0)  
+  adam 1e-2 50 epochs (v23)  
+  
   </details>
 
 </details>
@@ -230,14 +242,6 @@ Results:
 ```
 
 ## ToDo
-
-other code https://github.com/menglin0320/wap-on-tensor/ **In progress**  
-2019: train ~0.4; val 0.001 after 10 epochs  
-2013: train ~1; val 0.15 after 70 epochs
-
-**Model needs to completely memorize the data to get good at the val set**
-
-2019 val set is hard, possible that model isn't overfitting as much
 
 2019 data **NEW**
 
