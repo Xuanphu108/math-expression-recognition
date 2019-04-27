@@ -223,7 +223,7 @@
   2019 training until train loss is close to 0 adam lr 1e-4 50 epochs (v22; doesn't go to 0)  
   adam 1e-2 50 epochs (v23; doesn't go to 0)  
   sgd lr 1e-2 50 epochs (v24; doesn't go to 0)  
-  resnet 50 epochs (https://www.kaggle.com/bkkaggle/fork-of-math-recognition-4bb8bd; )  
+  resnet 50 epochs (https://www.kaggle.com/bkkaggle/fork-of-math-recognition-4bb8bd; loss doesn't go to 0 but close and val bleu increased slightly)  
   reimplementation of wap on tensor (https://www.kaggle.com/bkkaggle/wap-tensorflow; )  
   sgd 100 epochs (https://www.kaggle.com/bkkaggle/fork-of-2019-recognition; )  
   wap tensorflow 2019 100 epochs (https://www.kaggle.com/bkkaggle/wap-tensorflow; )  
