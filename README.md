@@ -218,15 +218,16 @@
   2019: train ~0.4; val 0.001 after 10 epochs  
   2013: train ~1; val 0.15 after 70 epochs  
 
-  **Model needs to completely memorize the data to get good at the val set**
+  **Model seems to need to completely memorize the data to get good at the val set**
 
   2019 training until train loss is close to 0 adam lr 1e-4 50 epochs (v22; doesn't go to 0)  
   adam 1e-2 50 epochs (v23; doesn't go to 0)  
   sgd lr 1e-2 50 epochs (v24; doesn't go to 0)  
   resnet 50 epochs (https://www.kaggle.com/bkkaggle/fork-of-math-recognition-4bb8bd; loss doesn't go to 0 but close and val bleu increased slightly)  
-  reimplementation of wap on tensor (https://www.kaggle.com/bkkaggle/wap-tensorflow; )  
-  sgd 100 epochs (https://www.kaggle.com/bkkaggle/fork-of-2019-recognition; )  
+  reimplementation of wap on tensor (https://www.kaggle.com/bkkaggle/2019-recognition; )  
+  sgd 100 epochs (https://www.kaggle.com/bkkaggle/fork-of-2019-recognition; loss doesn't go to 0)  
   wap tensorflow 2019 100 epochs (https://www.kaggle.com/bkkaggle/wap-tensorflow; )  
+  adadelta lr 2 50 epochs (https://www.kaggle.com/bkkaggle/fork-of-2019-recognition?scriptVersionId=13486514; )  
   
   
   </details>
@@ -249,40 +250,26 @@ Results:
 
 ## ToDo
 
+resnet **Try again after some models generalize to val set**  
+2019 data **NEW**  
+combine feature maps from all blocks  
+Pool feature maps and use somehow?  
+clr/sgdr ?  
+change lr scheduler from 0.5 to 0.1?  
+more regularization in resnet18  
+img augmentation  
+different attention mechanisms (add, concat, dot, etc)  
 
-resnet
-2019 data **NEW**
+Train encoder and decoder with different learning rates  
+* Related: https://github.com/allenai/allennlp/issues/2618  
 
-combine feature maps from all blocks
-
-Pool feature maps and use somehow?
-
-clr/sgdr ?
-
-change lr scheduler from 0.5 to 0.1?
-
-more regularization in resnet18
-
-img augmentation
-
-different attention mechanisms (add, concat, dot, etc)
-
-Train encoder and decoder with different learning rates
-* Related: https://github.com/allenai/allennlp/issues/2618
-
-multiscale only gets 0.44 with a single model 
-
-2013 is ~4% harder than 2014 https://github.com/JianshuZhang/WAP/issues/6#issuecomment-388676301
-
-model is overfitting on train **Regularization helps**
-
-transformer decoder
-
-Larger/Smaller models
-
-render predicted latex **Do later**
-
-Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**
+multiscale only gets 0.44 with a single model  
+2013 is ~4% harder than 2014 https://github.com/JianshuZhang/WAP/issues/6#issuecomment-388676301  
+model is overfitting on train **Regularization helps**  
+transformer decoder  
+Larger/Smaller models  
+render predicted latex **Do later**  
+Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**  
 
 ## Done
 
