@@ -218,18 +218,16 @@
   2019: train ~0.4; val 0.001 after 10 epochs  
   2013: train ~1; val 0.15 after 70 epochs  
 
-  **Model seems to need to completely memorize the data to get good at the val set**
+  **Model seems to need to completely memorize the data to get good at the val set** *Doesn't work*
 
   2019 training until train loss is close to 0 adam lr 1e-4 50 epochs (v22; doesn't go to 0)  
   adam 1e-2 50 epochs (v23; doesn't go to 0)  
   sgd lr 1e-2 50 epochs (v24; doesn't go to 0)  
   resnet 50 epochs (https://www.kaggle.com/bkkaggle/fork-of-math-recognition-4bb8bd; loss doesn't go to 0 but close and val bleu increased slightly)  
-  reimplementation of wap on tensor (https://www.kaggle.com/bkkaggle/2019-recognition; )  
+  reimplementation of wap on tensor (https://www.kaggle.com/bkkaggle/2019-recognition; val loss doesn't go down to 0)  
   sgd 100 epochs (https://www.kaggle.com/bkkaggle/fork-of-2019-recognition; loss doesn't go to 0)  
-  wap tensorflow 2019 100 epochs (https://www.kaggle.com/bkkaggle/wap-tensorflow; )  
-  adadelta lr 2 50 epochs (https://www.kaggle.com/bkkaggle/fork-of-2019-recognition?scriptVersionId=13486514; )  
-  
-  
+  wap tensorflow 2019 100 epochs (https://www.kaggle.com/bkkaggle/wap-tensorflow; loss goes down but val exprate doesn't go up)  
+  adadelta lr 2 100 epochs (https://www.kaggle.com/bkkaggle/fork-of-2019-recognition; loss doesn't go to 0)  
   </details>
 
 </details>
