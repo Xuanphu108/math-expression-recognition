@@ -230,6 +230,16 @@
   adadelta lr 2 100 epochs (https://www.kaggle.com/bkkaggle/fork-of-2019-recognition; loss doesn't go to 0)  
   </details>
 
+  <details>
+    <summary>crohme 2019 iid val set</summary>
+  
+  https://www.kaggle.com/bkkaggle/2019-math-recognition
+  
+  resnet out of distribution val set (v1; bleu 0.14 exprate 0.001)  
+  resnet iid val set (v3; )  
+  
+  </details>
+
 </details>
 
 
@@ -248,8 +258,8 @@ Results:
 
 ## ToDo
 
-resnet **Try again after some models generalize to val set**  
-2019 data **model can't generalize to val set**  
+## Probably won't do
+
 combine feature maps from all blocks  
 Pool feature maps and use somehow?  
 clr/sgdr ?  
@@ -266,10 +276,12 @@ multiscale only gets 0.44 with a single model
 model is overfitting on train **Regularization helps**  
 transformer decoder  
 Larger/Smaller models  
-render predicted latex **Do later**  
-Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/ **Do later**  
+render predicted latex  
+Use im2latex dataset for pretraining http://lstm.seas.harvard.edu/latex/  
 
 ## Done
+
+2019 data **model can't generalize to val set**  
 
 Try older test sets and see if they also overfit **Not necessary**
 
