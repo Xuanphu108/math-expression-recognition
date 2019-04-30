@@ -249,7 +249,7 @@ Results:
 ## ToDo
 
 resnet **Try again after some models generalize to val set**  
-2019 data **NEW**  
+2019 data **model can't generalize to val set**  
 combine feature maps from all blocks  
 Pool feature maps and use somehow?  
 clr/sgdr ?  
